@@ -1,0 +1,32 @@
+{% extends "layout-property.html" %}
+
+{% set pageQuestion = "Did you get Boab tax?" %}
+{% set pageQuestionAgent = "Did your client get Boab tax?" %}
+{% set pageAnswer = "boab-tax" %}
+{% set valueOne = "Yes" %}
+{% set valueTwo= "No" %}
+{% set errorOne = "Enter a value for did your client get Boab tax" %}
+
+{% block pageTitle %}
+    {% if  data['errorthispage'] == "true"  %}
+        Error:
+    {% endif %}
+
+    {% if  data['user'] == "agent"  %}
+        {{pageQuestionAgent}}
+    {% else %}
+        {{pageQuestion}}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<form action="form-handler" method="post" novalidate>
+{% if  data['errorthispage'] == "true"  %}
+  {% include "../../../templates/radio-include.html" %}
+{% else %}
+  {% include "../../../templates/radio-include.html" %}
+{% endif %}
+
+</form>
+
+{% endblock %}

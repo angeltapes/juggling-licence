@@ -1,0 +1,163 @@
+{% extends "layout-property.html" %}
+
+<!-- This was an experiment in having fully editable, saveable pages - 
+it wasn't successful so I'll stick with the 'editor' pages in this
+folder.  -->
+
+{% set pageQuestion = "
+  111
+" %}
+{% set pageQuestionAgent = "
+  222
+" %}
+{% set pageHint = "
+   
+" %}
+{% set pageHintAgent = "
+   
+" %}
+{% set pageAnswer = "
+   555
+" %}
+{% set valueOne = "
+   Yes
+" %}
+{% set valueTwo= "
+  No
+" %}
+{% set valueOneAgent = "
+  Yes
+" %}
+{% set valueTwoAgent = "
+  No
+" %}
+{% set errorOne = "
+  Enter a value for did your client get Boab tax" 
+%}
+
+{% block pageTitle %}
+{% if  data['errorthispage'] == "true"  %}
+Error:
+{% endif %}
+
+{% if  data['user'] == "agent"  %}
+{{pageQuestionAgent}}
+{% else %}
+{{pageQuestion}}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-third">
+      <form action="#" method="post" novalidate>
+  <h1 class="govuk-heading-m">
+    Radio buttons editor
+  </h1>
+   
+      <div class="govuk-form-group">
+        <label class="govuk-label govuk-label--s">
+          H1 question
+        </label>
+        <input class="govuk-input govuk-input--width-10" id="ss-h1" name="ss-h1" 
+        type="text" value="{{ data['ss-h1'] | default(pageQuestion)}}">
+      </div>
+      {% set pageQuestion = data['ss-h1'] %}
+  
+      <div class="govuk-form-group">
+        <label class="govuk-label govuk-label--s">
+          Hint text (optional)
+        </label>
+        <input class="govuk-input govuk-input--width-10" id="ss-hint" name="ss-hint" 
+        type="text" value="{{ data['ss-hint'] }}">
+      </div>
+      {% set pageHint = data['ss-hint'] %}
+  
+      <div class="govuk-form-group">
+        <label class="govuk-label govuk-label--s">
+          Value 1
+        </label>
+        <input class="govuk-input govuk-input--width-10" id="ss-value-1" name="ss-value-1" 
+        type="text" value="{{ data['ss-value-1'] }}">
+      </div>
+      {% set valueOne = data['ss-value-1'] %}
+  
+      <div class="govuk-form-group">
+        <label class="govuk-label govuk-label--s">
+          Value 2
+        </label>
+        <input class="govuk-input govuk-input--width-10" id="ss-value-2" name="ss-value-2" 
+        type="text" value="{{ data['ss-value-2'] }}">
+      </div>
+      {% set valueTwo = data['ss-value-2'] %}
+  
+      <div class="govuk-form-group">
+        <label class="govuk-label govuk-label--s">
+          Answer ID
+        </label>
+        <input class="govuk-input govuk-input--width-10" id="ss-answer" name="ss-answer" 
+        type="text" value="{{ data['ss-answer'] | default('myAnswer') }}">
+      </div>
+      {% set pageAnswer = data['ss-answer'] %}
+  
+      {{ govukButton({
+        text: "Apply"
+      }) }}
+  
+    </form>
+  
+      <h1 class="govuk-heading-m">
+        Output
+      </h1>
+      <button class="govuk-button govuk-button--secondary" data-module="govuk-button"  onclick="myFunction()">
+        Copy to clipboard
+      </button>
+    <p class="govuk-body" id="myInput">
+  <code>
+    &#123;&#123; govukRadios&#40;&#123; 
+      classes: &#x22;govuk-radios--inline&#x22;,
+      name: {{pageAnswer}},
+      value: {{pageAnswer}},
+      fieldset: &#123;
+        legend: &#123;
+          text: {{pageQuestion}},
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        &#125;
+      &#125;,
+      hint: &#123;
+        text: {{pageHint}}
+      &#125;,
+      items: &#91;
+        &#123;
+          value: valueOne,
+          text: valueOne
+        &#125;,
+        &#123;
+          value: valueTwo,
+          text: valueTwo
+        &#125;
+      &#93;
+    &#125;&#41; &#125;&#125;
+    </code>
+  </p>
+</div> 
+  
+  <div class="govuk-grid-column-two-thirds"> 
+
+    <h1 class="govuk-heading-l">
+      {{pageTitle}}
+    </h1>
+
+  <form action="pia-yes-no" method="post" novalidate>
+    {% if  data['errorthispage'] == "true"  %}
+    {% include "../../../templates/radio-include-error.html" %}
+    {% else %}
+    {% include "./radio-include.html" %}
+    {% endif %}
+  </form>
+  
+  {% endblock %}
+  

@@ -1,0 +1,60 @@
+{% extends "layout-property.html" %}
+{% set pageTitle = "000" %}
+{% set pageQuestion = "111" %}
+{% set pageQuestionAgent = "222" %}
+{% set pageHint = "" %}
+{% set pageHintAgent = "" %}
+{% set pageAnswer = "555" %}
+{% set valueOne = "Yes" %}
+{% set valueTwo= "No" %}
+{% set valueOneAgent = "Yes" %}
+{% set valueTwoAgent = "No" %}
+{% set errorOne = "Enter a value for did your client get Boab tax" %}
+
+{% block pageTitle %}
+    {% if  data['errorthispage'] == "true"  %}
+        Error:
+    {% endif %}
+
+    {% if  data['user'] == "agent"  %}
+        {{pageQuestionAgent}}
+    {% else %}
+        {{pageQuestion}}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds"> 
+
+    <h1 class="govuk-heading-l">
+      {{pageTitle}}
+    </h1>
+
+  <!-- <div class="govuk-body">
+    <p>
+      If you live abroad for more than six months of the year but rent out a property in the UK you are a 
+      non-resident landlord. 
+    </p>
+    </div> -->
+    
+    <!-- <details class="govuk-details" data-module="govuk-details">
+      <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text">
+          Understanding {{pageTitle}}
+        </span>
+      </summary>
+      <div class="govuk-details__text">
+          <p>If you claim the property income allowance, of up to &pound;1,000, you cannot deduct any other allowable expenses or claim any other allowances. Read more about <a href="https://www.gov.uk/guidance/tax-free-allowances-on-property-and-trading-income#:~:text=a%20partnership.-,Property%20allowance,-The%20property%20allowance" target="_blank" rel="noopener"> tax-free allowances on property and trading income (opens in new tab) </a></p>    </div>
+    </details>  -->
+
+<form action="form-handler" method="post" novalidate>
+  {% if  data['errorthispage'] == "true"  %}
+    {% include "../../../templates/radio-include-error-complex.html" %}
+  {% else %}
+    {% include "../../../templates/radio-include-complex.html" %}
+  {% endif %}
+</form>
+
+{% endblock %}

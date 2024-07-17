@@ -7,7 +7,7 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    {% include "govuk-prototype-kit/includes/homepage-top.njk" %}
+    <!-- {% include "govuk-prototype-kit/includes/homepage-top.njk" %} -->
 
     <h1 class="govuk-heading-xl">
       {{ serviceName }}
@@ -15,7 +15,17 @@
     <p class="govuk-body">
       A sandpit for useful prototype code. 
     </p>
-    {% include "govuk-prototype-kit/includes/homepage-bottom.njk" %}
+    <h2 class="govuk-heading-m">
+      Examples
+    </h2>
+    <p class="govuk-body">
+      <a href="balsalmiq-style" class="govuk-link">Switch on Balsalmiq (rough) styles</a>
+      
+    </p>
+    <!-- {{ govukButton({
+      text: "Continue"
+    }) }} -->
+    <!-- {% include "govuk-prototype-kit/includes/homepage-bottom.njk" %} -->
   </div>
 </div>
 

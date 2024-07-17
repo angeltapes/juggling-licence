@@ -1,0 +1,151 @@
+{% extends "layout-property.html" %}
+
+<!-- {% set pageQuestion = "Have you finished this section?" %}
+{% set pageQuestionAgent = "Have you finished this section?" %}
+{% set pageHint = "You'll still be able to go back and review the information that you've given us once you've finished." %}
+{% set pageAnswer = "foreign-property-about-complete-section" %}
+{% set valueOne = "Yes" %}
+{% set valueTwo= "No" %}
+{% set valueOneAgent = "Yes" %}
+{% set valueTwoAgent = "No" %}
+{% set errorOne = "Enter a value for did your client get Boab tax" %} -->
+
+{% block pageTitle %}
+{% if  data['errorthispage'] == "true"  %}
+Error:
+{% endif %}
+
+{% if  data['user'] == "agent"  %}
+{{pageQuestionAgent}}
+{% else %}
+{{pageQuestion}}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-third">
+    <form action="#" method="post" novalidate>
+<h1 class="govuk-heading-m">
+  Currency input editor
+</h1>
+
+<p class="govuk-body">
+  <a href="editor-checkboxes" class="govuk-link">check boxes</a> | <a href="editor-radios" class="govuk-link">radios</a> | <a href="editor-complex" class="govuk-link">complex</a> | currency | <a href="editor-conditional" class="govuk-link">conditional</a>  
+</p>
+
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--s">
+        H1 question
+      </label>
+      <input class="govuk-input govuk-input--width-10" id="ss-h1" name="ss-h1" 
+      type="text" value="{{ data['ss-h1'] | default('H1')}}">
+    </div>
+    {% set pageQuestion = data['ss-h1'] | default('H1') %}
+
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--s">
+        Hint text (optional)
+      </label>
+      <input class="govuk-input govuk-input--width-10" id="ss-hint" name="ss-hint" 
+      type="text" value="{{ data['ss-hint'] }}">
+    </div>
+    {% set pageHint = data['ss-hint'] %}
+
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--s">
+        Answer ID
+      </label>
+      <input class="govuk-input govuk-input--width-10" id="ss-answer" name="ss-answer" 
+      type="text" value="{{ data['ss-answer'] | default('myAnswer') }}">
+    </div>
+    {% set pageAnswer = data['ss-answer'] %}
+
+    {{ govukButton({
+      text: "Apply"
+    }) }}
+
+  </form>
+
+    <h1 class="govuk-heading-m">
+      Output
+    </h1>
+    <button class="govuk-button govuk-button--secondary" data-module="govuk-button"  onclick="myFunction()">
+      Copy to clipboard
+    </button>
+  <p class="govuk-body" id="myInput">
+<code>
+  &#123;&#123; govukRadios&#40;&#123; 
+    classes: &#x22;govuk-radios--inline&#x22;,
+    name: {{pageAnswer}},
+    value: {{pageAnswer}},
+    fieldset: &#123;
+      legend: &#123;
+        text: {{pageQuestion}},
+        isPageHeading: true,
+        classes: "govuk-fieldset__legend--l"
+      &#125;
+    &#125;,
+    hint: &#123;
+      text: {{pageHint}}
+    &#125;,
+    items: &#91;
+      &#123;
+        value: valueOne,
+        text: valueOne
+      &#125;,
+      &#123;
+        value: valueTwo,
+        text: valueTwo
+      &#125;
+    &#93;
+  &#125;&#41; &#125;&#125;
+  </code>
+</p>
+
+
+    
+  </div> 
+  <div class="govuk-grid-column-two-thirds"> 
+  
+  <form action="#" method="post" novalidate>
+   
+  {{ govukInput({
+    id: pageAnswer,
+    name: pageAnswer,
+    label: {
+      text: pageQuestion,
+      classes: "govuk-label--l",
+      isPageHeading: true
+    },
+    hint: {
+      text: pageHint
+    },
+    prefix: {
+      text: "£"
+    },
+    classes: "govuk-input--width-5",
+    spellcheck: false
+  }) }}
+
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+
+  </form>
+
+  <script>
+  function myFunction() {
+    // Get the text field
+    let copyText = document.getElementById("myInput").innerHTML;
+
+    // Copy the text inside the text field
+    navigator.clipboard.writeText(copyText);
+
+    // Alert the copied text
+    alert("Code copied");
+} 
+  </script>
+  
+  {% endblock %}
+  

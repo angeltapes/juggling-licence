@@ -1,0 +1,60 @@
+{% extends "layout-property.html" %}
+
+{% set pageQuestion = "How much?" %}
+{% set pageQuestionAgent = "Have you finished this section?" %}
+{% set pageHint = "You'll still be able to go back and review the information that you've given us once you've finished." %}
+{% set pageAnswer = "input-value" %}
+{% set valueOne = "Yes" %}
+{% set valueTwo= "No" %}
+{% set valueOneAgent = "Yes" %}
+{% set valueTwoAgent = "No" %}
+{% set errorOne = "Enter a value for did your client get Boab tax" %} 
+{% set outputvalue = "working" %}
+
+{% block pageTitle %}
+{% if  data['errorthispage'] == "true"  %}
+Error:
+{% endif %}
+
+{% if  data['user'] == "agent"  %}
+{{pageQuestionAgent}}
+{% else %}
+{{pageQuestion}}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+
+  <div class="govuk-grid-column-two-thirds"> 
+    {{outputvalue}}
+  <form action="input" method="post" novalidate>
+   {% set outputvalue = "working" %}
+  {{ govukInput({
+    id: pageAnswer,
+    name: pageAnswer,
+    value: data[pageAnswer],
+    label: {
+      text: pageQuestion,
+      classes: "govuk-label--l",
+      isPageHeading: true
+    },
+    hint: {
+      text: pageHint
+    },
+    prefix: {
+      text: "£"
+    },
+    classes: "govuk-input--width-5",
+    spellcheck: false
+  }) }}
+
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+
+  </form>
+
+  
+  {% endblock %}
+  

@@ -1,0 +1,57 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName="Home" %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {% include "govuk-prototype-kit/includes/homepage-top.njk" %}
+
+    <h1 class="govuk-heading-xl">
+      Why AI won't kill off interaction designers
+    </h1>
+    <p class="govuk-body">
+      Most adults would be able to understand the code you're looking at, even 
+      if they're not a developer.
+    </p>
+    <p class="govuk-body">
+      For example, here's a list:
+    </p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>
+        HTML is for writers, to create content
+      </li>
+      <li>
+        CSS is for designers, to create pages
+      </li>
+      <li>
+        Javascript is for developers, to make the web work like a piece of 
+        software
+      </li>
+    </ul>
+    <p class="govuk-body">
+      Yes, you could go to chat GPG to write this code for you. Maybe one day
+      humans won't write code at all.
+    </p>
+    <p class="govuk-body">
+      We need to remember: behind every app or bit of software there are teams 
+      of people collaborating with each other. Web pages built out of HTML, CSS 
+      and Javascript are the end product. We only get to them after we've had 
+      conversations with each other and done research on real people.
+    </p>
+    <p class="govuk-body">
+      If Interaction Designers don't need to write code, we'll move on to a 
+      difference kind of 'prototype'. 
+    </p>
+    <p class="govuk-body">
+      What do you think?
+    </p>
+
+
+    {% include "govuk-prototype-kit/includes/homepage-bottom.njk" %}
+  </div>
+</div>
+
+{% endblock %}

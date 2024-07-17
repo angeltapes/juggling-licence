@@ -1,0 +1,63 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName="Balsalmiq styles" %}
+
+{% block content %}
+
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {% if data['balsalmiq-style'] == "true" %}
+      {% include "balsalmiq-css.html" %}
+    {% endif %}
+    
+    {{ govukRadios({
+      name: "how-many-balls",
+      fieldset: {
+        legend: {
+          text: "How many balls can you juggle?",
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },      
+      hint: {
+        text: "Click the link in the footer to make this page look like 
+        Balsalmiq."
+      },
+      items: [
+        {
+          value: "3 or more",
+          text: "3 or more"
+        },
+        {
+          value: "1 or 2",
+          text: "1 or 2"
+        },
+        {
+          value: "None - I cannot juggle",
+          text: "None - I cannot juggle"
+        }
+      ]
+    }) }}
+
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+    <!-- {% include "govuk-prototype-kit/includes/homepage-bottom.njk" %} -->
+  </div>
+</div>
+
+<div class ="footer-toggle" style="position:relative; top: 9em">
+  
+  <p class="govuk-body">Prototype toggle: 
+    
+    <a href="balsalmiq-style?balsalmiq-style=false" class="govuk-link">Original</a> / 
+    
+    <a href="balsalmiq-style?balsalmiq-style=true" class="govuk-link">Balsalmiq style</a> 
+
+     </p>
+
+  </div>
+
+{% endblock %}

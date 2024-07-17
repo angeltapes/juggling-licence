@@ -1,0 +1,66 @@
+    {% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+    {% if data['user'] == "agent" %}
+
+    {{ govukRadios({
+      classes: "govuk-radios--inline",
+      name: pageAnswer,
+      value: data[pageAnswer],
+      fieldset: {
+        legend: {
+          text: pageQuestionAgent,
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--m"
+        }
+      },
+      hint: {
+        text: pageHintAgent
+      },
+      items: [
+        {
+          value: valueOne,
+          text: valueOneAgent
+        },
+        {
+          value: valueTwo,
+          text: valueTwoAgent
+        }
+      ]
+    }) }}
+
+    {% else %}
+
+    {{ govukRadios({
+      classes: "govuk-radios--inline",
+      name: pageAnswer,
+      value: data[pageAnswer],
+      fieldset: {
+        legend: {
+          text: pageQuestion,
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--m"
+        }
+      },
+      hint: {
+        text: pageHintAgent
+      },
+      items: [
+        {
+          value: valueOne,
+          text: valueOne
+        },
+        {
+          value: valueTwo,
+          text: valueTwo
+        }
+      ]
+    }) }}
+
+    {% endif %}
+
+
+    {% from "govuk/components/button/macro.njk" import govukButton %}
+
+    {{ govukButton({
+      text: "Continue"
+    }) }}

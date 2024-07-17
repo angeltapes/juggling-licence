@@ -1,0 +1,36 @@
+{% extends "layout-property.html" %}
+
+{% set pageQuestion = "111" %}
+{% set pageQuestionAgent = "222" %}
+{% set pageHint = "" %}
+{% set pageHintAgent = "" %}
+{% set pageAnswer = "555" %}
+
+{% set errorOne = "Enter a value for did your client get Boab tax" %}
+
+{% block pageTitle %}
+{% if  data['errorthispage'] == "true"  %}
+Error:
+{% endif %}
+
+{% if  data['user'] == "agent"  %}
+{{pageQuestionAgent}}
+{% else %}
+{{pageQuestion}}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds"> 
+
+  <form action="pia-yes-no" method="post" novalidate>
+    {% if  data['errorthispage'] == "true"  %}
+    {% include "../../../templates/text-include-error.html" %}
+    {% else %}
+    {% include "../../../templates/text-include.html" %}
+    {% endif %}
+  </form>
+  
+  {% endblock %}
+  

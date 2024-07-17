@@ -1,0 +1,107 @@
+{% extends "layout-property.html" %}
+
+ {% set pageQuestion = "Have you finished this section?" %}
+{% set pageQuestionAgent = "Have you finished this section?" %}
+{% set pageHint = "You'll still be able to go back and review the information that you've given us once you've finished." %}
+{% set pageAnswer = "foreign-property-about-complete-section" %}
+{% set conditionalAnswer = "enterAmount" %}
+{% set valueOne = "Yes" %}
+{% set valueTwo= "No" %}
+{% set valueOneAgent = "Yes" %}
+{% set valueTwoAgent = "No" %}
+{% set errorOne = "Enter a value for did your client get Boab tax" %} 
+
+{% block pageTitle %}
+  Conditional page editor
+{% endblock %}
+
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+
+{% block content %}
+
+
+ 
+  <!--<h1 class="govuk-heading-xl">
+    Short heading
+  </h1>
+  <p>
+                                    Para 1
+    
+    
+    
+    
+  </p>
+  <p>
+                                                    
+      
+      
+      
+      
+      
+      
+  </p>
+  <p>
+                                                    
+      
+      
+      
+      
+      
+      
+  </p>
+
+  <p class="govuk-body">
+    <a href="What is the thing?" target="_blank">What is the thing?</a>
+  </p>
+
+  </p>-->
+
+  {% set conditionalHtml %}
+  {{ govukInput({
+    id: conditionalAnswer,
+    name: conditionalAnswer,
+    classes: "govuk-!-width-one-third",
+    label: {
+      text: "Enter the amount"
+    },
+    hint: {
+      text: ""
+    },
+    prefix: {
+      text: "£"
+    }
+  }) }}
+  {% endset -%}
+
+  {{ govukRadios({ 
+    name: "fctr-answer",
+    id: "fctr-answer",
+    fieldset: {
+      legend: {
+        text: "Have you calculated the foreign tax credit relief figure?",
+        isPageHeading: true,
+        classes: "govuk-fieldset__legend--m"
+      }
+    },
+    hint: {
+      text: ""
+    },
+    items: [
+      {
+        value: "Yes",
+        text: "Yes",
+        conditional: {
+          html: conditionalHtml
+        }
+      },
+      {
+        value: "No - we'll calculate it for you at the end",
+        text: "No - we'll calculate it for you at the end"
+      }
+    ]
+  }) }}
+  
+  
+  {% endblock %}
+  

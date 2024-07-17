@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "..\\..\\juggling-licence"
+		},
+		{
+			"path": "..\\.."
+		}
+	],
+	"settings": {
+		"workbench.colorCustomizations": {
+			"activityBar.background": "#561905",
+			"titleBar.activeBackground": "#782307",
+			"titleBar.activeForeground": "#FFFBF9"
+		}
+	}
+}
