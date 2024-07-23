@@ -1,0 +1,93 @@
+<!-- {% extends "layouts/main.html" %} -->
+
+{% set pageName="Scottish Design System" %}
+
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="https://designsystem.gov.scot/webfiles/1721135200822/assets/designsystem/css/main.css"/> 
+<style>
+  header{display:none}
+  #replace-header{
+    padding:0 0 2em 0;
+  }
+  #replace-service-logo{
+    width:191px; 
+    height:81px
+  }
+  #replace-service-name{
+    display: inline;
+    padding:1em;
+    vertical-align:top;
+    float:right
+  }
+</style>
+<div id="replace-header">
+  <img src="/public/images/scotjuggle-logo.png" alt="ScotJuggle logo" id="replace-service-logo">
+  <p id="replace-service-name">
+    Apply for a Scottish juggling licence
+  </p>
+</div>
+<hr>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    
+    <!-- {% include "govuk-prototype-kit/includes/homepage-top.njk" %} -->
+    
+    <h1 class="govuk-heading-xl">
+      Scottish design system style
+    </h1>
+    <p class="govuk-body">
+      In this example I've added CSS to over-ride the default gov.uk styles.
+    </p>
+    <style>
+      legend {
+        font-size: 1.375rem;
+        line-height: 1.4545454545;
+      }
+      .ds_hint-text {
+        color: #727272;
+        margin-bottom: 16px;
+      }
+      .ds_radio {
+        margin-bottom: 24px;
+        padding-left: 40px;
+        position: relative;
+      }
+      .ds_radio__label {
+        display: inline-block;
+        padding: 4px 32px 4px 16px;
+      }
+      .ds_radio__input {
+        height: 44px;
+        left: -2px;
+        opacity: 0;
+        position: absolute;
+        top: -2px;
+        width: 44px;
+      }
+    </style>
+    
+    <fieldset>
+      <legend>Do you, aye?</legend>
+      <p class="ds_hint-text">Select an option</p>
+      <div class="ds_field-group">
+        <div class="ds_radio">
+          <input class="ds_radio__input" id="useful-yes" name="feedback-type" type="radio" value="yes">
+          <label class="ds_radio__label" for="useful-yes">Aye</label>
+        </div>
+        <div class="ds_radio">
+          <input class="ds_radio__input" id="useful-no" name="feedback-type" type="radio" value="no">
+          <label class="ds_radio__label" for="useful-no">Aye, right</label>
+        </div>
+      </div>
+    </fieldset>
+    
+    
+    <a href="index.html">
+      <button class="ds_button" >Continue</button>
+    </a>
+    
+  </div>
+</div>
+
+{% endblock %}

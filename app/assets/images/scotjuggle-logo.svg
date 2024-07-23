@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="191.23125mm"
+   height="81.918747mm"
+   viewBox="0 0 191.23125 81.918747"
+   version="1.1"
+   id="svg5"
+   sodipodi:docname="scotjuggle-logo.svg"
+   inkscape:export-filename="C:\Users\kingr\Documents\GitHub\juggling-licence\app\assets\images\scotjuggle-logo.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#111111"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="0.76969697"
+     inkscape:cx="250.09843"
+     inkscape:cy="320.25591"
+     inkscape:window-width="1920"
+     inkscape:window-height="1001"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2">
+    <rect
+       x="74.055115"
+       y="278.03149"
+       width="609.33069"
+       height="227.3622"
+       id="rect3402" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-7.509375,-63.884375)">
+    <rect
+       style="fill:#ffffff;stroke:#070000;stroke-width:0.79375;stroke-opacity:1"
+       id="rect846"
+       width="190.4375"
+       height="81.125"
+       x="7.90625"
+       y="64.28125" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,3.139373,12.442844)"
+       id="text3400"
+       style="font-size:112px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect3402)"><tspan
+         x="74.054688"
+         y="380.21225"
+         id="tspan9288">ScotJuggle</tspan></text>
+  </g>
+</svg>
