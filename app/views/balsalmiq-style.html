@@ -4,10 +4,9 @@
 
 {% block content %}
 
-
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-
+    <form action="index" method="post" novalidate>
     {% if data['balsalmiq-style'] == "true" %}
       {% include "balsalmiq-css.html" %}
     {% endif %}
@@ -44,11 +43,12 @@
     {{ govukButton({
       text: "Continue"
     }) }}
+    </form>
     <!-- {% include "govuk-prototype-kit/includes/homepage-bottom.njk" %} -->
   </div>
 </div>
 
-<div class ="footer-toggle" style="position:relative; top: 9em">
+<div class ="footer-toggle" style="position:relative; top: 6em">
   
   <p class="govuk-body">Prototype toggle: 
     
