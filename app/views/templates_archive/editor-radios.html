@@ -1,25 +1,10 @@
 {% extends "layouts/main.html" %}
 
-<!-- {% set pageQuestion = "Have you finished this section?" %}
-{% set pageQuestionAgent = "Have you finished this section?" %}
-{% set pageHint = "You'll still be able to go back and review the information that you've given us once you've finished." %}
-{% set pageAnswer = "foreign-property-about-complete-section" %}
-{% set valueOne = "Yes" %}
-{% set valueTwo= "No" %}
-{% set valueOneAgent = "Yes" %}
-{% set valueTwoAgent = "No" %}
-{% set errorOne = "Enter a value for did your client get Boab tax" %} -->
-
 {% block pageTitle %}
-{% if  data['errorthispage'] == "true"  %}
-Error:
-{% endif %}
-
-{% if  data['user'] == "agent"  %}
-{{pageQuestionAgent}}
-{% else %}
-{{pageQuestion}}
-{% endif %}
+  {% if  data['errorthispage'] == "true"  %}
+    Error:
+  {% endif %}
+    Radio buttons editor
 {% endblock %}
 
 {% block content %}
@@ -95,26 +80,26 @@ Error:
 <code>
   &#123;&#123; govukRadios&#40;&#123; 
     classes: &#x22;govuk-radios--inline&#x22;,
-    name: {{pageAnswer}},
-    value: {{pageAnswer}},
+    name: &#x22;{{pageAnswer}}&#x22;,
+    value: &#x22;{{pageAnswer}}&#x22;,
     fieldset: &#123;
       legend: &#123;
-        text: {{pageQuestion}},
+        text: &#x22;{{pageQuestion}}&#x22;,
         isPageHeading: true,
         classes: "govuk-fieldset__legend--l"
       &#125;
     &#125;,
     hint: &#123;
-      text: {{pageHint}}
+      text: &#x22;{{pageHint}}&#x22;
     &#125;,
     items: &#91;
       &#123;
-        value: valueOne,
-        text: valueOne
+        value: &#x22;valueOne&#x22;,
+        text: &#x22;valueOne&#x22;
       &#125;,
       &#123;
-        value: valueTwo,
-        text: valueTwo
+        value: &#x22;valueTwo&#x22;,
+        text: &#x22;valueTwo&#x22;
       &#125;
     &#93;
   &#125;&#41; &#125;&#125;
@@ -130,21 +115,49 @@ Error:
     
   {{ govukRadios({
     classes: "govuk-radios--inline",
-    name: pageAnswer,
-    value: data[pageAnswer],
+    name: &#x22;pageAnswer&#x22;,
+    value: &#x22;pageAnswer&#x22;,
     fieldset: {
       legend: {
-        text: pageQuestion,
+        text: &#x22;pageQuestion&#x22;,
         isPageHeading: true,
         classes: "govuk-fieldset__legend--l"
       }
     },
     hint: {
-      text: pageHint
+      text: &#x22;pageHint&#x22;
+    },
+    items: [
+      {
+        value: 
+<code>
+  {{ govukRadios({ 
+    classes: "govuk-radios--inline",
+    name: myAnswer,
+    value: myAnswer,
+    fieldset: {
+      legend: {
+        text: How many balls can you juggle?,
+        isPageHeading: true,
+        classes: "govuk-fieldset__legend--l"
+      }
+    },
+    hint: {
+      text: Careful now
     },
     items: [
       {
         value: valueOne,
+        text: valueOne
+      },
+      {
+        value: valueTwo,
+        text: valueTwo
+      }
+    ]
+  }) }}
+  </code>
+valueOne,
         text: valueOne
       },
       {

@@ -1,0 +1,60 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form class="form" action="check-answers" method="post">
+
+
+        <code>
+          {{ govukRadios({ 
+            classes: "govuk-radios--inline",
+            name: myAnswer,
+            value: myAnswer,
+            fieldset: {
+              legend: {
+                text: How many balls can you juggle?,
+                isPageHeading: true,
+                classes: "govuk-fieldset__legend--l"
+              }
+            },
+            hint: {
+              text: Careful now
+            },
+            items: [
+              {
+                value: valueOne,
+                text: valueOne
+              },
+              {
+                value: valueTwo,
+                text: valueTwo
+              }
+            ]
+          }) }}
+          </code>
+        
+        
+        
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

@@ -21,11 +21,37 @@
 
 {% block content %}
 <form action="form-handler" method="post" novalidate>
-{% if  data['errorthispage'] == "true"  %}
-  {% include "../../../templates/radio-include.html" %}
-{% else %}
-  {% include "../../../templates/radio-include.html" %}
-{% endif %}
+
+
+
+  <code>
+    {{ govukRadios({ 
+      classes: "govuk-radios--inline",
+      name: "myAnswer",
+      value: "myAnswer",
+      fieldset: {
+        legend: {
+          text: "Do you ayeeeeee?",
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      hint: {
+        text: "Gwan gwan "
+      },
+      items: [
+        {
+          value: "Aye",
+          text: "Aye"
+        },
+        {
+          value: "Naw",
+          text: "Naw"
+        }
+      ]
+    }) }}
+    </code>
+  
 
 </form>
 

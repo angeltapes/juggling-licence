@@ -14,12 +14,7 @@
 {% if  data['errorthispage'] == "true"  %}
 Error:
 {% endif %}
-
-{% if  data['user'] == "agent"  %}
-{{pageQuestionAgent}}
-{% else %}
-{{pageQuestion}}
-{% endif %}
+ Radio buttons editor
 {% endblock %}
 
 {% block content %}
@@ -41,7 +36,6 @@ Error:
       <input class="govuk-input govuk-input--width-10" id="ss-h1" name="ss-h1" 
       type="text" value="{{ data['ss-h1'] | default('H1')}}">
     </div>
-    {% set pageQuestion = data['ss-h1'] | default('H1') %}
 
     <div class="govuk-form-group">
       <label class="govuk-label govuk-label--s">
@@ -50,7 +44,6 @@ Error:
       <input class="govuk-input govuk-input--width-10" id="ss-hint" name="ss-hint" 
       type="text" value="{{ data['ss-hint'] }}">
     </div>
-    {% set pageHint = data['ss-hint'] %}
 
     <div class="govuk-form-group">
       <label class="govuk-label govuk-label--s">
@@ -59,7 +52,6 @@ Error:
       <input class="govuk-input govuk-input--width-10" id="ss-value-1" name="ss-value-1" 
       type="text" value="{{ data['ss-value-1'] }}">
     </div>
-    {% set valueOne = data['ss-value-1'] %}
 
     <div class="govuk-form-group">
       <label class="govuk-label govuk-label--s">
@@ -68,7 +60,6 @@ Error:
       <input class="govuk-input govuk-input--width-10" id="ss-value-2" name="ss-value-2" 
       type="text" value="{{ data['ss-value-2'] }}">
     </div>
-    {% set valueTwo = data['ss-value-2'] %}
 
     <div class="govuk-form-group">
       <label class="govuk-label govuk-label--s">
@@ -77,7 +68,6 @@ Error:
       <input class="govuk-input govuk-input--width-10" id="ss-answer" name="ss-answer" 
       type="text" value="{{ data['ss-answer'] | default('myAnswer') }}">
     </div>
-    {% set pageAnswer = data['ss-answer'] %}
 
     {{ govukButton({
       text: "Apply"
@@ -95,26 +85,26 @@ Error:
 <code>
   &#123;&#123; govukRadios&#40;&#123; 
     classes: &#x22;govuk-radios--inline&#x22;,
-    name: {{pageAnswer}},
-    value: {{pageAnswer}},
+    name: &#x22;{{data['ss-answer']}}&#x22;,
+    value: &#x22;{{data['ss-answer']}}&#x22;,
     fieldset: &#123;
       legend: &#123;
-        text: {{pageQuestion}},
+        text: &#x22;{{data['ss-h1']}}&#x22;,
         isPageHeading: true,
         classes: "govuk-fieldset__legend--l"
       &#125;
     &#125;,
     hint: &#123;
-      text: {{pageHint}}
+      text: &#x22;{{data['ss-hint']}}&#x22;
     &#125;,
     items: &#91;
       &#123;
-        value: valueOne,
-        text: valueOne
+        value: &#x22;{{data['ss-value-1']}}&#x22;,
+        text: &#x22;{{data['ss-value-1']}}&#x22;
       &#125;,
       &#123;
-        value: valueTwo,
-        text: valueTwo
+        value: &#x22;{{data['ss-value-2']}}&#x22;,
+        text: &#x22;{{data['ss-value-2']}}&#x22;
       &#125;
     &#93;
   &#125;&#41; &#125;&#125;
@@ -130,26 +120,26 @@ Error:
     
   {{ govukRadios({
     classes: "govuk-radios--inline",
-    name: pageAnswer,
-    value: data[pageAnswer],
+    name: data['ss-answer'],
+    value: data['ss-answer'],
     fieldset: {
       legend: {
-        text: pageQuestion,
+        text: data['ss-h1'],
         isPageHeading: true,
         classes: "govuk-fieldset__legend--l"
       }
     },
     hint: {
-      text: pageHint
+      text: data['ss-hint']
     },
     items: [
       {
-        value: valueOne,
-        text: valueOne
+        value: data['ss-value-1'],
+        text: data['ss-value-1']
       },
       {
-        value: valueTwo,
-        text: valueTwo
+        value: data['ss-value-2'],
+        text: data['ss-value-2']
       }
     ]
   }) }}
