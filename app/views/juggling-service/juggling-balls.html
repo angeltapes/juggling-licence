@@ -1,54 +1,77 @@
 {% extends "layouts/main.html" %}
 
-{% block pageTitle %}
-  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
-{% endblock %}
+<!-- I set these values at the top of the page to save scrolling.  -->
+{% if  data['user'] == "agent"  %}
+  {% set pageQuestion = "How many balls can you juggle?" %}
+  {% set pageHint = "" %}
+  {% set pageAnswer = "how-many-balls" %}
+  {% set valueOne = "3 or more" %}
+  {% set valueTwo= "1 or two" %}
+  {% set valueThree= "None - I cannot juggle" %}
+  {% set errorOne = "Enter a value for did your client get Boab tax" %}
+{% else %}
+  {% set pageQuestion = "How many balls can you juggle?" %}
+  {% set pageHint = "" %}
+  {% set pageAnswer = "how-many-balls" %}
+  {% set valueOne = "3 or more" %}
+  {% set valueTwo= "1 or two" %}
+  {% set valueThree= "None - I cannot juggle" %}
+  {% set errorOne = "Enter a value for did you get Boab tax" %}
+{% endif %}
 
-{% block beforeContent %}
-  {{ govukBackLink({
-  text: "Back",
-  href: "javascript:window.history.back()"
-}) }}
+{% block pageTitle %}
+{% if  data['errorthispage'] == "true"  %}
+Error:
+{% endif %}
+{{pageQuestion}}
 {% endblock %}
 
 {% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds"> 
 
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-     <form class="form" action="juggling-trick" method="post">
+    <!-- Uncomment this H1 heading and add a pageTitle value for complex 
+      question pages -->
+    <!-- <h1 class="govuk-heading-l">
+      {{pageTitle}}
+    </h1> -->
 
-        {{ govukRadios({
-          name: "how-many-balls",
-          fieldset: {
-            legend: {
-              text: "How many balls can you juggle?",
-              isPageHeading: true,
-              classes: "govuk-fieldset__legend--l"
-            }
-          },
-          items: [
-            {
-              value: "3 or more",
-              text: "3 or more"
-            },
-            {
-              value: "1 or 2",
-              text: "1 or 2"
-            },
-            {
-              value: "None - I cannot juggle",
-              text: "None - I cannot juggle"
-            }
-          ]
-        }) }}
+  <form action="juggling-trick" method="post" novalidate>
 
-        {{ govukButton({
-          text: "Continue"
-        }) }}
+    {{ govukRadios({
+      name: pageAnswer,
+      value: data[pageAnswer],
+      fieldset: {
+        legend: {
+          text: pageQuestion,
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      hint: {
+        text: pageHint
+      },
+      items: [
+        {
+          value: valueOne,
+          text: valueOne
+        },
+        {
+          value: valueTwo,
+          text: valueTwo
+        }
+        ,
+        {
+          value: valueThree,
+          text: valueThree
+        }
+      ]
+    }) }}
 
-      </form>
-
-    </div>
-  </div>
-
-{% endblock %}
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+  </form>
+  
+  {% endblock %}
+  

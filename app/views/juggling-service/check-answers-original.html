@@ -1,0 +1,80 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Check your answers template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds-from-desktop">
+
+      <h1 class="govuk-heading-xl">
+        Check your answers before sending your application
+      </h1>
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "Number of balls you can juggle"
+            },
+            value: {
+              text: data['how-many-balls']
+            },
+            actions: {
+              items: [
+                {
+                  href: "juggling-balls",
+                  text: "Change",
+                  visuallyHiddenText: "number of balls you can juggle"
+                }
+              ]
+            }
+          }
+          ,
+          {
+            key: {
+              text: "Your most impressive juggling trick"
+            },
+            value: {
+              text: data['most-impressive-trick']
+            },
+            actions: {
+              items: [
+                {
+                  href: "juggling-trick",
+                  text: "Change",
+                  visuallyHiddenText: "your most impressive juggling trick"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+      <h2 class="govuk-heading-m">
+        Now send your application
+      </h2>
+
+      <p>
+        By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.
+      </p>
+
+      <form action="confirmation" method="post" novalidate>
+
+        {{ govukButton({
+          text: "Accept and send"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+{% endblock %}

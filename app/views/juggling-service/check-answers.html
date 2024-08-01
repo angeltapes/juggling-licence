@@ -18,46 +18,30 @@
       <h1 class="govuk-heading-xl">
         Check your answers before sending your application
       </h1>
-
-      {{ govukSummaryList({
-        rows: [
-          {
-            key: {
-              text: "Number of balls you can juggle"
-            },
-            value: {
-              text: data['how-many-balls']
-            },
-            actions: {
-              items: [
-                {
-                  href: "juggling-balls",
-                  text: "Change",
-                  visuallyHiddenText: "number of balls you can juggle"
-                }
-              ]
-            }
-          }
-          ,
-          {
-            key: {
-              text: "Your most impressive juggling trick"
-            },
-            value: {
-              text: data['most-impressive-trick']
-            },
-            actions: {
-              items: [
-                {
-                  href: "juggling-trick",
-                  text: "Change",
-                  visuallyHiddenText: "your most impressive juggling trick"
-                }
-              ]
-            }
-          }
-        ]
-      }) }}
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Number of balls you can juggle
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{data['how-many-balls']}}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="juggling-balls.html">Change<span class="govuk-visually-hidden"> name</span></a>
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Most impressive juggling trick
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{data['most-impressive-trick']}}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="juggling-trick.html">Change<span class="govuk-visually-hidden"> name</span></a>
+          </dd>
+        </div>
+      </dl>
 
       <h2 class="govuk-heading-m">
         Now send your application
