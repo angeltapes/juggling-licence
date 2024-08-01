@@ -1,0 +1,47 @@
+    {% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+    {% if data['user'] == "agent" %}
+
+    {{ govukInput({
+      id: pageAnswer,
+      name: pageAnswer,
+      value: data[pageAnswer],
+      label: {
+        text: pageQuestionAgent,
+        classes: "govuk-label--m",
+        isPageHeading: true
+      },
+      hint: {
+        text: pageHintAgent
+      },
+      classes: "govuk-input--width-5",
+      spellcheck: false
+    }) }}
+
+    {% else %}
+
+    {% from "govuk/components/input/macro.njk" import govukInput %}
+
+    {{ govukInput({
+      id: pageAnswer,
+      name: pageAnswer,
+      label: {
+        text: pageQuestion,
+        classes: "govuk-label--l",
+        isPageHeading: true
+      },
+      hint: {
+        text: pageHint
+      },
+      classes: "govuk-input--width-5",
+      spellcheck: false
+    }) }}
+    
+
+    {% endif %}
+
+    {% from "govuk/components/button/macro.njk" import govukButton %}
+
+    {{ govukButton({
+      text: "Continue"
+    }) }}

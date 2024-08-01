@@ -15,18 +15,32 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+     <form class="form" action="juggling-trick" method="post">
 
-      <h1 class="govuk-heading-l">
-        How many balls can you juggle?
-      </h1>
-
-      <form class="form" action="juggling-trick" method="post">
-
-        <p>
-          [Insert question content here - see the
-          <a href="https://design-system.service.gov.uk">GOV.UK Design System</a>
-          for examples]
-        </p>
+        {{ govukRadios({
+          name: "how-many-balls",
+          fieldset: {
+            legend: {
+              text: "How many balls can you juggle?",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          items: [
+            {
+              value: "3 or more",
+              text: "3 or more"
+            },
+            {
+              value: "1 or 2",
+              text: "1 or 2"
+            },
+            {
+              value: "None - I cannot juggle",
+              text: "None - I cannot juggle"
+            }
+          ]
+        }) }}
 
         {{ govukButton({
           text: "Continue"
