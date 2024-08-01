@@ -2,17 +2,19 @@
 
 <!-- I set these values at the top of the page to save scrolling.  -->
 {% if  data['user'] == "agent"  %}
-  {% set pageQuestion = "Radio buttons template" %}
+  {% set pageQuestion = "Check boxes template" %}
   {% set pageHint = "" %}
-  {% set valueOne = "Yes" %}
-  {% set valueTwo= "No" %}
-  {% set errorOne = "Enter a value for did your client get Boab tax" %}
+  {% set valueOne = "One" %}
+  {% set valueTwo= "Two" %}
+  {% set valueThree= "Three" %}
+  {% set errorOne = "" %}
 {% else %}
-  {% set pageQuestion = "Radio buttons template" %}
+  {% set pageQuestion = "Check boxes template" %}
   {% set pageHint = "" %}
-  {% set valueOne = "Yes" %}
-  {% set valueTwo= "No" %}
-  {% set errorOne = "Enter a value for did you get Boab tax" %}
+  {% set valueOne = "One" %}
+  {% set valueTwo= "Two" %}
+  {% set valueThree= "Three" %}
+  {% set errorOne = "" %}
 {% endif %}
 
 {% block pageTitle %}
@@ -34,8 +36,7 @@ Error:
 
   <form action="index" method="post" novalidate>
 
-    {{ govukRadios({
-      classes: "govuk-radios--inline",
+    {{ govukCheckboxes({
       name: pageAnswer,
       value: data[pageAnswer],
       fieldset: {
@@ -56,6 +57,10 @@ Error:
         {
           value: valueTwo,
           text: valueTwo
+        },
+        {
+          value: valueThree,
+          text: valueThree
         }
       ]
     }) }}

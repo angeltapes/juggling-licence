@@ -1,10 +1,18 @@
 {% extends "layouts/main.html" %}
 
-{% set pageQuestion = "111" %}
-{% set pageQuestionAgent = "222" %}
-{% set pageHint = "" %}
-{% set pageHintAgent = "" %}
-{% set pageAnswer = "555" %}
+{% if  data['user'] == "agent"  %}
+  {% set pageQuestion = "Currency input template" %}
+  {% set pageHint = "" %}
+  {% set valueOne = "Yes" %}
+  {% set valueTwo= "No" %}
+  {% set errorOne = "Enter a value for did your client get Boab tax" %}
+{% else %}
+  {% set pageQuestion = "Currency input template" %}
+  {% set pageHint = "" %}
+  {% set valueOne = "Yes" %}
+  {% set valueTwo= "No" %}
+  {% set errorOne = "Enter a value for did you get Boab tax" %}
+{% endif %}
 
 {% set errorOne = "Enter a value for did your client get Boab tax" %}
 
@@ -24,12 +32,29 @@ Error:
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds"> 
 
-  <form action="pia-yes-no" method="post" novalidate>
-    {% if  data['errorthispage'] == "true"  %}
-    {% include "../../../templates/currency-include-error.html" %}
-    {% else %}
-    {% include "../../../templates/currency-include.html" %}
-    {% endif %}
+  <form action="index" method="post" novalidate>
+    {{ govukInput({
+      id: pageAnswer,
+      name: pageAnswer,
+      value: data[pageAnswer],
+      label: {
+        text: pageQuestion,
+        classes: "govuk-label--l",
+        isPageHeading: true
+      },
+      hint: {
+        text: pageHint
+      },
+      prefix: {
+        text: "£"
+      },
+      classes: "govuk-input--width-5",
+      spellcheck: false
+    }) }}
+
+    {{ govukButton({
+      text: "Continue"
+    }) }}
   </form>
   
   {% endblock %}

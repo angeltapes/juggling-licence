@@ -1,0 +1,35 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName="Home" %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <!-- {% include "govuk-prototype-kit/includes/homepage-top.njk" %} -->
+
+    <h1 class="govuk-heading-xl">
+      Templates
+    </h1>
+    <p class="govuk-body">
+      It's useful to keep common page examples in one place. 
+    </p>
+    <p class="govuk-body">
+      <a href="radio-template" class="govuk-link">Radio buttons</a>
+    </p>
+    <p class="govuk-body">
+      <a href="check-boxes-template" class="govuk-link">Check boxes</a>
+    </p>
+    <p class="govuk-body">
+      <a href="currency-template" class="govuk-link">Currency input</a>
+    </p>
+    <form action="../index" method="post" novalidate>
+    {{ govukButton({
+      text: "Back to main page"
+    }) }}
+    </form>
+  </div>
+</div>
+
+{% endblock %}
