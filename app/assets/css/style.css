@@ -1,0 +1,409 @@
+
+.govuk-header{
+  display:none
+}
+
+.govuk-width-container{
+  margin:0
+}
+
+.govuk-main-wrapper{
+  padding-top:0
+}
+
+@charset "UTF-8";
+html {
+  font-size: 100%;
+  height: 100%;
+  font: 100% Helvetica, sans-serif;
+  color: #1A1A1A;
+  font-size:1rem;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0
+}
+
+#skiptocontent {
+  /*http://daviddickball.uk/2013/04/dont-do-skip-to-content-links-wrong/*/
+  height: 1px;
+  width: 1px;
+  position: absolute;
+  overflow: hidden;
+  top: -10px;
+}
+
+
+main {
+  display: inline-block;
+}
+
+/* Optional menu controls */
+#menuButton {
+  display: inline-block;
+  margin: 0;
+  background-size: 2em 2em;
+  background: #000;
+  color: #FFF;
+  border: none;
+  font-size: 1.5em;
+}
+
+#menuButton p {
+  display: none;
+}
+
+#menuButton svg {
+  fill: #FFF;
+}
+
+/*
+  HEADER
+*/
+
+header {
+  background-color: #000;
+  margin: 0;
+  padding: 1em 1em 2em 1em;
+  width: 100%;
+  z-index: 1;
+}
+
+header h1{
+    color:white
+}
+
+header p{
+  color: #fff;
+  display: inline;
+}
+
+header a{
+  color:white
+}
+
+/*
+  TEXT AND BUTTONS
+*/
+
+#pageTitle {
+  background-color: #245591;
+  color: #FFF;
+  font-size: 1.3rem;
+  margin: 0;
+  padding: 0.5em 1em 0.5em 1.5em;
+  width: 100%;
+  z-index: 8;
+}
+
+h1 {
+  font-size: 2em;
+  font-weight: normal;
+}
+
+h2 {
+  font-size: 1.5em;
+  font-weight: normal;
+}
+
+h3 {
+  font-size: 1.16em;
+  font-weight: normal;
+}
+
+p {
+  font-size: 1rem;
+  /* the default, so this line not needed */
+  line-height: 1.5;
+  color: #1A1A1A;
+  /* default text colour */
+}
+
+a:hover {
+  color: orange;
+}
+
+a:focus {
+  color: gold;
+  text-decoration-style: solid;
+}
+
+.primary {
+  font-size: 100%;
+  color: #FFF;
+  background: #245591;
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 5px;
+  transition: 0.5s;
+}
+
+.primary:hover {
+  opacity: 0.7;
+}
+
+.secondary {
+  font-size: 100%;
+  background: #FFF;
+  padding: 0.5em 1em;
+  border: solid 1px #84AADF;
+  border-radius: 5px;
+  transition: 0.5s;
+}
+
+.secondary:hover {
+  background: #AAC2E9;
+}
+
+.primary:focus, .secondary:focus {
+  background: gold;
+  color: #000;
+  box-shadow: 2px 2px #666;
+}
+
+/*
+  FORMS
+*/
+
+.hint {
+  /* minor text */
+  color: #666666;
+}
+
+.error {
+  /* error state */
+  color: #FF0000;
+  margin-top: 0.5em;
+}
+
+.errorState{
+    border:solid 3px red;
+    margin-top:1em;
+    width:90%;
+    padding:1em
+}
+
+.label {
+  margin: 1.5em 0 0 0;
+  display: block;
+}
+
+.errorInput {
+  border: 2px solid #FFFF00;
+}
+
+input {
+  font-size: 100%;
+}
+
+input:focus {
+  box-shadow: 1px -2px #666 inset;
+}
+
+input[type=text] {
+  display: block;
+  margin: 0;
+  padding: 0.5em;
+  border: 1px solid #666;
+  border-radius: 5px;
+}
+
+[type=radio] {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.radioButtons, .checkBoxes {
+  margin-top: 2em;
+}
+
+/* One radio button per line */
+.radioButtons Label {
+  display: block;
+  cursor: pointer;
+  line-height: 2.5;
+  font-size: 1em;
+}
+
+.checkBoxes label {
+  display: block;
+  cursor: pointer;
+  line-height: 2.5;
+  font-size: 1em;
+}
+
+[type=radio] + span {
+  display: block;
+}
+
+input[type=select] {
+  margin: 0.5em;
+  font-size: 100%;
+}
+
+/* the basic, unchecked style */
+[type=radio] + span:before {
+  content: "";
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.25em;
+  border-radius: 1em;
+  border: 0.06em solid #000;
+  margin-right: 0.75em;
+  transition: 0.5s ease all;
+}
+
+/* the checked style using the :checked pseudo class */
+[type=radio]:checked + span:before {
+  background: #245591;
+}
+
+/* never forget focus styling */
+[type=radio]:focus + span:after {
+  content: " â†";
+  font-size: 1em;
+  line-height: 1;
+  vertical-align: -0.125em;
+}
+
+table {
+  margin: 2em 0;
+  text-align: left;
+  vertical-align: top;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #666;
+  padding: 1em;
+}
+
+th {
+  background-color: #245591;
+  color: #FFF;
+}
+
+tr:hover {
+  background-color: #f5f5f5;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/*
+  LANDING PAGES
+*/
+
+#cards {
+  padding: 1em;
+  margin-right: 0.5em;
+  list-style: none;
+}
+
+#cards li {
+  background-color: #245591;
+  color: #fff;
+  padding: 1.5em 1em;
+  margin: 0 1em 1em 0;
+}
+
+.grid-display {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.grid-display li {
+  flex-grow: 1;
+  flex-shrink: 1;
+  /* the default value, in fact */
+  flex-basis: 10em;
+  max-width: 20em;
+}
+
+/*
+  LAYOUT
+*/
+
+hr {
+    margin: 2em 0 2em 0
+}
+
+/*------------------------------------*\
+    devices with a screen width of under 767px
+\*------------------------------------*/
+
+@media only screen and (max-width: 767px) {
+  h1{font-size: 8vw;margin:0;line-height:1.1}
+  h2{font-size: 7vw;margin-top:1em;line-height:1}
+  h3{font-size: 6vw;margin-top:1.5em;line-height:1.1}
+  p,li,a,#tagline{font-size: 5vw}
+
+  /* For mobile phones: */
+  main {
+    margin: 0;
+  }
+
+  #main{
+    margin: 1em
+  }
+
+  header {
+    display: block;
+  }
+
+  .primary, .secondary {
+    width: 90%;
+    margin: 1em 0;
+    display: block;
+  }
+}
+
+
+/*------------------------------------*\
+    devices with a screen width greater than 768px
+\*------------------------------------*/
+
+
+@media only screen and (min-width: 768px) {
+   h1{font-size: 2.6vw;margin:0;}
+   h2{font-size: 2vw;margin-top:1em}
+   h3{font-size: 1.6vw;margin-top:1.5em}
+   p,li,a,#tagline{font-size: 1.4vw}
+  main {
+    padding:1em 2em
+  }
+
+  #cards li {
+    width: 100%;
+  }
+
+  .radioButtons, .checkBoxes {
+    width: 100%;
+  }
+}
+
+#footer {
+  background: #000;
+  color: #fff;
+  padding: 1em 0 1em 2em;
+  width: 100%;
+  margin: 2em 0 0 0em;
+  padding-left: 2em;
+}
+
+/*# sourceMappingURL=style.css.map */

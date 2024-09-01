@@ -1,7 +1,13 @@
-  <body>
+{% extends "layouts/main.html" %}
 
-    <!-- I included the CSS in an html page -->
-    {% include "./_style.html" %}
+{% set pageName="Home" %}
+
+{% block content %}
+
+
+
+    <!-- Extra style sheet -->
+    <link href="/public/css/style.css" rel="stylesheet" type="text/css" />
 
     <!-- a handy skip link for keyboard users -->
     <div id="skiptocontent">
@@ -12,12 +18,13 @@
     <header role="banner">
       <!-- Use any element to open the sidenav -->
       <button id = "menuButton" onclick="toggleNav()"><i class="fa fa-bars"></i></button>
-      <p>
-        <a href="../">Shoestring UI</a> 
-      </p>
+     <h1>Shoestring UI</h1> 
+     <p>
+      <a href="../">Back</a>
+     </p>
     </header>
 
-    <h1 id="pageTitle">
+    <h1 id="pageTitle" class="testy">
        Style guide
     </h1>
 
@@ -55,11 +62,14 @@
           <label class="hint" for="tricky">Here's a hint
           </label>
           <input type="text" name="tricky">
+          <fieldset class="errorState">
           <label class="label" for="error">Error state
           </label>
-          <label class="error" for="error">Oops try again
-          </label>
-          <input type="text" name="error" class="errorInput">
+            <label class="error" for="error">Oops, try again
+            </label>
+            <input type="text" name="error" class="errorInput">
+          </fieldset>
+
 
 
         <!--Radio button design by Heydon Pickering - https://codepen.io/SitePoint/pen/qhCba/-->
@@ -162,5 +172,5 @@
 
     <!-- a non-blocking javascript resource -->
     <script src="script.js"></script>
-  </body>
-</html>
+ 
+{% endblock %}
