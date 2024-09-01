@@ -4,8 +4,8 @@
 {% set pageQuestionAgent = "Have you finished this section?" %}
 {% set pageHint = "You'll still be able to go back and review the information that you've given us once you've finished." %}
 {% set pageAnswer = "foreign-property-about-complete-section" %}
-{% set valueOne = "Yes" %}
-{% set valueTwo= "No" %}
+{% set valueOne = "Value 1" %}
+{% set valueTwo= "Value 2" %}
 {% set valueOneAgent = "Yes" %}
 {% set valueTwoAgent = "No" %}
 {% set errorOne = "Enter a value for did your client get Boab tax" %} -->
@@ -27,12 +27,10 @@ Error:
   <div class="govuk-grid-column-one-third">
     <form action="#" method="post" novalidate>
 <h1 class="govuk-heading-m">
-  Currency input editor
+  Check boxes editor
 </h1>
 
-<p class="govuk-body">
-  <a href="editor-checkboxes" class="govuk-link">check boxes</a> | <a href="editor-radios" class="govuk-link">radios</a> | <a href="editor-complex" class="govuk-link">complex</a> | currency | <a href="editor-conditional" class="govuk-link">conditional</a>  
-</p>
+{% include "./_navigation.html" %}
 
     <div class="govuk-form-group">
       <label class="govuk-label govuk-label--s">
@@ -51,6 +49,24 @@ Error:
       type="text" value="{{ data['ss-hint'] }}">
     </div>
     {% set pageHint = data['ss-hint'] %}
+
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--s">
+        Value 1
+      </label>
+      <input class="govuk-input govuk-input--width-10" id="ss-value-1" name="ss-value-1" 
+      type="text" value="{{ data['ss-value-1'] }}">
+    </div>
+    {% set value1 = data['ss-value-1'] %}
+
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--s">
+        Value 2
+      </label>
+      <input class="govuk-input govuk-input--width-10" id="ss-value-2" name="ss-value-2" 
+      type="text" value="{{ data['ss-value-2'] }}">
+    </div>
+    {% set value2 = data['ss-value-2'] %}
 
     <div class="govuk-form-group">
       <label class="govuk-label govuk-label--s">
@@ -75,8 +91,7 @@ Error:
     </button>
   <p class="govuk-body" id="myInput">
 <code>
-  &#123;&#123; govukRadios&#40;&#123; 
-    classes: &#x22;govuk-radios--inline&#x22;,
+  &#123;&#123; govukCheckboxes&#40;&#123; 
     name: {{pageAnswer}},
     value: {{pageAnswer}},
     fieldset: &#123;
@@ -91,12 +106,12 @@ Error:
     &#125;,
     items: &#91;
       &#123;
-        value: valueOne,
-        text: valueOne
+        value: value1,
+        text: value1
       &#125;,
       &#123;
-        value: valueTwo,
-        text: valueTwo
+        value: value2,
+        text: value2
       &#125;
     &#93;
   &#125;&#41; &#125;&#125;
@@ -109,24 +124,32 @@ Error:
   <div class="govuk-grid-column-two-thirds"> 
   
   <form action="#" method="post" novalidate>
-   
-  {{ govukInput({
-    id: pageAnswer,
+    
+  {{ govukCheckboxes({
     name: pageAnswer,
-    label: {
-      text: pageQuestion,
-      classes: "govuk-label--l",
-      isPageHeading: true
+    value: data[pageAnswer],
+    fieldset: {
+      legend: {
+        text: pageQuestion,
+        isPageHeading: true,
+        classes: "govuk-fieldset__legend--l"
+      }
     },
     hint: {
       text: pageHint
     },
-    prefix: {
-      text: "£"
-    },
-    classes: "govuk-input--width-5",
-    spellcheck: false
+    items: [
+      {
+        value: value1,
+        text: value1
+      },
+      {
+        value: value2,
+        text: value2
+      }
+    ]
   }) }}
+
 
     {{ govukButton({
       text: "Continue"

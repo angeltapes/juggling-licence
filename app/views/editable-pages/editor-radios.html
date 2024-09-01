@@ -4,8 +4,8 @@
 {% set pageQuestionAgent = "Have you finished this section?" %}
 {% set pageHint = "You'll still be able to go back and review the information that you've given us once you've finished." %}
 {% set pageAnswer = "foreign-property-about-complete-section" %}
-{% set valueOne = "Value 1" %}
-{% set valueTwo= "Value 2" %}
+{% set valueOne = "Yes" %}
+{% set valueTwo= "No" %}
 {% set valueOneAgent = "Yes" %}
 {% set valueTwoAgent = "No" %}
 {% set errorOne = "Enter a value for did your client get Boab tax" %} -->
@@ -14,12 +14,7 @@
 {% if  data['errorthispage'] == "true"  %}
 Error:
 {% endif %}
-
-{% if  data['user'] == "agent"  %}
-{{pageQuestionAgent}}
-{% else %}
-{{pageQuestion}}
-{% endif %}
+ Radio buttons editor
 {% endblock %}
 
 {% block content %}
@@ -27,12 +22,10 @@ Error:
   <div class="govuk-grid-column-one-third">
     <form action="#" method="post" novalidate>
 <h1 class="govuk-heading-m">
-  Check boxes editor
+  Radio buttons editor
 </h1>
 
-<p class="govuk-body">
-  check boxes | <a href="editor-radios" class="govuk-link">radios</a> | <a href="editor-complex" class="govuk-link">complex</a> | <a href="editor-currency" class="govuk-link">currency</a> | <a href="editor-conditional" class="govuk-link">conditional</a>  
-</p>
+{% include "./_navigation.html" %}
 
     <div class="govuk-form-group">
       <label class="govuk-label govuk-label--s">
@@ -41,7 +34,6 @@ Error:
       <input class="govuk-input govuk-input--width-10" id="ss-h1" name="ss-h1" 
       type="text" value="{{ data['ss-h1'] | default('H1')}}">
     </div>
-    {% set pageQuestion = data['ss-h1'] | default('H1') %}
 
     <div class="govuk-form-group">
       <label class="govuk-label govuk-label--s">
@@ -50,7 +42,6 @@ Error:
       <input class="govuk-input govuk-input--width-10" id="ss-hint" name="ss-hint" 
       type="text" value="{{ data['ss-hint'] }}">
     </div>
-    {% set pageHint = data['ss-hint'] %}
 
     <div class="govuk-form-group">
       <label class="govuk-label govuk-label--s">
@@ -59,7 +50,6 @@ Error:
       <input class="govuk-input govuk-input--width-10" id="ss-value-1" name="ss-value-1" 
       type="text" value="{{ data['ss-value-1'] }}">
     </div>
-    {% set value1 = data['ss-value-1'] %}
 
     <div class="govuk-form-group">
       <label class="govuk-label govuk-label--s">
@@ -68,7 +58,6 @@ Error:
       <input class="govuk-input govuk-input--width-10" id="ss-value-2" name="ss-value-2" 
       type="text" value="{{ data['ss-value-2'] }}">
     </div>
-    {% set value2 = data['ss-value-2'] %}
 
     <div class="govuk-form-group">
       <label class="govuk-label govuk-label--s">
@@ -77,7 +66,6 @@ Error:
       <input class="govuk-input govuk-input--width-10" id="ss-answer" name="ss-answer" 
       type="text" value="{{ data['ss-answer'] | default('myAnswer') }}">
     </div>
-    {% set pageAnswer = data['ss-answer'] %}
 
     {{ govukButton({
       text: "Apply"
@@ -93,27 +81,28 @@ Error:
     </button>
   <p class="govuk-body" id="myInput">
 <code>
-  &#123;&#123; govukCheckboxes&#40;&#123; 
-    name: {{pageAnswer}},
-    value: {{pageAnswer}},
+  &#123;&#123; govukRadios&#40;&#123; 
+    classes: &#x22;govuk-radios--inline&#x22;,
+    name: &#x22;{{data['ss-answer']}}&#x22;,
+    value: &#x22;{{data['ss-answer']}}&#x22;,
     fieldset: &#123;
       legend: &#123;
-        text: {{pageQuestion}},
+        text: &#x22;{{data['ss-h1']}}&#x22;,
         isPageHeading: true,
         classes: "govuk-fieldset__legend--l"
       &#125;
     &#125;,
     hint: &#123;
-      text: {{pageHint}}
+      text: &#x22;{{data['ss-hint']}}&#x22;
     &#125;,
     items: &#91;
       &#123;
-        value: value1,
-        text: value1
+        value: &#x22;{{data['ss-value-1']}}&#x22;,
+        text: &#x22;{{data['ss-value-1']}}&#x22;
       &#125;,
       &#123;
-        value: value2,
-        text: value2
+        value: &#x22;{{data['ss-value-2']}}&#x22;,
+        text: &#x22;{{data['ss-value-2']}}&#x22;
       &#125;
     &#93;
   &#125;&#41; &#125;&#125;
@@ -127,27 +116,28 @@ Error:
   
   <form action="#" method="post" novalidate>
     
-  {{ govukCheckboxes({
-    name: pageAnswer,
-    value: data[pageAnswer],
+  {{ govukRadios({
+    classes: "govuk-radios--inline",
+    name: data['ss-answer'],
+    value: data['ss-answer'],
     fieldset: {
       legend: {
-        text: pageQuestion,
+        text: data['ss-h1'],
         isPageHeading: true,
         classes: "govuk-fieldset__legend--l"
       }
     },
     hint: {
-      text: pageHint
+      text: data['ss-hint']
     },
     items: [
       {
-        value: value1,
-        text: value1
+        value: data['ss-value-1'],
+        text: data['ss-value-1']
       },
       {
-        value: value2,
-        text: value2
+        value: data['ss-value-2'],
+        text: data['ss-value-2']
       }
     ]
   }) }}

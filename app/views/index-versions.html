@@ -10,22 +10,22 @@
     <!-- {% include "govuk-prototype-kit/includes/homepage-top.njk" %} -->
 
     <h1 class="govuk-heading-xl">
-      {{ serviceName }}
+      {{ serviceName }} prototype
     </h1>
     <p class="govuk-body">
-      A sandpit for useful prototype code. 
+      The current version has been handed over to developers to build
     </p>
+    {{ govukButton({
+      text: "Current version"
+    }) }}
     <h2 class="govuk-heading-m">
-      Examples
+      New versions
     </h2>
     <p class="govuk-body">
-      <a href="./juggling-service/start" class="govuk-link">Advanced Juggling licence application</a>
+      September 2024 - <a href="./juggling-service/start" class="govuk-link">Advanced Juggling licence application</a> for User Research
     </p>
     <p class="govuk-body">
-      <a href="./editable-pages/editor-radios" class="govuk-link">Editable pages</a>
-    </p>
-    <p class="govuk-body">
-      <a href="./templates/index" class="govuk-link">Templates</a>
+      August 2024 - <a href="./templates/index" class="govuk-link">Manager journey</a> for stakeholder review
     </p>
     <p class="govuk-body">
       <a href="balsalmiq-style" class="govuk-link">Switch on Balsalmiq (rough) styles</a>
@@ -35,9 +35,6 @@
     </p>
     <p class="govuk-body">
       <a href="scottish" class="govuk-link">Scottish Design System hack</a> - using CSS to hide the gov.uk header
-    </p>
-    <p class="govuk-body">
-      <a href="./shoestring-ui/" class="govuk-link">Shoestring UI</a> - a simple CSS framework for building apps
     </p>
     <!-- {{ govukButton({
       text: "Continue"

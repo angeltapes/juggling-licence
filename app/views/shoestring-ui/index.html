@@ -1,0 +1,164 @@
+  <body>
+{% include "./_style.html" %}
+    <!-- Style sheet -->
+    <style href="./style.css"></style>
+    <!-- a handy skip link for keyboard users -->
+    <div id="skiptocontent">
+       <a href="#main">skip to main content</a>
+    </div>
+
+    <!-- logo / page navigation etc. goes here -->
+    <header role="banner">
+      <!-- Use any element to open the sidenav -->
+      <button id = "menuButton" onclick="toggleNav()"><i class="fa fa-bars"></i></button>
+      <p>
+        <a href="../">Shoestring UI</a> 
+      </p>
+    </header>
+
+    <h1 id="pageTitle">
+       Style guide
+    </h1>
+
+    <!--
+
+    Start of Main section
+
+    -->
+
+    <main id="main" role ="main">
+        <!-- this page’s unique content -->
+
+        <h2>Base rules</h2>
+        <h1>H1 heading</h1>
+        <h2>H2 heading</h2>
+        <h3>H3 heading</h3>
+        <p>Text p</p>
+        <p class="hint">Hint text p</p>
+        <p><a href="#">Link</a></p>
+        <button type="submit" class="primary">Primary button</button>
+        <button type="submit" class="secondary">Secondary button</button>
+
+        <h2>Modules</h2>
+        <!--start of form controls-->
+        <form>
+          <label class="label" for="firstname">First name
+          </label>
+          <input type="text" name="firstname">
+          <label class="label" for="lastname">Last name
+          </label>
+          <input type="text" name="lastname">
+          <label class="label" for="tricky">Tricky question
+          </label>
+          <label class="hint" for="tricky">Here's a hint
+          </label>
+          <input type="text" name="tricky">
+          <label class="label" for="error">Error state
+          </label>
+          <label class="error" for="error">Oops try again
+          </label>
+          <input type="text" name="error" class="errorInput">
+
+
+        <!--Radio button design by Heydon Pickering - https://codepen.io/SitePoint/pen/qhCba/-->
+        <fieldset class="radioButtons">
+          <legend>Radio Control Quality</legend>
+          <label for="accessible">
+            <input type="radio" value="accessible" name="quality" id="accessible"> <span>accessible</span>
+          </label>
+
+          <label for="pretty">
+            <input type="radio" value="pretty" name="quality" id="pretty"> <span>pretty</span>
+          </label>
+
+          <label for="accessible-and-pretty">
+            <input type="radio" value="pretty"  name="quality" id="accessible-and-pretty" checked> <span>accessible and pretty</span>
+          </label>
+        </fieldset>
+
+        <fieldset class="checkBoxes">
+        <legend>Check boxes</legend>
+
+          <label for="this">
+            <input type="checkbox" value="this"  name="this" id="this" checked> <span>this</span>
+          </label>
+
+          <label for="that">
+            <input type="checkbox" value="that"  name="that" id="that"> <span>that</span>
+          </label>
+        </fieldset>
+
+        </form>
+
+        <table>
+          <caption>WC3 Table</caption>
+          <tr>
+            <th scope="col">
+              Duck
+            </th>
+            <th scope="col">
+              Breed
+            </th>
+            <th scope="col">
+              Favourite band
+            </th>
+          </tr>
+          <tr scope="row">
+            <td>
+              Donald
+            </td>
+            <td>
+              Disney
+            </td>
+            <td>
+              Slayer
+            </td>
+          </tr>
+          <tr scope="row">
+            <td>
+              Daffy
+            </td>
+            <td>
+              Warner Bros
+            </td>
+            <td>
+              Wu Tang Clan
+            </td>
+          </tr>
+          <tr scope="row">
+            <td>
+              Howard
+            </td>
+            <td>
+              Marvel
+            </td>
+            <td>
+              Vengaboys
+            </td>
+          </tr>
+        </table>
+
+
+        <h2>Layout rules</h2>
+        <ul id="cards" class="grid-display">
+            <li>card 1</li>
+            <li>card 2</li>
+            <li>card 3</li>
+        </ul>
+
+     <!--
+
+      End of Main section
+
+      -->
+  </main>
+
+  <footer id="footer" role="contentinfo">
+  &copy; Madmarch 2024
+  </footer>
+
+
+    <!-- a non-blocking javascript resource -->
+    <script src="script.js"></script>
+  </body>
+</html>
