@@ -1,43 +1,84 @@
 {% extends "layouts/main.html" %}
 
 {% block pageTitle %}
-{% if  data['errorthispage'] == "true"  %}
-Error:
-{% endif %}
-
-{% if  data['user'] == "agent"  %}
-{{pageQuestionAgent}}
-{% else %}
-{{pageQuestion}}
-{% endif %}
+Test page
 {% endblock %}
 
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     <form action="editor-radios" method="post" novalidate>
-<h1 class="govuk-heading-m">
-  Test page
-</h1>
-<code>
+
+
+  <!--<h1 class="govuk-heading-xl">
+    Short heading
+  </h1>
+  <p>
+            
+    
+  </p>
+  <p>
+                                            
+      test2
+
+      
+      
+      
+      
+  </p>
+  <p>
+                                            
+      333
+
+      
+      
+      
+      
+  </p>
+
+  <p class="govuk-body">
+    <a href="What is the thing?" target="_blank">What is the thing?</a>
+  </p>
+
+  </p>-->
+
+  {% set conditionalHtml %}
+  {{ govukInput({
+    id: conditionalAnswer,
+    name: conditionalAnswer,
+    classes: "govuk-!-width-one-third",
+    label: {
+      text: ""
+    },
+    hint: {
+      text: ""
+    },
+    prefix: {
+      text: "£"
+    }
+  }) }}
+  {% endset -%}
+
   {{ govukRadios({ 
-    classes: "govuk-radios--inline",
-    name: "myAnswer",
-    value: "myAnswer",
+    name: "sss",
+    id: "sss",
     fieldset: {
       legend: {
-        text: "Do you do ya wanna eh?",
+        text: "xxx",
         isPageHeading: true,
-        classes: "govuk-fieldset__legend--l"
+        classes: "govuk-fieldset__legend--m"
       }
     },
     hint: {
-      text: "test"
+      text: "Goan goan"
     },
     items: [
       {
         value: "Yes",
-        text: "Yes"
+        text: "Yes",
+        conditional: {
+          html: conditionalHtml
+        }
       },
       {
         value: "No",
@@ -45,8 +86,17 @@ Error:
       }
     ]
   }) }}
-  </code>
+  
 
+      
+      
+      
+      
+      
+
+      
+      
+      
 
 
 

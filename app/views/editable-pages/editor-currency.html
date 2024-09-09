@@ -1,25 +1,7 @@
 {% extends "layouts/main.html" %}
 
-<!-- {% set pageQuestion = "Have you finished this section?" %}
-{% set pageQuestionAgent = "Have you finished this section?" %}
-{% set pageHint = "You'll still be able to go back and review the information that you've given us once you've finished." %}
-{% set pageAnswer = "foreign-property-about-complete-section" %}
-{% set valueOne = "Yes" %}
-{% set valueTwo= "No" %}
-{% set valueOneAgent = "Yes" %}
-{% set valueTwoAgent = "No" %}
-{% set errorOne = "Enter a value for did your client get Boab tax" %} -->
-
 {% block pageTitle %}
-{% if  data['errorthispage'] == "true"  %}
-Error:
-{% endif %}
-
-{% if  data['user'] == "agent"  %}
-{{pageQuestionAgent}}
-{% else %}
-{{pageQuestion}}
-{% endif %}
+  Currency editor
 {% endblock %}
 
 {% block content %}
@@ -39,7 +21,6 @@ Error:
       <input class="govuk-input govuk-input--width-10" id="ss-h1" name="ss-h1" 
       type="text" value="{{ data['ss-h1'] | default('H1')}}">
     </div>
-    {% set pageQuestion = data['ss-h1'] | default('H1') %}
 
     <div class="govuk-form-group">
       <label class="govuk-label govuk-label--s">
@@ -48,7 +29,6 @@ Error:
       <input class="govuk-input govuk-input--width-10" id="ss-hint" name="ss-hint" 
       type="text" value="{{ data['ss-hint'] }}">
     </div>
-    {% set pageHint = data['ss-hint'] %}
 
     <div class="govuk-form-group">
       <label class="govuk-label govuk-label--s">
@@ -57,7 +37,6 @@ Error:
       <input class="govuk-input govuk-input--width-10" id="ss-answer" name="ss-answer" 
       type="text" value="{{ data['ss-answer'] | default('myAnswer') }}">
     </div>
-    {% set pageAnswer = data['ss-answer'] %}
 
     {{ govukButton({
       text: "Apply"
@@ -73,30 +52,22 @@ Error:
     </button>
   <p class="govuk-body" id="myInput">
 <code>
-  &#123;&#123; govukRadios&#40;&#123; 
-    classes: &#x22;govuk-radios--inline&#x22;,
-    name: {{pageAnswer}},
-    value: {{pageAnswer}},
-    fieldset: &#123;
-      legend: &#123;
-        text: {{pageQuestion}},
-        isPageHeading: true,
-        classes: "govuk-fieldset__legend--l"
-      &#125;
-    &#125;,
-    hint: &#123;
-      text: {{pageHint}}
-    &#125;,
-    items: &#91;
-      &#123;
-        value: valueOne,
-        text: valueOne
+  &#123;&#123; govukInput&#40;&#123; 
+  id: &#x22;{{data['ss-answer']}}&#x22;,  
+  name: &#x22;{{data['ss-answer']}}&#x22;,
+      label: &#123;
+        text: &#x22;{{data['ss-h1']}}&#x22;,
+        classes: "govuk-fieldset__legend--l",
+        isPageHeading: true
       &#125;,
-      &#123;
-        value: valueTwo,
-        text: valueTwo
-      &#125;
-    &#93;
+    hint: &#123;
+      text: &#x22;{{data['ss-hint']}}&#x22;
+    &#125;,
+    prefix: &#123;
+    text: "£"
+    &#125;,
+    classes: "govuk-input--width-5",
+    spellcheck: false
   &#125;&#41; &#125;&#125;
   </code>
 </p>
@@ -109,15 +80,15 @@ Error:
   <form action="#" method="post" novalidate>
    
   {{ govukInput({
-    id: pageAnswer,
-    name: pageAnswer,
+    id: data['ss-answer'],
+    name: data['ss-answer'],
     label: {
-      text: pageQuestion,
+      text: data['ss-h1'],
       classes: "govuk-label--l",
       isPageHeading: true
     },
     hint: {
-      text: pageHint
+      text: data['ss-hint']
     },
     prefix: {
       text: "£"
