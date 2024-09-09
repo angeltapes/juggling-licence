@@ -1,15 +1,36 @@
+/* 
+
+govuk overrides 
+
+*/
 
 .govuk-header{
   display:none
 }
 
 .govuk-width-container{
-  margin:0
+  margin:0;
+  width:100%;
+  max-width:100%
 }
 
 .govuk-main-wrapper{
   padding-top:0
 }
+
+main {
+  width:100%
+}
+
+#main-content{
+  padding:0
+}
+
+/* 
+
+Base styles 
+
+*/
 
 @charset "UTF-8";
 html {
@@ -27,7 +48,7 @@ html {
 }
 
 body {
-  margin: 0
+  margin: 0;
 }
 
 #skiptocontent {
@@ -39,10 +60,6 @@ body {
   top: -10px;
 }
 
-
-main {
-  display: inline-block;
-}
 
 /* Optional menu controls */
 #menuButton {

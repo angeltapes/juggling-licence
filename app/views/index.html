@@ -10,22 +10,56 @@
     <!-- {% include "govuk-prototype-kit/includes/homepage-top.njk" %} -->
 
     <h1 class="govuk-heading-xl">
-      {{ serviceName }}
+      <s>{{ serviceName }}</s>
     </h1>
     <p class="govuk-body">
-      A sandpit for useful prototype code. 
+      A sandpit for useful prototype code. This isn't a real government service. 
     </p>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.10.0/p5.min.js"></script>
+    <script>
+      let curves; 
+
+function setup() {
+	createCanvas(400, 400);
+	background(255);
+	angleMode(DEGREES);
+	curves = int(random(3, 9));
+	stroke(255,145,85);
+	rectMode(CENTER);
+	noFill()
+}
+
+function draw() {
+	background(255,5);
+	translate(width / 2, height / 2);
+	rotate(frameCount / 100);
+	let x = sin(frameCount / 10) * 200;
+	for (j = 0; j < curves; j++){	
+		push();
+		rotate(360 / curves * j);
+		translate(0, curves * 20);
+		for(i = 0; i < curves; i++){
+			push();
+			rotate((360 / curves) * i);
+			rotate(-x);
+			rect(0, curves * 20, curves * 2, curves * 2);
+			pop()
+		}
+		pop()
+	}
+}
+    </script>
     <h2 class="govuk-heading-m">
       Examples
     </h2>
-    <p class="govuk-body">
-      <a href="./juggling-service/start" class="govuk-link">Advanced Juggling licence application</a>
-    </p>
     <p class="govuk-body">
       <a href="./editable-pages/editor-radios" class="govuk-link">Editable pages</a>
     </p>
     <p class="govuk-body">
       <a href="./templates/index" class="govuk-link">Templates</a>
+    </p>
+    <p class="govuk-body">
+      <a href="./juggling-service/start" class="govuk-link">Advanced Juggling licence application</a>
     </p>
     <p class="govuk-body">
       <a href="balsalmiq-style" class="govuk-link">Switch on Balsalmiq (rough) styles</a>
@@ -39,10 +73,6 @@
     <p class="govuk-body">
       <a href="./shoestring-ui/" class="govuk-link">Shoestring UI</a> - a simple CSS framework for building apps
     </p>
-    <!-- {{ govukButton({
-      text: "Continue"
-    }) }} -->
-    <!-- {% include "govuk-prototype-kit/includes/homepage-bottom.njk" %} -->
   </div>
 </div>
 
