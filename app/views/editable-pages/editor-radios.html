@@ -1,15 +1,5 @@
 {% extends "layouts/main.html" %}
 
-<!-- {% set pageQuestion = "Have you finished this section?" %}
-{% set pageQuestionAgent = "Have you finished this section?" %}
-{% set pageHint = "You'll still be able to go back and review the information that you've given us once you've finished." %}
-{% set pageAnswer = "foreign-property-about-complete-section" %}
-{% set valueOne = "Yes" %}
-{% set valueTwo= "No" %}
-{% set valueOneAgent = "Yes" %}
-{% set valueTwoAgent = "No" %}
-{% set errorOne = "Enter a value for did your client get Boab tax" %} -->
-
 {% block pageTitle %}
 {% if  data['errorthispage'] == "true"  %}
 Error:
@@ -32,7 +22,7 @@ Error:
         H1 question
       </label>
       <input class="govuk-input govuk-input--width-10" id="ss-h1" name="ss-h1" 
-      type="text" value="{{ data['ss-h1'] | default('H1')}}">
+      type="text" value="{{ data['ss-h1'] | default('Enter a question')}}">
     </div>
 
     <div class="govuk-form-group">
@@ -40,7 +30,7 @@ Error:
         Hint text (optional)
       </label>
       <input class="govuk-input govuk-input--width-10" id="ss-hint" name="ss-hint" 
-      type="text" value="{{ data['ss-hint'] }}">
+      type="text" value="{{ data['ss-hint'] | default ('Yes')}}">
     </div>
 
     <div class="govuk-form-group">
@@ -48,7 +38,7 @@ Error:
         Value 1
       </label>
       <input class="govuk-input govuk-input--width-10" id="ss-value-1" name="ss-value-1" 
-      type="text" value="{{ data['ss-value-1'] }}">
+      type="text" value="{{ data['ss-value-1'] | default('No')}}">
     </div>
 
     <div class="govuk-form-group">
