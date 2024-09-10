@@ -21,10 +21,14 @@
       <dl class="govuk-summary-list govuk-!-margin-bottom-9">
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
-            Number of balls you can juggle
+            {% if data['user'] == "agent" %}
+              Number of balls your client can juggle
+            {% else %}
+              Number of balls you can juggle
+            {% endif %}
           </dt>
           <dd class="govuk-summary-list__value">
-            {{data['how-many-balls']}}
+              {{data['how-many-balls']}}
           </dd>
           <dd class="govuk-summary-list__actions">
             <a class="govuk-link" href="juggling-balls.html">Change<span class="govuk-visually-hidden"> name</span></a>
@@ -35,7 +39,11 @@
             Most impressive juggling trick
           </dt>
           <dd class="govuk-summary-list__value">
-            {{data['most-impressive-trick']}}
+            {% if data['most-impressive-trick'] %}
+              {{data['most-impressive-trick']}}
+            {% else %}
+              Not entered
+            {% endif %}
           </dd>
           <dd class="govuk-summary-list__actions">
             <a class="govuk-link" href="juggling-trick.html">Change<span class="govuk-visually-hidden"> name</span></a>

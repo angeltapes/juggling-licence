@@ -1,25 +1,16 @@
 {% extends "layouts/main.html" %}
 
 <!-- I set these values at the top of the page to save scrolling.  -->
-{% if  data['user'] == "agent"  %}
-  {% set pageQuestion = "Radio buttons template" %}
-  {% set pageHint = "" %}
-  {% set pageAnswer = "user" %}
-  {% set valueOne = "Yes" %}
-  {% set valueTwo= "No" %}
-  {% set errorOne = "Enter a value for did your client get Boab tax" %}
-{% else %}
   {% set pageQuestion = "Who are you?" %}
   {% set pageHint = "" %}
   {% set pageAnswer = "user" %}
   {% set valueOne = "A juggler" %}
   {% set valueTwo= "A juggler's manager" %}
-  {% set errorOne = "Enter a value for did you get Boab tax" %}
-{% endif %}
+  {% set errorOne = "Enter a value for who you are" %}
 
 {% block pageTitle %}
 {% if  data['errorthispage'] == "true"  %}
-Error:
+Error: {{errorOne}}}
 {% endif %}
 {{pageQuestion}}
 {% endblock %}
@@ -37,6 +28,7 @@ Error:
   <form action="juggling-balls" method="post" novalidate>
 
     {{ govukRadios({
+      id: pageAnswer,
       name: pageAnswer,
       value: data[pageAnswer],
       fieldset: {
@@ -51,11 +43,11 @@ Error:
       },
       items: [
         {
-          value: valueOne,
+          value: "juggler",
           text: valueOne
         },
         {
-          value: valueTwo,
+          value: "agent",
           text: valueTwo
         }
       ]

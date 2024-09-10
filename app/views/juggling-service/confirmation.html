@@ -15,7 +15,11 @@
       }) }}
 
       <p>
-        We have sent you a confirmation email.
+        {% if  data['user'] == "agent"  %} 
+          We have sent your client a confirmation email.
+        {% else %}
+          We have sent you a confirmation email.
+        {% endif %}
       </p>
 
       <h2 class="govuk-heading-m">

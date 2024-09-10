@@ -11,6 +11,12 @@
 }) }}
 {% endblock %}
 
+{% if data['user'] == "agent" %}
+  {% set pageQuestion = "What is your client's most impressive juggling trick?" %}
+{% else %}
+  {% set pageQuestion = "What is your most impressive juggling trick?" %}
+{% endif %}
+
 {% block content %}
 
   <div class="govuk-grid-row">
@@ -22,7 +28,7 @@
           name: "most-impressive-trick",
           id: "most-impressive-trick",
           label: {
-            text: "What is your most impressive juggling trick?",
+              text: pageQuestion,
             classes: "govuk-label--l",
             isPageHeading: true
           }
