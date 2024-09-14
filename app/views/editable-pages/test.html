@@ -9,27 +9,34 @@ Test page
   <div class="govuk-grid-column-two-thirds">
     <form action="editor-radios" method="post" novalidate>
 
-
+ 
   <!--<h1 class="govuk-heading-xl">
-    Short heading
+    Yeah son
   </h1>
   <p>
-            
+                                                    
+    
+    
+    
+    
+    
     
   </p>
   <p>
                                             
-      test2
-
+      
       
       
       
       
   </p>
   <p>
-                                            
-      333
-
+                                                                            
+      
+      
+      
+      
+      
       
       
       
@@ -44,11 +51,11 @@ Test page
 
   {% set conditionalHtml %}
   {{ govukInput({
-    id: conditionalAnswer,
-    name: conditionalAnswer,
+    id: data['ss-conditional-id'],
+    name: data['ss-conditional-id'],
     classes: "govuk-!-width-one-third",
     label: {
-      text: ""
+      text: "Enter the amount"
     },
     hint: {
       text: ""
@@ -60,17 +67,17 @@ Test page
   {% endset -%}
 
   {{ govukRadios({ 
-    name: "sss",
-    id: "sss",
+    name: "myAnswer",
+    id: "myAnswer",
     fieldset: {
       legend: {
-        text: "xxx",
+        text: "Do you wanna?",
         isPageHeading: true,
         classes: "govuk-fieldset__legend--m"
       }
     },
     hint: {
-      text: "Goan goan"
+      text: ""
     },
     items: [
       {
@@ -87,19 +94,7 @@ Test page
     ]
   }) }}
   
-
-      
-      
-      
-      
-      
-
-      
-      
-      
-
-
-
+  
     {{ govukButton({
       text: "Continue"
     }) }}

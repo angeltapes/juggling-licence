@@ -16,16 +16,14 @@
 </h1>
 
 {% include "./_navigation.html" %}
-<p>
-  This is a 'conditional reveal' page. Clicking the first radio button opens a second question.
-</p>
-    <div class="govuk-form-group">
-      <label class="govuk-label govuk-label--s">
-        H1 heading
-      </label>
-      <input class="govuk-input govuk-input--width-10" id="ss-headline" name="ss-headline" 
-      type="text" value="{{ data['ss-headline'] | default('H1 heading')}}">
-    </div>
+
+<div class="govuk-form-group">
+  <label class="govuk-label govuk-label--s">
+    H1 heading
+  </label>
+  <input class="govuk-input govuk-input--width-10" id="ss-headline" name="ss-headline" 
+  type="text" value="{{ data['ss-headline'] | default('H1 heading')}}">
+</div>
     
     <div class="govuk-form-group">
       <label class="govuk-label govuk-label--s">
@@ -36,6 +34,7 @@
         {{ data['ss-para1'] }}
     </textarea>
     </div>
+    {% set pageText1 = data['ss-para1'] %}
 
     <div class="govuk-form-group">
       <label class="govuk-label govuk-label--s">
@@ -46,6 +45,7 @@
         {{ data['ss-para2'] }}
       </textarea>
     </div>
+    {% set pageText2 = data['ss-para2'] %}
 
     <div class="govuk-form-group">
       <label class="govuk-label govuk-label--s">
@@ -56,6 +56,31 @@
         {{ data['ss-para3'] }}
       </textarea>
     </div>
+    {% set pageText3 = data['ss-para3'] %}
+
+<!-- Uncomment the following lines to offer more paragraph boxes: -->
+<!-- 
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--s">
+        Paragraph 4
+      </label>
+      <textarea class="govuk-textarea" id="ss-para4" name="ss-para4" rows="2" 
+      cols="25">
+        {{ data['ss-para4'] }}
+      </textarea>
+    </div>
+    {% set pageText4 = data['ss-para4'] %}
+
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--s">
+        Paragraph 5
+      </label>
+      <textarea class="govuk-textarea" id="ss-para5" name="ss-para5" rows="2" 
+      cols="25">
+        {{ data['ss-para5'] }}
+      </textarea>
+    </div>
+    {% set pageText5 = data['ss-para5'] %} -->
 
     <div class="govuk-form-group">
       <label class="govuk-label govuk-label--s">
@@ -64,23 +89,25 @@
       <input class="govuk-input govuk-input--width-10" id="ss-link-text" name="ss-link-text" 
       type="text" value="{{ data['ss-link-text'] | default('What is the thing?')}}">
     </div>
+    {% set linkText = data['ss-link-text'] %}
 
     <div class="govuk-form-group">
       <label class="govuk-label govuk-label--s">
         Link ref
       </label>
       <input class="govuk-input govuk-input--width-10" id="ss-link-ref" name="ss-link-ref" 
-      type="text" value="{{ data['ss-link-ref'] | default('#')}}">
+      type="text" value="{{ data['ss-link-ref'] | default('What is the thing?')}}">
     </div>
-<hr>
+    {% set linkRef = data['ss-link-ref'] | default ('#') %}
 
     <div class="govuk-form-group">
       <label class="govuk-label govuk-label--s">
-        Radio buttons question
+        H2 question
       </label>
       <input class="govuk-input govuk-input--width-10" id="ss-h1" name="ss-h1" 
-      type="text" value="{{ data['ss-h1'] | default('Do you wanna?')}}">
+      type="text" value="{{ data['ss-h1'] | default('What is the thing?')}}">
     </div>
+    {% set pageQuestion = data['ss-h1'] | default('H2') %}
 
 
     <div class="govuk-form-group">
@@ -90,23 +117,25 @@
       <input class="govuk-input govuk-input--width-10" id="ss-hint" name="ss-hint" 
       type="text" value="{{ data['ss-hint'] }}">
     </div>
+    {% set pageHint = data['ss-hint'] %}
 
     <div class="govuk-form-group">
       <label class="govuk-label govuk-label--s">
-        Option 1
+        Value 1
       </label>
       <input class="govuk-input govuk-input--width-10" id="ss-value-1" name="ss-value-1" 
-      type="text" value="{{ data['ss-value-1'] | default("Yes")}}">
+      type="text" value="{{ data['ss-value-1'] }}">
     </div>
+    {% set valueOne = data['ss-value-1'] | default('Yes') %}
 
     <div class="govuk-form-group">
       <label class="govuk-label govuk-label--s">
-        Option 2
+        Value 2
       </label>
       <input class="govuk-input govuk-input--width-10" id="ss-value-2" name="ss-value-2" 
-      type="text" value="{{ data['ss-value-2'] | default("No")}}">
+      type="text" value="{{ data['ss-value-2'] }}">
     </div>
-
+    {% set valueTwo = data['ss-value-2'] | default('No') %}
 
     <div class="govuk-form-group">
       <label class="govuk-label govuk-label--s">
@@ -115,8 +144,7 @@
       <input class="govuk-input govuk-input--width-10" id="ss-answer" name="ss-answer" 
       type="text" value="{{ data['ss-answer'] | default('myAnswer') }}">
     </div>
-
-    <hr>
+    {% set pageAnswer = data['ss-answer'] %}
 
     <div class="govuk-form-group">
       <label class="govuk-label govuk-label--s">
@@ -125,14 +153,16 @@
       <input class="govuk-input govuk-input--width-10" id="ss-conditional" name="ss-conditional" 
       type="text" value="{{ data['ss-conditional'] | default('Enter the amount')}}">
     </div>
+    {% set conditionalQuestion = data['ss-conditional'] %}
 
     <div class="govuk-form-group">
       <label class="govuk-label govuk-label--s">
         Conditional answer ID
       </label>
       <input class="govuk-input govuk-input--width-10" id="ss-conditional-id" name="ss-conditional-id" 
-      type="text" value="{{ data['ss-conditional-id'] | default("conditional") }}">
+      type="text" value="{{ data['ss-conditional-id'] | default('conditionalAnswer') }}">
     </div>
+    {% set conditionalAnswer = data['ss-conditional-id'] %}
 
     <div class="govuk-form-group">
       <label class="govuk-label govuk-label--s">
@@ -141,17 +171,18 @@
       <input class="govuk-input govuk-input--width-10" id="ss-conditional-hint" name="ss-conditional-hint" 
       type="text" value="{{ data['ss-conditional-hint'] }}">
     </div>
+    {% set conditionalHint = data['ss-conditional-hint'] %}
 
     {% set conditionalHtml %}
     {{ govukInput({
-      id: data['ss-conditional-id'],
-      name: data['ss-conditional-id'],
+      id: conditionalAnswer,
+      name: conditionalAnswer,
       classes: "govuk-!-width-one-third",
       label: {
-        text: data['ss-conditional']
+        text: conditionalQuestion
       },
       hint: {
-        text: cdata['ss-conditional-hint']
+        text: conditionalHint
       },
       prefix: {
         text: "£"
@@ -187,21 +218,21 @@
   </p>
 
   <p class="govuk-body">
-    <a href="{{ data['ss-link-ref'] }}" target="_blank">{{ data['ss-link-text'] }}</a>
+    <a href="{{ linkRef }}" target="_blank">{{ linkText }}</a>
   </p>
 
   </p>-->
 
   &#123;% set conditionalHtml %&#125;
   &#123;&#123; govukInput&#40;&#123;
-    id: data['ss-conditional-id'],
-    name: data['ss-conditional-id'],
+    id: conditionalAnswer,
+    name: conditionalAnswer,
     classes: "govuk-!-width-one-third",
     label: &#123;
-      text: "{{data['ss-conditional']}}"
+      text: "{{conditionalQuestion}}"
     },
     hint: &#123;
-      text: "{{cdata['ss-conditional-hint']}}"
+      text: "{{conditionalHint}}"
     },
     prefix: &#123;
       text: "£"
@@ -210,11 +241,11 @@
   &#123;% endset -%&#125;
 
   &#123;&#123; govukRadios&#40;&#123; 
-    name: "{{data['ss-answer']}}",
-    id: "{{data['ss-answer']}}",
+    name: "{{pageAnswer}}",
+    id: "{{pageAnswer}}",
     fieldset: &#123;
       legend: &#123;
-        text: "{{data['ss-h1'] | default("Do you wanna?")}}",
+        text: "{{pageQuestion}}",
         isPageHeading: true,
         classes: "govuk-fieldset__legend--m"
       &#125;
@@ -224,15 +255,15 @@
     &#125;,
     items: &#91;
       &#123;
-        value: "{{data['ss-value-1']}}",
-        text: "{{data['ss-value-1'] | default("Yes")}}",
+        value: "{{valueOne}}",
+        text: "{{valueOne}}",
         conditional: {
           html: conditionalHtml
         }
       &#125;,
       &#123;
-        value: "{{data['ss-value-2']}}",
-        text: "{{data['ss-value-2']| default("No")}}"
+        value: "{{valueTwo}}",
+        text: "{{valueTwo}}"
       &#125;
     &#93;
   &#125;&#41; &#125;&#125;
@@ -244,27 +275,37 @@
   
   <form action="#" method="post" novalidate>
     <h1 class="govuk-heading-xl">
-      {{data['ss-headline'] | default('H1 heading')}}
+      {{data['ss-heading'] | default('H1 heading')}}}}
     </h1>
     
-    <p>
-      {{ data['ss-para1'] }}
-    </p>
-    <p>
-      {{ data['ss-para2'] }}
-    </p>
-    <p>
-      {{ data['ss-para3'] }}
+    <p class="govuk-body">
+      {{pageText1}}  
     </p>
 
     <p class="govuk-body">
-      <a href={{ data['ss-link-ref'] }} class="govuk-link" target="_blank">{{ data['ss-link-text'] }}</a>
+      {{pageText2}}  
+    </p>
+
+    <p class="govuk-body">
+      {{pageText3}}  
+    </p>
+
+    <p class="govuk-body">
+      {{pageText4}}  
+    </p>
+
+    <p class="govuk-body">
+      {{pageText5}}  
+    </p>
+
+    <p class="govuk-body">
+      <a href={{ linkRef }} class="govuk-link" target="_blank">{{ linkText }}</a>
     </p>
 
   {{ govukRadios({
-    name: data['ss-answer'],
-    id: data['ss-answer'],
-    value: data[data['ss-answer']],
+    name: pageAnswer,
+    id: pageAnswer,
+    value: data[pageAnswer],
     fieldset: {
       legend: {
         text: pageQuestion,
@@ -273,16 +314,19 @@
       }
     },
     hint: {
-      text: data['ss-hint']
+      text: pageHint
     },
     items: [
       {
-        value: data['ss-value-1'],
-        text: data['ss-value-1'] | default("Yes")
+        value: valueOne,
+        text: valueOne,
+        conditional: {
+          html: conditionalHtml
+        }
       },
       {
-        value: data['ss-value-2'],
-        text: data['ss-value-2'] | default("No")
+        value: valueTwo,
+        text: valueTwo
       }
     ]
   }) }}
