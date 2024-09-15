@@ -16,10 +16,10 @@
 
     <div class="govuk-form-group">
       <label class="govuk-label govuk-label--s">
-        H1 question
+        Label
       </label>
       <input class="govuk-input govuk-input--width-10" id="ss-h1" name="ss-h1" 
-      type="text" value="{{ data['ss-h1'] | default('H1')}}">
+      type="text" value="{{ data['ss-h1'] | default('Enter the amount')}}">
     </div>
 
     <div class="govuk-form-group">
@@ -32,12 +32,17 @@
 
     <div class="govuk-form-group">
       <label class="govuk-label govuk-label--s">
-        Answer ID
+        Name (for session data)
       </label>
+      <p id="ss-answer-hint" class="govuk-hint">Stores the answer in your browser</p>
       <input class="govuk-input govuk-input--width-10" id="ss-answer" name="ss-answer" 
       type="text" value="{{ data['ss-answer'] | default('myAnswer') }}">
     </div>
 
+    <p class="govuk-body">
+      Press return / 'Apply' to update the page.
+    </p>
+    
     {{ govukButton({
       text: "Apply"
     }) }}
@@ -83,7 +88,7 @@
     id: data['ss-answer'],
     name: data['ss-answer'],
     label: {
-      text: data['ss-h1'],
+      text: data['ss-h1'] | default('Enter the amount'),
       classes: "govuk-label--l",
       isPageHeading: true
     },

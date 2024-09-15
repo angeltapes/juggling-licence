@@ -3,54 +3,27 @@
 {% set pageName="Home" %}
 
 {% block content %}
+<!-- Load P5.js using a CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.10.0/p5.min.js"></script>
 
+<!-- You can amend the style of any page using CSS -->
+<style>
+.govuk-header{
+  /* color:#000;background-color:#2a8e02 */
+  background-image: linear-gradient(red, yellow);}
+</style>
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     
     <!-- {% include "govuk-prototype-kit/includes/homepage-top.njk" %} -->
     
     <h1 class="govuk-heading-xl">
-      <s>{{ serviceName }}</s>
+      {{ serviceName }} - sandpit
     </h1>
     <p class="govuk-body">
-      A sandpit for useful prototype code. This isn't a real government service. 
+      A sandpit for useful prototype code. <strong>This isn't a real government service. </strong>
     </p>
-
-    <!-- An animation made from P5.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.10.0/p5.min.js"></script>
-    <script>
-      let curves; 
-      
-      function setup() {
-        createCanvas(400, 400);
-        background(255);
-        angleMode(DEGREES);
-        curves = int(random(3, 9));
-        stroke(255,145,85);
-        rectMode(CENTER);
-        noFill()
-      }
-      
-      function draw() {
-        background(255,5);
-        translate(width / 2, height / 2);
-        rotate(frameCount / 100);
-        let x = sin(frameCount / 10) * 200;
-        for (j = 0; j < curves; j++){	
-          push();
-          rotate(360 / curves * j);
-          translate(0, curves * 20);
-          for(i = 0; i < curves; i++){
-            push();
-            rotate((360 / curves) * i);
-            rotate(-x);
-            rect(0, curves * 20, curves * 2, curves * 2);
-            pop()
-          }
-          pop()
-        }
-      }
-    </script>
+    {% include "./animation.html" %}
     <h2 class="govuk-heading-m">
       Examples
     </h2>
@@ -76,7 +49,7 @@
       <a href="./shoestring-ui/" class="govuk-link">Shoestring UI</a> - a simple CSS framework for building apps
     </p>
     <p>
-      Just for fun, I added an animation made with <a href="https://openprocessing.org/sketch/2223885" target="_blank">P5.js</a>.
+      <a href="ps-sandpit.html">P5 sandpit</a> - Just for fun, I added an animation made with <a href="https://openprocessing.org/sketch/2223885" target="_blank">P5.js</a>.
     </p>
   </div>
 </div>

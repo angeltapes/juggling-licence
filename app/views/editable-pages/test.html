@@ -10,44 +10,26 @@ Test page
     <form action="editor-radios" method="post" novalidate>
 
  
-  <!--<h1 class="govuk-heading-xl">
-    Yeah son
-  </h1>
-  <p>
-                                                    
-    
-    
-    
-    
-    
-    
-  </p>
-  <p>
-                                            
-      
-      
-      
-      
-      
-  </p>
-  <p>
-                                                                            
-      
-      
-      
-      
-      
-      
-      
-      
-      
-  </p>
+<code>
+  {{ govukInput({ 
+  id: "myAnswer",  
+  name: "myAnswer",
+      label: {
+        text: "Enter the amount",
+        classes: "govuk-fieldset__legend--l",
+        isPageHeading: true
+      },
+    hint: {
+      text: ""
+    },
+    prefix: {
+    text: "£"
+    },
+    classes: "govuk-input--width-5",
+    spellcheck: false
+  }) }}
+  </code>
 
-  <p class="govuk-body">
-    <a href="What is the thing?" target="_blank">What is the thing?</a>
-  </p>
-
-  </p>-->
 
   {% set conditionalHtml %}
   {{ govukInput({

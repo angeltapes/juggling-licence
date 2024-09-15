@@ -24,10 +24,10 @@ Error:
 
     <div class="govuk-form-group">
       <label class="govuk-label govuk-label--s">
-        H1 question
+        Legend
       </label>
       <input class="govuk-input govuk-input--width-10" id="ss-h1" name="ss-h1" 
-      type="text" value="{{ data['ss-h1'] | default('H1')}}">
+      type="text" value="{{ data['ss-h1'] | default('Do you juggle?')}}">
     </div>
 
     <div class="govuk-form-group">
@@ -40,24 +40,25 @@ Error:
 
     <div class="govuk-form-group">
       <label class="govuk-label govuk-label--s">
-        Value 1
+        Check box 1
       </label>
       <input class="govuk-input govuk-input--width-10" id="ss-value-1" name="ss-value-1" 
-      type="text" value="{{ data['ss-value-1'] }}">
+      type="text" value="{{ data['ss-value-1'] | default("Yes") }}">
     </div>
 
     <div class="govuk-form-group">
       <label class="govuk-label govuk-label--s">
-        Value 2
+        Check box 2
       </label>
       <input class="govuk-input govuk-input--width-10" id="ss-value-2" name="ss-value-2" 
-      type="text" value="{{ data['ss-value-2'] }}">
+      type="text" value="{{ data['ss-value-2'] | default("No") }}">
     </div>
 
     <div class="govuk-form-group">
       <label class="govuk-label govuk-label--s">
-        Answer ID
+        Name (for session data)
       </label>
+      <p id="ss-answer-hint" class="govuk-hint">Stores the answer in your browser</p>
       <input class="govuk-input govuk-input--width-10" id="ss-answer" name="ss-answer" 
       type="text" value="{{ data['ss-answer'] | default('myAnswer') }}">
     </div>
@@ -117,7 +118,7 @@ Error:
     value: data['ss-answer'],
     fieldset: {
       legend: {
-        text: data['ss-h1'],
+        text: data['ss-h1'] | default("Do you juggle?"),
         isPageHeading: true,
         classes: "govuk-fieldset__legend--l"
       }
@@ -128,11 +129,11 @@ Error:
     items: [
       {
         value: data['ss-value-1'],
-        text: data['ss-value-1']
+        text: data['ss-value-1'] | default("Yes")
       },
       {
         value: data['ss-value-2'],
-        text: data['ss-value-2']
+        text: data['ss-value-2'] | default("No")
       }
     ]
   }) }}
