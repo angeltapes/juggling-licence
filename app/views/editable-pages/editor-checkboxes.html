@@ -26,8 +26,9 @@ Error:
       <label class="govuk-label govuk-label--s">
         Legend
       </label>
+      <p id="ss-h1-hint" class="govuk-hint">Edit the question</p>
       <input class="govuk-input govuk-input--width-10" id="ss-h1" name="ss-h1" 
-      type="text" value="{{ data['ss-h1'] | default('Do you juggle?')}}">
+      type="text" value="{{ data['ss-h1'] | default('What do you juggle?')}}" aria-describedby="ss-h1-hint">
     </div>
 
     <div class="govuk-form-group">
@@ -35,23 +36,23 @@ Error:
         Hint text (optional)
       </label>
       <input class="govuk-input govuk-input--width-10" id="ss-hint" name="ss-hint" 
-      type="text" value="{{ data['ss-hint'] }}">
+      type="text" value="{{ data['ss-hint'] | default ("Select all that apply")}}">
     </div>
 
     <div class="govuk-form-group">
       <label class="govuk-label govuk-label--s">
         Check box 1
       </label>
-      <input class="govuk-input govuk-input--width-10" id="ss-value-1" name="ss-value-1" 
-      type="text" value="{{ data['ss-value-1'] | default("Yes") }}">
+      <input class="govuk-input govuk-input--width-10" id="ss-option-1" name="ss-option-1" 
+      type="text" value="{{ data['ss-option-1'] | default("Balls") }}">
     </div>
 
     <div class="govuk-form-group">
       <label class="govuk-label govuk-label--s">
         Check box 2
       </label>
-      <input class="govuk-input govuk-input--width-10" id="ss-value-2" name="ss-value-2" 
-      type="text" value="{{ data['ss-value-2'] | default("No") }}">
+      <input class="govuk-input govuk-input--width-10" id="ss-option-2" name="ss-option-2" 
+      type="text" value="{{ data['ss-option-2'] | default("Clubs") }}">
     </div>
 
     <div class="govuk-form-group">
@@ -60,7 +61,7 @@ Error:
       </label>
       <p id="ss-answer-hint" class="govuk-hint">Stores the answer in your browser</p>
       <input class="govuk-input govuk-input--width-10" id="ss-answer" name="ss-answer" 
-      type="text" value="{{ data['ss-answer'] | default('myAnswer') }}">
+      type="text" value="{{ data['ss-answer'] | default('myAnswer') }}" aria-describedby="ss-answer-hint">
     </div>
 
     {{ govukButton({
@@ -93,12 +94,12 @@ Error:
   &#125;,
   items: &#91;
     &#123;
-      value: &#x22;{{data['ss-value-1']}}&#x22;,
-      text: &#x22;{{data['ss-value-1']}}&#x22;
+      value: &#x22;{{data['ss-option-1']}}&#x22;,
+      text: &#x22;{{data['ss-option-1']}}&#x22;
     &#125;,
     &#123;
-      value: &#x22;{{data['ss-value-2']}}&#x22;,
-      text: &#x22;{{data['ss-value-2']}}&#x22;
+      value: &#x22;{{data['ss-option-2']}}&#x22;,
+      text: &#x22;{{data['ss-option-2']}}&#x22;
     &#125;
   &#93;
 &#125;&#41; &#125;&#125;
@@ -118,22 +119,22 @@ Error:
     value: data['ss-answer'],
     fieldset: {
       legend: {
-        text: data['ss-h1'] | default("Do you juggle?"),
+        text: data['ss-h1'] | default("What do you juggle?"),
         isPageHeading: true,
         classes: "govuk-fieldset__legend--l"
       }
     },
     hint: {
-      text: data['ss-hint']
+      text: data['ss-hint'] | default("Select all that apply")
     },
     items: [
       {
-        value: data['ss-value-1'],
-        text: data['ss-value-1'] | default("Yes")
+        value: data['ss-option-1'],
+        text: data['ss-option-1'] | default("Balls")
       },
       {
-        value: data['ss-value-2'],
-        text: data['ss-value-2'] | default("No")
+        value: data['ss-option-2'],
+        text: data['ss-option-2'] | default("Clubs")
       }
     ]
   }) }}

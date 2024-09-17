@@ -3,8 +3,6 @@
 {% set pageName="Home" %}
 
 {% block content %}
-<!-- Load P5.js using a CDN -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.10.0/p5.min.js"></script>
 
 <!-- You can amend the style of any page using CSS -->
 <style>
@@ -23,7 +21,6 @@
     <p class="govuk-body">
       A sandpit for useful prototype code. <strong>This isn't a real government service. </strong>
     </p>
-    {% include "./animation.html" %}
     <h2 class="govuk-heading-m">
       Examples
     </h2>
@@ -49,7 +46,7 @@
       <a href="./shoestring-ui/" class="govuk-link">Shoestring UI</a> - a simple CSS framework for building apps
     </p>
     <p>
-      <a href="ps-sandpit.html">P5 sandpit</a> - Just for fun, I added an animation made with <a href="https://openprocessing.org/sketch/2223885" target="_blank">P5.js</a>.
+      <a href="ps-sandpit.html">P5.js sandpit</a> - adding extra interactivity with P5 / Processing
     </p>
   </div>
 </div>

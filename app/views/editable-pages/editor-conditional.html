@@ -17,7 +17,7 @@
 
 {% include "./_navigation.html" %}
 <p>
-  This is a 'conditional reveal' page. Select first radio button to open a second question.
+  This is a 'conditional reveal' page. Select the first radio button to open a second question.
 </p>
     <div class="govuk-form-group">
       <label class="govuk-label govuk-label--s">
@@ -151,7 +151,7 @@
         text: data['ss-conditional']
       },
       hint: {
-        text: cdata['ss-conditional-hint']
+        text: data['ss-conditional-hint']
       },
       prefix: {
         text: "£"
@@ -229,14 +229,14 @@
     items: &#91;
       &#123;
         value: "{{data['ss-value-1']}}",
-        text: "{{data['ss-value-1'] | default("Yes")}}",
+        text: "{{data['ss-value-1']}}",
         conditional: {
           html: conditionalHtml
         }
       &#125;,
       &#123;
         value: "{{data['ss-value-2']}}",
-        text: "{{data['ss-value-2']| default("No")}}"
+        text: "{{data['ss-value-2']}}"
       &#125;
     &#93;
   &#125;&#41; &#125;&#125;
@@ -268,7 +268,6 @@
   {{ govukRadios({
     name: data['ss-answer'],
     id: data['ss-answer'],
-    value: data[data['ss-answer']],
     fieldset: {
       legend: {
         text: pageQuestion,
@@ -282,11 +281,14 @@
     items: [
       {
         value: data['ss-value-1'],
-        text: data['ss-value-1'] | default("Yes")
+        text: data['ss-value-1'],
+        conditional: {
+          html: conditionalHtml
+        }
       },
       {
         value: data['ss-value-2'],
-        text: data['ss-value-2'] | default("No")
+        text: data['ss-value-2'] 
       }
     ]
   }) }}

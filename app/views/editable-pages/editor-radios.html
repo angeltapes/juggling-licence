@@ -56,7 +56,7 @@ Error:
       </label>
       <p id="ss-answer-hint" class="govuk-hint">Stores the answer in your browser</p>
       <input class="govuk-input govuk-input--width-10" id="ss-answer" name="ss-answer" 
-      type="text" value="{{ data['ss-answer'] | default('myAnswer') }}">
+      type="text" value="{{ data['ss-answer'] | default('myAnswer') }}" aria-describedby="ss-answer-hint">
     </div>
 
     <p class="govuk-body">
@@ -115,7 +115,7 @@ Error:
   {{ govukRadios({
     classes: "govuk-radios--inline",
     name: data['ss-answer'],
-    value: data['ss-answer'],
+    id: data['ss-answer'],
     fieldset: {
       legend: {
         text: data['ss-h1'] | default("Do you juggle?"),
@@ -129,11 +129,11 @@ Error:
     items: [
       {
         value: data['ss-value-1'],
-        text: data['ss-value-1'] | default("Yes")
+        text: data['ss-value-1'] 
       },
       {
         value: data['ss-value-2'],
-        text: data['ss-value-2'] | default("No")
+        text: data['ss-value-2'] 
       }
     ]
   }) }}

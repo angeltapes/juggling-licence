@@ -75,6 +75,36 @@ Test page
       }
     ]
   }) }}
+
+
+<code>
+  {{ govukRadios({ 
+    classes: "govuk-radios--inline",
+    name: "",
+    value: "",
+    fieldset: {
+      legend: {
+        text: "Do you juggle?",
+        isPageHeading: true,
+        classes: "govuk-fieldset__legend--l"
+      }
+    },
+    hint: {
+      text: ""
+    },
+    items: [
+      {
+        value: "Yes",
+        text: "Yes"
+      },
+      {
+        value: "No",
+        text: "No"
+      }
+    ]
+  }) }}
+  </code>
+
   
   
     {{ govukButton({
