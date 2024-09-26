@@ -22,7 +22,7 @@
       A sandpit for useful prototype code. <strong>This isn't a real government service. </strong>
     </p>
     <h2 class="govuk-heading-m">
-      Examples
+      Example journeys
     </h2>
     <p class="govuk-body">
       <a href="./editable-pages/editor-radios" class="govuk-link">Editable pages</a>
@@ -47,6 +47,14 @@
     </p>
     <p>
       <a href="ps-sandpit.html">P5.js sandpit</a> - adding extra interactivity with P5 / Processing
+    </p>
+    <h2>Useful snippets</h2>
+    <p>Here's an example of JSON data, pulled from the file app\data\people.json.</p>
+    <p>To use the JSON, add new lines to the file app\data\session-data-defaults.js</p>
+    <p>
+      {% for person in data['people'] %}
+      {{person.name}}<br>
+      {% endfor %}
     </p>
   </div>
 </div>
