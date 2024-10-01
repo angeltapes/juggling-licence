@@ -46,7 +46,7 @@
               <th scope="col" class="govuk-table__header">Date</th>
               <th scope="col" class="govuk-table__header">Name</th>
               <th scope="col" class="govuk-table__header">Address</th>
-              <th scope="col" class="govuk-table__header">Date of birth</th>
+              <th scope="col" class="govuk-table__header govuk-!-text-align-right">Date of birth</th>
               <th scope="col" class="govuk-table__header">Owner</th>
               <th scope="col" class="govuk-table__header">Status</th>
             </tr>
@@ -56,7 +56,7 @@
               <th scope="row" class="govuk-table__header">1 April</th>
               <td class="govuk-table__cell">Tay Tay Swifte</td>
               <td class="govuk-table__cell">5 Oak Drive QQ1 7NN</td>
-              <td class="govuk-table__cell">1 April 1989</td>
+              <td class="govuk-table__cell govuk-!-text-align-right">1-04-1989</td>
               <td class="govuk-table__cell">Avinash Singh</td>
               <td class="govuk-table__cell">New</td>
             </tr>
@@ -64,7 +64,7 @@
               <th scope="row" class="govuk-table__header">1 April</th>
               <td class="govuk-table__cell">Marion Hall</td>
               <td class="govuk-table__cell">13 Pine Hall HH1 8NN</td>
-              <td class="govuk-table__cell">1 April 1971</td>
+              <td class="govuk-table__cell govuk-!-text-align-right">25-12-1971</td>
               <td class="govuk-table__cell">Kyunghyun Cho</td>
               <td class="govuk-table__cell">New</td>
             </tr>
@@ -74,10 +74,10 @@
               <tr class="govuk-table__row">
                 <th scope="row" class="govuk-table__header">1 April</th>
                 <td class="govuk-table__cell">{{person.name}}</td>
-                <td class="govuk-table__cell">5 Oak Drive QQ1 7NN</td>
-                <td class="govuk-table__cell">1 April 1989</td>
+                <td class="govuk-table__cell">{{person.address}}</td>
+                <td class="govuk-table__cell govuk-!-text-align-right">{{person.dob}}</td>
                 <td class="govuk-table__cell">Avinash Singh</td>
-                <td class="govuk-table__cell">New</td>
+                <td class="govuk-table__cell">{{person.status}}</td>
               </tr>
               {% endfor %}
               
