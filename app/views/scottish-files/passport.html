@@ -1,0 +1,136 @@
+{# !!!! The Question pattern is currently being reviewed and is subject to change !!!! #}
+
+{% extends "sg-prototype-templates/layouts/_base-layout.njk" %}
+
+{% block pageTitle %}Question{% endblock %}
+
+{# Example of using a different logo in the header - in this case the Mygov.scot logo #}
+{% block siteBrandingLogo %}
+<a class="ds_site-branding__logo  ds_site-branding__link" href="/">
+    <img class="ds_site-branding__logo-image" src="{{ assetPathTemplates }}/images/site-furniture/logos/mygov.svg" alt="mygov.scot" />
+</a>
+{% endblock %}
+
+{# Use an empty siteBrandingTitle block to only show the logo for site branding #}
+{% block siteBrandingTitle %}
+{% endblock %}
+
+{# Use an empty siteSearch block to hide the search from the header #}
+{% block siteSearch %}{% endblock %}
+
+{# 'Part of' notification message - in place of breadcrumbs #}
+{% block breadcrumbs %}
+<div class="ds_wrapper">
+    <nav class="ds_notification-message">
+        <h3 class="ds_notification-message__title">
+            Part of: Going abroad
+        </h3>
+        <div class="ds_notification-message__body">
+            <p><a href="/path/of/start/page">Your passport</a></p>
+        </div>
+    </nav>
+</div>
+{% endblock %}
+
+{% block main %}
+<div class="ds_wrapper">
+    <main id="main-content" class="ds_layout  ds_layout--article">
+
+        {% block mainContent %}
+        <div class="ds_layout__content">
+            
+            {# Set the action attribute to the next page in your form's journey #}
+            <form action="../index" method="post">
+                <div class="ds_question">
+                    <fieldset>
+                        <legend class="ds_page-header">
+                            <h1 class="ds_page-header__title">
+                                Renew your Scottish passport
+                            </h1>
+                        </legend>
+
+
+<div class="ds_inset-text">
+    <div class="ds_inset-text__text">
+        You don't need a passport to travel to England, Wales, Ireland or any other EU country.    </div>
+</div>
+
+
+
+                        {# Example of a form input - in this case a date input with datepicker #}
+                        <div data-module="ds-datepicker" class="ds_datepicker">
+                            <label class="ds_label" for="chosen-date">Date of issue</label>
+                            <p class="ds_hint-text">Use dd/mm/yyyy format. For example, 19/09/2014.</p>
+                            <div class="ds_input__wrapper">
+                                <input id="chosen-date" name="chosen-date" type="text" class="ds_input  ds_input--fixed-10">
+                            </div>
+                        </div>
+                        
+                    </fieldset>
+                </div>
+                
+
+<fieldset>
+    <legend>What's the surprise twist?</legend>
+    <p class="ds_hint-text">Select an option</p>
+    <div class="ds_field-group">
+        <div class="ds_radio">
+            <input class="ds_radio__input" id="useful-yes" name="feedback-type" type="radio" value="yes">
+            <label class="ds_radio__label" for="useful-yes">The milkman was Sean Connery</label>
+        </div>
+        <div class="ds_radio">
+            <input class="ds_radio__input" id="useful-no" name="feedback-type" type="radio" value="no">
+            <label class="ds_radio__label" for="useful-no">The lodger was Sean Connery</label>
+        </div>
+        <div class="ds_radio">
+            <input class="ds_radio__input" id="useful-maybe" name="feedback-type" type="radio" value="maybe">
+            <label class="ds_radio__label" for="useful-maybe">The male model was Sean Connery</label>
+        </div>
+    </div>
+</fieldset>
+
+
+                <div class="button-group">
+                    <a href="/path/of/prev/page" class="ds_button  ds_button--cancel  ds_button--has-icon  ds_button--has-icon--left">
+                        <svg class="ds_icon" aria-hidden="true" role="img"><use href="{{ assetPath }}/images/icons/icons.stack.svg#chevron_left"></use></svg>
+                        Back
+                    </a>
+                    <button class="ds_button  ds_button--has-icon">
+                        Next
+                        <svg class="ds_icon" aria-hidden="true" role="img"><use href="{{ assetPath }}/images/icons/icons.stack.svg#chevron_right"></use></svg>
+                    </button>
+                </div>
+            </form>
+
+            {# Optionally show submitted answers so far #}
+            {% block answerSummary %}
+            <div>
+                <h2>Your answers</h2>
+                <p><button class="ds_link">Clear answers and start again</button></p>
+                <ol class="ds_summary-list">
+                    <li class="ds_summary-list__item"><span class="ds_summary-list__key">This is an example question?</span> <span class="ds_summary-list__value" id="q1"> <span class="visually-hidden">Your answer is: </span> <q class="ds_summary-list__answer">My answer</q></span>
+                        <div class="ds_summary-list__actions">
+                            <ul class="ds_summary-list__actions-list">
+                                <li class="ds_summary-list__actions-list-item"><button class="ds_link" aria-describedby="q1">Change <span class="visually-hidden">your answer for: <q>This is an example question?</q></span></button></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="ds_summary-list__item"><span class="ds_summary-list__key">This is another different example question?</span> <span class="ds_summary-list__value" id="q2"> <span class="visually-hidden">Your answer is: </span> <q class="ds_summary-list__answer">My answer</q></span>
+                        <div class="ds_summary-list__actions">
+                            <ul class="ds_summary-list__actions-list">
+                                <li class="ds_summary-list__actions-list-item"><button class="ds_link" aria-describedby="q2">Change <span class="visually-hidden">your answer for: <q>This is another different example question?</q></span></button></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+            {% endblock %}
+
+
+        </div>
+        {% endblock %}
+
+        
+    </main>
+</div>
+{% endblock %}
