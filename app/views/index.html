@@ -11,7 +11,6 @@
   background-image: linear-gradient(red, yellow);}
 </style>
 <div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
     
     <!-- {% include "govuk-prototype-kit/includes/homepage-top.njk" %} -->
     
@@ -22,8 +21,11 @@
       A sandpit for useful prototype code. <strong>This isn't a real government service. </strong>
     </p>
     <h2 class="govuk-heading-m">
-      Examples
+      Example journeys
     </h2>
+    <p class="govuk-body">
+      <a href="./cases/index" class="govuk-link">Case management example</a>
+    </p>
     <p class="govuk-body">
       <a href="./editable-pages/editor-radios" class="govuk-link">Editable pages</a>
     </p>
@@ -47,6 +49,14 @@
     </p>
     <p>
       <a href="p5-sandpit.html">P5.js sandpit</a> - adding extra interactivity with P5 / Processing
+    </p>
+    <h2>Useful snippets</h2>
+    <p>Here's an example of JSON data, pulled from the file app\data\people.json.</p>
+    <p>To use the JSON, add new lines to the file app\data\session-data-defaults.js</p>
+    <p>
+      {% for person in data['people'] %}
+      {{person.name}}<br>
+      {% endfor %}
     </p>
   </div>
 </div>
