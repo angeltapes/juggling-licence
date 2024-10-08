@@ -31,7 +31,30 @@
               {{data['how-many-balls']}}
           </dd>
           <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" href="juggling-balls.html">Change<span class="govuk-visually-hidden"> name</span></a>
+            <a class="govuk-link" href="juggling-balls.html">Change<span class="govuk-visually-hidden"> how many balls</span></a>
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            {% if data['user'] == "agent" %}
+              What can your client juggle?
+            {% else %}
+              What can you juggle?
+            {% endif %}
+          </dt>
+          <dd class="govuk-summary-list__value">
+            <ul class="govuk-list govuk-list--bullet">
+              <!-- Display the selected check box values in a list -->
+              {% for i in data['objects'] %}
+              <li>
+                {{i}}
+              </li>
+              {% endfor %}
+            </ul>
+
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="juggling-objects.html">Change<span class="govuk-visually-hidden"> objects</span></a>
           </dd>
         </div>
         <div class="govuk-summary-list__row">

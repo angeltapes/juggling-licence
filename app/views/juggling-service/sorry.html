@@ -1,0 +1,22 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+    Sorry
+{% endblock %}
+
+{% block content %}
+<form action="form-handler" method="post" novalidate>
+
+<h1 class="govuk-heading-xl">
+  Sorry, this service isn't right for you
+</h1>
+<p class="govuk-body">
+  You said that you don't juggle. 
+</p>
+{{ govukButton({
+  text: "Exit",
+  href: "../"
+}) }}
+</form>
+
+{% endblock %}

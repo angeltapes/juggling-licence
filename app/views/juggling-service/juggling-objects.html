@@ -2,22 +2,18 @@
 
 <!-- I set these values at the top of the page to save scrolling.  -->
 {% if  data['user'] == "agent"  %} 
-  {% set pageQuestion = "How many balls can your client juggle?" %}
-  {% set pageHint = "" %}
-  {% set pageAnswer = "how-many-balls" %}
-  {% set valueOne = "3 or more" %}
-  {% set valueTwo= "1 or two" %}
-  {% set valueThree= "None - they cannot juggle" %}
-  {% set errorOne = "Enter a value for how many balls can they juggle" %}
+  {% set pageQuestion = "What can your client juggle?" %}
+  {% set errorOne = "Enter a value for xxx" %}
 {% else %}
-  {% set pageQuestion = "How many balls can you juggle?" %}
-  {% set pageHint = "" %}
-  {% set pageAnswer = "how-many-balls" %}
-  {% set valueOne = "3 or more" %}
-  {% set valueTwo= "1 or two" %}
-  {% set valueThree= "None - I cannot juggle" %}
-  {% set errorOne = "Enter a value for how many balls can you juggle" %}
+  {% set pageQuestion = "What can you juggle?" %}
+  {% set errorOne = "Enter a value for xxx" %}
 {% endif %}
+
+{% set pageHint = "Select all that apply" %}
+{% set pageAnswer = "objects" %}
+{% set valueOne = "Balls" %}
+{% set valueTwo= "Clubs" %}
+{% set valueThree= "Knives" %}
 
 {% block pageTitle %}
 {% if  data['errorthispage'] == "true"  %}
@@ -36,11 +32,11 @@ Error:
       {{pageTitle}}
     </h1> -->
 
-  <form action="juggling-balls-router" method="post" novalidate>
+  <form action="juggling-trick" method="post" novalidate>
 
-    {{ govukRadios({
+    {{ govukCheckboxes({
       name: pageAnswer,
-      value: data[pageAnswer],
+      values: data[pageAnswer],
       fieldset: {
         legend: {
           text: pageQuestion,
@@ -59,8 +55,7 @@ Error:
         {
           value: valueTwo,
           text: valueTwo
-        }
-        ,
+        },
         {
           value: valueThree,
           text: valueThree

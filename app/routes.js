@@ -7,3 +7,12 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 
 // Add your routes here
+
+//Example route for the juggling balls journey
+router.post('/juggling-service/juggling-balls-router', function(request, response) {
+    if (request.session.data['how-many-balls'] == "None - I cannot juggle" || request.session.data['how-many-balls'] == "None - they cannot juggle"){
+        response.redirect("/juggling-service/sorry")
+    } else {
+        response.redirect("/juggling-service/juggling-objects")
+    }
+})
