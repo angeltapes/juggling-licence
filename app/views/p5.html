@@ -1,0 +1,20 @@
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {% include "govuk-prototype-kit/includes/homepage-top.njk" %}
+    <!-- Load P5.js using a CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.10.0/p5.min.js"></script>
+
+    <h1 class="govuk-heading-xl">
+      P5 sandpit
+    </h1>
+    <p class="govuk-body">
+      Extra interactivity using p5.js, also known as Processing. 
+    </p>
+    
+    <p class="govuk-body">
+      Just for fun, I added an animation made with <a href="https://openprocessing.org/sketch/2223885" target="_blank">P5.js</a>.
+    </p>
+    {% include "./animation.html" %}
+  </div>
+</div>
