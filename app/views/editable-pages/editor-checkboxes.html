@@ -81,7 +81,7 @@ Error:
   &#123;&#123; govukCheckboxes&#40;&#123; 
 
   name: &#x22;{{data['ss-answer']}}&#x22;,
-  value: &#x22;{{data['ss-answer']}}&#x22;,
+  values: &#x22;{{data['ss-answer']}}&#x22;,
     fieldset: &#123;
     legend: &#123;
       text: &#x22;{{data['ss-h1']}}&#x22;,
@@ -116,7 +116,7 @@ Error:
     
   {{ govukCheckboxes({
     name: data['ss-answer'],
-    value: data['ss-answer'],
+    values: data['ss-answer'],
     fieldset: {
       legend: {
         text: data['ss-h1'] | default("What do you juggle?"),
