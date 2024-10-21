@@ -1,3 +1,5 @@
+<!-- This experiment doesn't work very well. 
+The P5 sketch doesn't load consistently.  -->
 {% extends "layouts/main.html" %}
 
 {% set pageName="Home" %}
@@ -10,18 +12,29 @@
     {% include "govuk-prototype-kit/includes/homepage-top.njk" %}
     <!-- Load P5.js using a CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.10.0/p5.min.js"></script>
+    <script src="https://openprocessing.org/openprocessing_sketch.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.10.0/lib/p5.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.10.0/lib/addons/p5.sound.min.js"></script>
 
     <h1 class="govuk-heading-xl">
       P5 sandpit
     </h1>
     <p class="govuk-body">
-      Extra interactivity using p5.js, also known as Processing. 
+      Extra interactivity using p5.js, also known as Processing. xxx
     </p>
-    
+
     <p class="govuk-body">
       Just for fun, I added an animation made with <a href="https://openprocessing.org/sketch/2223885" target="_blank">P5.js</a>.
     </p>
-    {% include "./animation.html" %}
+    <style>
+      #p5-sketch{
+        display:block;
+        margin:3em;
+        top:3em
+      }
+    </style>
+    <p id="p5-sketch"></p>
+    {% include "./sketch.html" %}
   </div>
 </div>
 

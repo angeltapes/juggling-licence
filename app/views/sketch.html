@@ -1,0 +1,31 @@
+working
+<script>
+  // adjust size to parent div
+let parentDiv = document.getElementById("p5-sketch");
+let width = parentDiv.offsetWidth;
+let height = parentDiv.offsetHeight;
+function setup() {
+// create canvas inside div
+console.log(width);
+console.log(height);
+
+// let canvas = createCanvas(100,100);
+// canvas.parent("p5-sketch");
+let button = createButton('Continue');
+button.position(100, 400);
+button.class('govuk-button');
+button.class('p5-class');
+}
+// adjust canvas size on resize
+function windowResized() {
+// adjust width and height to parent div
+width = parentDiv.offsetWidth;
+height = parentDiv.offsetHeight;
+resizeCanvas(width, height);
+}
+
+// function draw(){
+
+// circle(mouseX,mouseY,50);
+// }
+</script>
