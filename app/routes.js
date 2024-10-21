@@ -16,3 +16,16 @@ router.post('/juggling-service/juggling-balls-router', function(request, respons
         response.redirect("/juggling-service/juggling-objects")
     }
 })
+
+// Logging session data  
+  
+router.use((req, res, next) => {    
+    const log = {  
+      method: req.method,  
+      url: req.originalUrl,  
+      data: req.session.data  
+    }  
+    console.log(JSON.stringify(log, null, 2))  
+   
+  next()  
+}) 
