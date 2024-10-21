@@ -15,7 +15,7 @@
       This is a common government pattern. Citizens apply for government services then 
       civil servants review the applications in a case management system.
     </p>
-    <form method="post">
+    <form action="index-broken" method="post">
       <div class="govuk-grid-row">
         <!-- Status -->
         <div class="govuk-grid-column-one-half">
@@ -61,66 +61,112 @@
       </div>
     </div>
   </div>
+  
+  <!-- 
+  Tabs 
+  -->
+  <div class="govuk-tabs" data-module="govuk-tabs">
+    <h2 class="govuk-tabs__title">
+      Contents
+    </h2>
+    <ul class="govuk-tabs__list">
+      <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
+        <a class="govuk-tabs__tab" href="#past-day">
+          All cases
+        </a>
+      </li>
+      <li class="govuk-tabs__list-item">
+        <a class="govuk-tabs__tab" href="#past-week">
+          My cases
+        </a>
+      </li>
+    </ul>
     
     <!-- 
-    Tabs 
+    All cases 
     -->
-    <div class="govuk-tabs" data-module="govuk-tabs">
-      <h2 class="govuk-tabs__title">
-        Contents
-      </h2>
-      <ul class="govuk-tabs__list">
-        <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
-          <a class="govuk-tabs__tab" href="#past-day">
-            All cases
-          </a>
-        </li>
-        <li class="govuk-tabs__list-item">
-          <a class="govuk-tabs__tab" href="#past-week">
-            My cases
-          </a>
-        </li>
-      </ul>
-      
-      <!-- 
-      All cases 
-      -->
-      <div class="govuk-tabs__panel" id="past-day">
-        <table class="govuk-table govuk-table--small-text-until-tablet">
-          <caption class="govuk-table__caption govuk-table__caption--m">All juggling licence applications</caption>
-          <thead class="govuk-table__head">
-            <tr class="govuk-table__row">
-              <th scope="col" class="govuk-table__header">Date</th>
-              <th scope="col" class="govuk-table__header">Name</th>
-              <th scope="col" class="govuk-table__header">Address</th>
-              <th scope="col" class="govuk-table__header govuk-!-text-align-right">Date of birth</th>
-              <th scope="col" class="govuk-table__header">Owner</th>
-              <th scope="col" class="govuk-table__header">Status</th>
-            </tr>
-          </thead>
-          <tbody class="govuk-table__body">
-            <!-- {% if "new" in data['status-filter'] %} -->
-            <tr class="govuk-table__row">
-              <th scope="row" class="govuk-table__header">1 April</th>
-              <td class="govuk-table__cell">Tay Tay Swifte</td>
-              <td class="govuk-table__cell">5 Oak Drive QQ1 7NN</td>
-              <td class="govuk-table__cell govuk-!-text-align-right">1-04-1989</td>
-              <td class="govuk-table__cell">Avinash Singh</td>
-              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--blue">New</strong></td>
-            </tr>
-            <tr class="govuk-table__row">
-              <th scope="row" class="govuk-table__header">1 April</th>
-              <td class="govuk-table__cell">Marion Hall</td>
-              <td class="govuk-table__cell">13 Pine Hall HH1 8NN</td>
-              <td class="govuk-table__cell govuk-!-text-align-right">25-12-1971</td>
-              <td class="govuk-table__cell">Kyunghyun Cho</td>
-              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--blue">New</strong></td>
-            </tr>
-            <!-- {% endif %} -->
-            <!-- Populate the table with the JSON saved in 
-            \app\data\people.json -->
+    <div class="govuk-tabs__panel" id="past-day">
+      <table class="govuk-table govuk-table--small-text-until-tablet">
+        <caption class="govuk-table__caption govuk-table__caption--m">All juggling licence applications</caption>
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Date</th>
+            <th scope="col" class="govuk-table__header">Name</th>
+            <th scope="col" class="govuk-table__header">Address</th>
+            <th scope="col" class="govuk-table__header govuk-!-text-align-right">Date of birth</th>
+            <th scope="col" class="govuk-table__header">Owner</th>
+            <th scope="col" class="govuk-table__header">Status</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          
+          <tr class="govuk-table__row">
+            <th scope="row" class="govuk-table__header">1 April</th>
+            <td class="govuk-table__cell">Tay Tay Swifte</td>
+            <td class="govuk-table__cell">5 Oak Drive QQ1 7NN</td>
+            <td class="govuk-table__cell govuk-!-text-align-right">1-04-1989</td>
+            <td class="govuk-table__cell">Avinash Singh</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--blue">New</strong></td>
+          </tr>
+          <tr class="govuk-table__row">
+            <th scope="row" class="govuk-table__header">1 April</th>
+            <td class="govuk-table__cell">Marion Hall</td>
+            <td class="govuk-table__cell">13 Pine Hall HH1 8NN</td>
+            <td class="govuk-table__cell govuk-!-text-align-right">25-12-1971</td>
+            <td class="govuk-table__cell">Kyunghyun Cho</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--blue">New</strong></td>
+          </tr>
+          
+          <!-- Populate the table with the JSON saved in 
+          \app\data\people.json -->
+          {% for person in data['people'] %}
+          {% if person.status in data['status-filter'] %}
+          <tr class="govuk-table__row">
+            <th scope="row" class="govuk-table__header">{{person.date}}</th>
+            <td class="govuk-table__cell">{{person.name}}</td>
+            <td class="govuk-table__cell">{{person.address}}</td>
+            <td class="govuk-table__cell govuk-!-text-align-right">{{person.dob}}</td>
+            <td class="govuk-table__cell">{{person.owner}}</td>
+            <td class="govuk-table__cell">
+              {% if person.status == "New" %}
+              <strong class="govuk-tag govuk-tag--blue">
+                {% elif person.status == "In progress" %}
+                <strong class="govuk-tag govuk-tag--green">
+                  {% elif person.status == "On hold"  %}
+                  <strong class="govuk-tag govuk-tag--red">
+                    {% endif %}
+                    {{person.status}}
+                  </strong>
+                </td>
+              </tr>
+              {% endif %}
+              {% endfor %}
+              
+            </tbody>
+          </table>
+        </div>
+        
+        <!-- 
+        My cases 
+        -->
+        <div class="govuk-tabs__panel" id="past-week">
+          
+          
+          <table class="govuk-table govuk-table--small-text-until-tablet">
+            <caption class="govuk-table__caption govuk-table__caption--m">My juggling licence applications</caption>
+            <thead class="govuk-table__head">
+              <tr class="govuk-table__row">
+                <th scope="col" class="govuk-table__header">Date</th>
+                <th scope="col" class="govuk-table__header">Name</th>
+                <th scope="col" class="govuk-table__header">Address</th>
+                <th scope="col" class="govuk-table__header govuk-!-text-align-right">Date of birth</th>
+                <th scope="col" class="govuk-table__header">Owner</th>
+                <th scope="col" class="govuk-table__header">Status</th>
+              </tr>
+            </thead>
             {% for person in data['people'] %}
-            <!-- {% if person.status in data['status-filter'] %} -->
+            
+            {% if person.owner =="Jane Grey" %}
             <tr class="govuk-table__row">
               <th scope="row" class="govuk-table__header">{{person.date}}</th>
               <td class="govuk-table__cell">{{person.name}}</td>
@@ -139,58 +185,12 @@
                     </strong>
                   </td>
                 </tr>
-                <!-- {% endif %} -->
-                {% endfor %}
+                {% endif %}
                 
-              </tbody>
-            </table>
+                {% endfor %}
+              </table>
+            </div>
           </div>
           
-          <!-- 
-          My cases 
-          -->
-          <div class="govuk-tabs__panel" id="past-week">
-            
-            
-            <table class="govuk-table govuk-table--small-text-until-tablet">
-              <caption class="govuk-table__caption govuk-table__caption--m">My juggling licence applications</caption>
-              <thead class="govuk-table__head">
-                <tr class="govuk-table__row">
-                  <th scope="col" class="govuk-table__header">Date</th>
-                  <th scope="col" class="govuk-table__header">Name</th>
-                  <th scope="col" class="govuk-table__header">Address</th>
-                  <th scope="col" class="govuk-table__header govuk-!-text-align-right">Date of birth</th>
-                  <th scope="col" class="govuk-table__header">Owner</th>
-                  <th scope="col" class="govuk-table__header">Status</th>
-                </tr>
-              </thead>
-              {% for person in data['people'] %}
-              <!-- {% if person.status in data['status-filter'] %} -->
-              {% if person.owner =="Jane Grey" %}
-              <tr class="govuk-table__row">
-                <th scope="row" class="govuk-table__header">{{person.date}}</th>
-                <td class="govuk-table__cell">{{person.name}}</td>
-                <td class="govuk-table__cell">{{person.address}}</td>
-                <td class="govuk-table__cell govuk-!-text-align-right">{{person.dob}}</td>
-                <td class="govuk-table__cell">{{person.owner}}</td>
-                <td class="govuk-table__cell">
-                  {% if person.status == "New" %}
-                  <strong class="govuk-tag govuk-tag--blue">
-                    {% elif person.status == "In progress" %}
-                    <strong class="govuk-tag govuk-tag--green">
-                      {% elif person.status == "On hold"  %}
-                      <strong class="govuk-tag govuk-tag--red">
-                        {% endif %}
-                        {{person.status}}
-                      </strong>
-                    </td>
-                  </tr>
-                  {% endif %}
-                  <!-- {% endif %} -->
-                  {% endfor %}
-                </table>
-              </div>
-            </div>
-            
-            {% endblock %}
-            
+          {% endblock %}
+          
