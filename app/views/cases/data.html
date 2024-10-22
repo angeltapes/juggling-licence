@@ -1,0 +1,130 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName="Home" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full-width">
+    <style>
+      .govuk-checkboxes__label{min-width:6em}
+    </style>
+    <h1 class="govuk-heading-xl">
+      Data dashboard
+    </h1>
+    <p class="govuk-body">
+      An example of a web page which pulls together useful statistics from a live
+      service. See <a href="index?status-filter=New&status-filter=In progress&status-filter=On hold&status-filter=Complete" class="govuk-link">Case management example</a>.
+
+    </p>
+    </div>
+          </div>
+          <div class="govuk-grid-row">
+            <h2>Statuses</h2>
+            <div class="govuk-grid-column-one-quarter">
+              <p><strong class="govuk-tag govuk-tag--blue">New</strong></p>
+              <h3 class="govuk-heading-l">54</h3>
+            </div>
+            <div class="govuk-grid-column-one-quarter">
+              <p><strong class="govuk-tag govuk-tag--green">In progress</strong></p>
+              <h3 class="govuk-heading-l">186</h3>
+            </div>
+            <div class="govuk-grid-column-one-quarter">
+              <p><strong class="govuk-tag govuk-tag--red">On hold</strong></p>
+              <h3 class="govuk-heading-l">12</h3>
+            </div>
+            <div class="govuk-grid-column-one-quarter">
+              <p>Completed</p>
+              <h3 class="govuk-heading-l">12,425</h3>
+            </div>
+          </div>
+          <hr>
+          <h2>Total applications</h2>
+          <a href="#">Edit date range</a></p>
+          <style>
+            .dynamic-cell{
+              background-color: #12436d;
+              color:white;
+              padding: 0.5em
+            }
+          </style>
+          
+            <table class="govuk-table govuk-table--small-text-until-tablet">
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">April</td>
+              <td class="govuk-table__cell"><span class="dynamic-cell" style="padding-right: 4.2em">423</span></td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">May</td>
+              <td class="govuk-table__cell"><span class="dynamic-cell" style="padding-right: 10.1em">1,019</span></td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">June</td>
+              <td class="govuk-table__cell"><span class="dynamic-cell" style="padding-right: 16.8em">1,682</span></td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">July</td>
+              <td class="govuk-table__cell"><span class="dynamic-cell" style="padding-right: 4.2em">2,143</span></td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">August</td>
+              <td class="govuk-table__cell"><span class="dynamic-cell" style="padding-right: 4.2em">3,287</span></td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">Total</td>
+              <td class="govuk-table__cell"><strong>8554</strong></td>
+            </tr>
+            </table>
+            <hr>
+            <div class="govuk-grid-row">
+            <table class="govuk-table govuk-table--small-text-until-tablet">
+              <caption class="govuk-table__caption govuk-table__caption--m">Work in progress</caption>
+              <thead class="govuk-table__head">
+                <tr class="govuk-table__row">
+                  <th scope="col" class="govuk-table__header">Case manager</th>
+                  <th scope="col" class="govuk-table__header govuk-!-text-align-right">New</th>
+                  <th scope="col" class="govuk-table__header govuk-!-text-align-right">In progress</th>
+                  <th scope="col" class="govuk-table__header govuk-!-text-align-right">On hold</th>
+                  <th scope="col" class="govuk-table__header govuk-!-text-align-right">Total</th>
+                  </tr>
+                  </thead>
+                  <style></style>
+                  <tr class="govuk-table__row">
+                    <td class="govuk-table__cell">Jane Grey</td>
+                    <td class="govuk-table__cell govuk-!-text-align-right"><strong class="govuk-tag govuk-tag--blue" style="padding-left: 2em">2</strong></td>
+                    <td class="govuk-table__cell govuk-!-text-align-right"><strong class="govuk-tag govuk-tag--green" style="padding-left: 1em">1</strong></td>
+                    <td class="govuk-table__cell govuk-!-text-align-right"><strong class="govuk-tag govuk-tag--red" style="padding-left: 1em">1</strong></td>
+                    <td class="govuk-table__cell govuk-!-text-align-right">4</td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                      <td class="govuk-table__cell">Avinash Singh</td>
+                      <td class="govuk-table__cell govuk-!-text-align-right"><strong class="govuk-tag govuk-tag--blue" style="padding-left: 3em">3</strong></td>
+                      <td class="govuk-table__cell govuk-!-text-align-right"><strong class="govuk-tag govuk-tag--green" style="padding-left: 1em">1</strong></td>
+                      <td class="govuk-table__cell govuk-!-text-align-right">0</td>
+                      <td class="govuk-table__cell govuk-!-text-align-right">4</td>
+                      </tr>
+                      <tr class="govuk-table__row">
+                        <td class="govuk-table__cell">Kyunghyun Cho</th>
+                        <td class="govuk-table__cell govuk-!-text-align-right"><strong class="govuk-tag govuk-tag--blue" style="padding-left: 3em">3</strong></td>
+                        <td class="govuk-table__cell govuk-!-text-align-right"><strong class="govuk-tag govuk-tag--green" style="padding-left: 1em">1</strong></td>
+                        <td class="govuk-table__cell govuk-!-text-align-right">0</td>
+                        <td class="govuk-table__cell govuk-!-text-align-right">4</td>
+                        </tr>
+                        <tr class="govuk-table__row">
+                          <td class="govuk-table__cell">Darren O'Keefe</th>
+                          <td class="govuk-table__cell govuk-!-text-align-right">0</td>
+                          <td class="govuk-table__cell govuk-!-text-align-right"><strong class="govuk-tag govuk-tag--green" style="padding-left: 3em">3</strong></td>
+                          <td class="govuk-table__cell govuk-!-text-align-right">0</td>
+                          <td class="govuk-table__cell govuk-!-text-align-right">3</td>
+                          </tr>
+                    </table>
+            </div>
+          
+          <!-- <div class="govuk-grid-row">
+            <div class="govuk-grid-column-one-half">
+              <p>govuk-grid-column-one-half</p>
+            </div>
+            <div class="govuk-grid-column-one-half">
+              <p>govuk-grid-column-one-half</p>
+            </div>
+          </div> -->
+              {% endblock %}
