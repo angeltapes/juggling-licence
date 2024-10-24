@@ -1,6 +1,6 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName="Home" %}
+{% set pageName="Data dashboard" %}
 
 {% block content %}
 <div class="govuk-grid-row">
@@ -12,72 +12,115 @@
       Data dashboard
     </h1>
     <p class="govuk-body">
-      An example of a web page which pulls together useful statistics from a live
+      An example of a web page which pulls together useful statistics about a live
       service. See <a href="index?status-filter=New&status-filter=In progress&status-filter=On hold&status-filter=Complete" class="govuk-link">Case management example</a>.
-
     </p>
     </div>
           </div>
+          <style>
+            .govuk-heading-xl{margin-top:0.2em}
+          </style>
           <div class="govuk-grid-row">
             <h2>Statuses</h2>
             <div class="govuk-grid-column-one-quarter">
-              <p><strong class="govuk-tag govuk-tag--blue">New</strong></p>
-              <h3 class="govuk-heading-l">54</h3>
+              <p><strong class="govuk-tag govuk-tag--blue">New</strong><span class="govuk-heading-xl">54<spam></spam></p>
             </div>
             <div class="govuk-grid-column-one-quarter">
-              <p><strong class="govuk-tag govuk-tag--green">In progress</strong></p>
-              <h3 class="govuk-heading-l">186</h3>
+              <p><strong class="govuk-tag govuk-tag--green">In progress</strong><span class="govuk-heading-xl">186</span></p>
             </div>
             <div class="govuk-grid-column-one-quarter">
-              <p><strong class="govuk-tag govuk-tag--red">On hold</strong></p>
-              <h3 class="govuk-heading-l">12</h3>
+              <p><strong class="govuk-tag govuk-tag--red">On hold</strong><span class="govuk-heading-xl">12</span></p>
             </div>
             <div class="govuk-grid-column-one-quarter">
-              <p>Completed</p>
-              <h3 class="govuk-heading-l">12,425</h3>
+              <p>Completed
+              <span class="govuk-heading-xl">6,425</span></p>
             </div>
           </div>
-          <hr>
+
+          <!-- Two column layout - column 1 -->
+          <div class="govuk-grid-row">
+            <div class="govuk-grid-column-one-half">
           <h2>Total applications</h2>
           <a href="#">Edit date range</a></p>
           <style>
             .dynamic-cell{
-              background-color: #12436d;
-              color:white;
-              padding: 0.5em
+              border-bottom: 5px #12436d solid;
+              padding: 0.5em 0.5em 0.5em 0
+            }
+            .govuk-table__cell{
+              border-bottom: none;
             }
           </style>
-          
             <table class="govuk-table govuk-table--small-text-until-tablet">
             <tr class="govuk-table__row">
               <td class="govuk-table__cell">April</td>
-              <td class="govuk-table__cell"><span class="dynamic-cell" style="padding-right: 4.2em">423</span></td>
+              <td class="govuk-table__cell"><span class="dynamic-cell" style="padding-right: 2em">423</span></td>
             </tr>
             <tr class="govuk-table__row">
               <td class="govuk-table__cell">May</td>
-              <td class="govuk-table__cell"><span class="dynamic-cell" style="padding-right: 10.1em">1,019</span></td>
+              <td class="govuk-table__cell"><span class="dynamic-cell" style="padding-right: 5em">1,019</span></td>
             </tr>
             <tr class="govuk-table__row">
               <td class="govuk-table__cell">June</td>
-              <td class="govuk-table__cell"><span class="dynamic-cell" style="padding-right: 16.8em">1,682</span></td>
+              <td class="govuk-table__cell"><span class="dynamic-cell" style="padding-right: 8em">1,682</span></td>
             </tr>
             <tr class="govuk-table__row">
               <td class="govuk-table__cell">July</td>
-              <td class="govuk-table__cell"><span class="dynamic-cell" style="padding-right: 4.2em">2,143</span></td>
+              <td class="govuk-table__cell"><span class="dynamic-cell" style="padding-right: 10em">2,143</span></td>
             </tr>
             <tr class="govuk-table__row">
               <td class="govuk-table__cell">August</td>
-              <td class="govuk-table__cell"><span class="dynamic-cell" style="padding-right: 4.2em">3,287</span></td>
+              <td class="govuk-table__cell"><span class="dynamic-cell" style="padding-right: 16em">3,287</span></td>
             </tr>
             <tr class="govuk-table__row">
-              <td class="govuk-table__cell">Total</td>
-              <td class="govuk-table__cell"><strong>8554</strong></td>
+              <td class="govuk-table__cell"><strong>Total</strong></td>
+              <td class="govuk-table__cell"><strong>8,554</strong></td>
             </tr>
             </table>
-            <hr>
+          </div>
+          <!-- Second column -->
+          <div class="govuk-grid-column-one-half">
+            <h2>Most popular days</h2>
+            <style>
+              .dynamic-cell-alt{
+                background-color: #0F6143;
+                color:white;
+                padding: 0.5em
+              }
+            </style>
+              <table class="govuk-table govuk-table--small-text-until-tablet">
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell">Monday</td>
+                <td class="govuk-table__cell"><span class="dynamic-cell-alt" style="padding-right: 8em">16%</span></td>
+              </tr>
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell">Tuesday</td>
+                <td class="govuk-table__cell"><span class="dynamic-cell-alt" style="padding-right: 16em">33%</span></td>
+              </tr>
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell">Wednesday</td>
+                <td class="govuk-table__cell"><span class="dynamic-cell-alt" style="padding-right: 13em">27%</span></td>
+              </tr>
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell">Thursday</td>
+                <td class="govuk-table__cell"><span class="dynamic-cell-alt" style="padding-right: 7em">15%</span></td>
+              </tr>
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell">Friday</td>
+                <td class="govuk-table__cell"><span class="dynamic-cell-alt" style="padding-right: 4em">9%</span></td>
+              </tr>
+              </table>
+            </div>
+        </div>
+            <!-- End of 2 column section -->
+            <style>
+              .bar-table td:last-child{
+                font-weight: bold
+              }
+            </style>
             <div class="govuk-grid-row">
-            <table class="govuk-table govuk-table--small-text-until-tablet">
-              <caption class="govuk-table__caption govuk-table__caption--m">Work in progress</caption>
+            <table class="govuk-table govuk-table--small-text-until-tablet bar-table">
+              <caption class="govuk-table__caption"><h2>Work in progress</h2></caption>
               <thead class="govuk-table__head">
                 <tr class="govuk-table__row">
                   <th scope="col" class="govuk-table__header">Case manager</th>
@@ -118,13 +161,4 @@
                           </tr>
                     </table>
             </div>
-          
-          <!-- <div class="govuk-grid-row">
-            <div class="govuk-grid-column-one-half">
-              <p>govuk-grid-column-one-half</p>
-            </div>
-            <div class="govuk-grid-column-one-half">
-              <p>govuk-grid-column-one-half</p>
-            </div>
-          </div> -->
               {% endblock %}
