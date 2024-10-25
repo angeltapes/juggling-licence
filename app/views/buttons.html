@@ -1,0 +1,57 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName="Home" %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    
+    <!-- {% include "govuk-prototype-kit/includes/homepage-top.njk" %} -->
+    
+    <h1 class="govuk-heading-xl">Some stupid tricks with buttons</h1>
+    <p class="govuk-body">
+      Rollover the buttons with a cursor for stuff to happen.
+    </p>
+    <style>
+      .govuk-button {
+        -webkit-transition: 3s;
+        -moz-transition: 3s;
+        -ms-transition: 3s;
+        transition: 3s;
+      }
+      .grow:hover {
+        padding: 500px;
+        font-size: 200px;
+      }
+    </style>
+    <p>
+      <button type="submit" class="govuk-button grow">Continue</button>
+    </p>
+
+    <style>
+      .spin:hover {
+        rotate: 3600deg;
+      }
+    </style>
+    <p>
+      <button type="submit" class="govuk-button spin">Continue</button>
+    </p>
+    <style>
+      .escape{
+        position-relative
+      }
+      .escape:hover {
+        position:absolute;
+        left:0;
+        top:0;
+        height:1000px;
+        width:1000px;
+        background-image: url("https://cdn.glitch.global/96fa22db-2a31-47fd-af60-76cd25d18ae6/bruce-campbell.jpg?v=1729853865106")
+      }
+    </style>
+    <p>
+      <button type="submit" class="govuk-button escape">Continue</button>
+    </p>
+  </div>
+
+{% endblock %}
