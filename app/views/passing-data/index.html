@@ -1,0 +1,93 @@
+{% extends "layouts/main.html" %}
+
+{% set mySetData="cabbage" %}
+{% set myCalculation= 69 * 666 %}
+
+{% block content %}
+    
+    <h1 class="govuk-heading-l">
+      Passing data
+    </h1>
+    <p class="govuk-body">
+      All the ways to pass data from one page to another in the gov.uk prototype kit. 
+    </p>
+    <p>
+      If a variable 'persists' it means you can still access it even after leaving
+      the page. 
+    </p>
+    <table class="govuk-table">
+      <caption class="govuk-table__caption govuk-table__caption--m">Variables used on this page</caption>
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header">Variable</th>
+          <th scope="col" class="govuk-table__header govuk-table__header--numeric">Value</th>
+          <th scope="col" class="govuk-table__header govuk-table__header--numeric">How was it created?</th>
+          <th scope="col" class="govuk-table__header govuk-table__header--numeric">Persists?</th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        <tr class="govuk-table__row">
+          <th scope="row" class="govuk-table__header">mySetData</th>
+          <td class="govuk-table__cell govuk-table__cell--numeric">{{mySetData}}</td>
+          <td class="govuk-table__cell govuk-table__cell--numeric">With Nunjucks, on this page</td>
+          <td class="govuk-table__cell govuk-table__cell--numeric">No</td>
+        </tr>
+        <tr class="govuk-table__row">
+          <th scope="row" class="govuk-table__header">myURLdata</th>
+          <td class="govuk-table__cell govuk-table__cell--numeric">{{data['myURLdata']}}</td>
+          <td class="govuk-table__cell govuk-table__cell--numeric">With the URL, on the previous page</td>
+          <td class="govuk-table__cell govuk-table__cell--numeric">Yes</td>
+        </tr>
+        <tr class="govuk-table__row">
+          <th scope="row" class="govuk-table__header">first-name</th>
+          <td class="govuk-table__cell govuk-table__cell--numeric">{{data['first-name']}}</td>
+          <td class="govuk-table__cell govuk-table__cell--numeric">In the file <strong>app\data\session-data-defaults.js</strong</td>
+            <td class="govuk-table__cell govuk-table__cell--numeric">Yes</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <th scope="row" class="govuk-table__header">myCalculaton</th>
+            <td class="govuk-table__cell govuk-table__cell--numeric">{{myCalculation}}</td>
+            <td class="govuk-table__cell govuk-table__cell--numeric">By performing a sum, on this page</td>
+              <td class="govuk-table__cell govuk-table__cell--numeric">No</td>
+            </tr>
+            <tr class="govuk-table__row">
+              <th scope="row" class="govuk-table__header">fruit-name</th>
+              <td class="govuk-table__cell govuk-table__cell--numeric">{{data['fruit-name']}}</td>
+              <td class="govuk-table__cell govuk-table__cell--numeric">By entering a value in the form below</td>
+                <td class="govuk-table__cell govuk-table__cell--numeric">Yes</td>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">hidden-fruit</th>
+                <td class="govuk-table__cell govuk-table__cell--numeric">{{data['hidden-fruit']}}</td>
+                <td class="govuk-table__cell govuk-table__cell--numeric">Secretly created when you submit the form below</td>
+                  <td class="govuk-table__cell govuk-table__cell--numeric">Yes</td>
+                </tr>
+      </tbody>
+    </table>
+    <h2>Create session data using a form</h2>
+    <form method="post">
+    <div class="govuk-form-group">
+      <h1 class="govuk-label-wrapper">
+        <label class="govuk-label govuk-label--s" for="fruit-name">
+          What is your favourite fruit?
+        </label>
+      </h1>
+      <input class="govuk-input govuk-input--width-10" id="fruit-name" name="fruit-name" type="text" value={{data['fruit-name']}}>
+    </div>
+    <input type="hidden" name="hidden-fruit" value="kiwi">
+ 
+    <button type="submit" class="govuk-button" data-module="govuk-button">
+      Reload page
+    </button>
+  </form>
+    <h2>JSON data</h2>
+    <p>Here's an example of JSON data, pulled from the file app\data\people.json.</p>
+    <p>To use the JSON, add new lines to the file app\data\session-data-defaults.js</p>
+    <p>
+      {% for person in data['people'] %}
+      {{person.name}}<br>
+      {% endfor %}
+    </p>
+  </div>
+
+{% endblock %}

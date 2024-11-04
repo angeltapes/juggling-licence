@@ -2,6 +2,7 @@
 
 {% set pageName="Data dashboard" %}
 
+
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full-width">
@@ -20,145 +21,526 @@
           <style>
             .govuk-heading-xl{margin-top:0.2em}
           </style>
-          <div class="govuk-grid-row">
+           <div class="govuk-grid-row">
             <h2>Statuses</h2>
             <div class="govuk-grid-column-one-quarter">
-              <p><strong class="govuk-tag govuk-tag--blue">New</strong><span class="govuk-heading-xl">54<spam></spam></p>
+              <p>
+                <strong class="govuk-tag govuk-tag--blue">New</strong
+                ><span class="govuk-heading-xl">54</span>
+              </p>
             </div>
             <div class="govuk-grid-column-one-quarter">
-              <p><strong class="govuk-tag govuk-tag--green">In progress</strong><span class="govuk-heading-xl">186</span></p>
+              <p>
+                <strong class="govuk-tag govuk-tag--green">In progress</strong
+                ><span class="govuk-heading-xl">186</span>
+              </p>
             </div>
             <div class="govuk-grid-column-one-quarter">
-              <p><strong class="govuk-tag govuk-tag--red">On hold</strong><span class="govuk-heading-xl">12</span></p>
+              <p>
+                <strong class="govuk-tag govuk-tag--red">On hold</strong
+                ><span class="govuk-heading-xl">12</span>
+              </p>
             </div>
             <div class="govuk-grid-column-one-quarter">
-              <p>Completed
-              <span class="govuk-heading-xl">6,425</span></p>
+              <p>Completed <span class="govuk-heading-xl">6,425</span></p>
             </div>
           </div>
-
+  
           <!-- Two column layout - column 1 -->
           <div class="govuk-grid-row">
             <div class="govuk-grid-column-one-half">
-          <h2>Total applications</h2>
-          <a href="#">Edit date range</a></p>
-          <style>
-            .dynamic-cell{
-              border-bottom: 5px #12436d solid;
-              padding: 0.5em 0.5em 0.5em 0
-            }
-            .govuk-table__cell{
-              border-bottom: none;
-            }
-          </style>
-            <table class="govuk-table govuk-table--small-text-until-tablet">
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">April</td>
-              <td class="govuk-table__cell"><span class="dynamic-cell" style="padding-right: 2em">423</span></td>
-            </tr>
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">May</td>
-              <td class="govuk-table__cell"><span class="dynamic-cell" style="padding-right: 5em">1,019</span></td>
-            </tr>
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">June</td>
-              <td class="govuk-table__cell"><span class="dynamic-cell" style="padding-right: 8em">1,682</span></td>
-            </tr>
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">July</td>
-              <td class="govuk-table__cell"><span class="dynamic-cell" style="padding-right: 10em">2,143</span></td>
-            </tr>
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">August</td>
-              <td class="govuk-table__cell"><span class="dynamic-cell" style="padding-right: 16em">3,287</span></td>
-            </tr>
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell"><strong>Total</strong></td>
-              <td class="govuk-table__cell"><strong>8,554</strong></td>
-            </tr>
-            </table>
-          </div>
-          <!-- Second column -->
-          <div class="govuk-grid-column-one-half">
-            <h2>Most popular days</h2>
-            <style>
-              .dynamic-cell-alt{
-                background-color: #0F6143;
-                color:white;
-                padding: 0.5em
-              }
-            </style>
+              <h2>Total applications</h2>
+              <p><a href="#">Edit date range</a></p>
+              <style>
+                .dynamic-cell {
+                  border-bottom: 5px #12436d solid;
+                  padding: 0.5em 0.5em 0 0;
+                }
+                .govuk-table__cell {
+                  border-bottom: none;
+                }
+              </style>
               <table class="govuk-table govuk-table--small-text-until-tablet">
-              <tr class="govuk-table__row">
-                <td class="govuk-table__cell">Monday</td>
-                <td class="govuk-table__cell"><span class="dynamic-cell-alt" style="padding-right: 8em">16%</span></td>
-              </tr>
-              <tr class="govuk-table__row">
-                <td class="govuk-table__cell">Tuesday</td>
-                <td class="govuk-table__cell"><span class="dynamic-cell-alt" style="padding-right: 16em">33%</span></td>
-              </tr>
-              <tr class="govuk-table__row">
-                <td class="govuk-table__cell">Wednesday</td>
-                <td class="govuk-table__cell"><span class="dynamic-cell-alt" style="padding-right: 13em">27%</span></td>
-              </tr>
-              <tr class="govuk-table__row">
-                <td class="govuk-table__cell">Thursday</td>
-                <td class="govuk-table__cell"><span class="dynamic-cell-alt" style="padding-right: 7em">15%</span></td>
-              </tr>
-              <tr class="govuk-table__row">
-                <td class="govuk-table__cell">Friday</td>
-                <td class="govuk-table__cell"><span class="dynamic-cell-alt" style="padding-right: 4em">9%</span></td>
-              </tr>
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">April</td>
+                  <td class="govuk-table__cell">
+                    <span class="dynamic-cell" style="padding-right: 2vw"
+                      >423</span
+                    >
+                  </td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">May</td>
+                  <td class="govuk-table__cell">
+                    <span class="dynamic-cell" style="padding-right: 5vw"
+                      >1,019</span
+                    >
+                  </td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">June</td>
+                  <td class="govuk-table__cell">
+                    <span class="dynamic-cell" style="padding-right: 8vw"
+                      >1,682</span
+                    >
+                  </td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">July</td>
+                  <td class="govuk-table__cell">
+                    <span class="dynamic-cell" style="padding-right: 10vw"
+                      >2,143</span
+                    >
+                  </td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">August</td>
+                  <td class="govuk-table__cell">
+                    <span class="dynamic-cell" style="padding-right: 16vw"
+                      >3,287</span
+                    >
+                  </td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell"><strong>Total</strong></td>
+                  <td class="govuk-table__cell"><strong>8,554</strong></td>
+                </tr>
               </table>
             </div>
-        </div>
-            <!-- End of 2 column section -->
-            <style>
-              .bar-table td:last-child{
-                font-weight: bold
-              }
-            </style>
-            <div class="govuk-grid-row">
-            <table class="govuk-table govuk-table--small-text-until-tablet bar-table">
-              <caption class="govuk-table__caption"><h2>Work in progress</h2></caption>
+            <!-- Second column -->
+            <div class="govuk-grid-column-one-half">
+              <h2>Most popular days</h2>
+              <style>
+                .dynamic-cell-alt {
+                  background-color: #cce2d8;
+                  padding: 0.5em;
+                }
+              </style>
+              <table class="govuk-table govuk-table--small-text-until-tablet">
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">Monday</td>
+                  <td class="govuk-table__cell">
+                    <span class="dynamic-cell-alt" style="padding-right: 8vw"
+                      >16%</span
+                    >
+                  </td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">Tuesday</td>
+                  <td class="govuk-table__cell">
+                    <span class="dynamic-cell-alt" style="padding-right: 16vw"
+                      >33%</span
+                    >
+                  </td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">Wednesday</td>
+                  <td class="govuk-table__cell">
+                    <span class="dynamic-cell-alt" style="padding-right: 13vw"
+                      >27%</span
+                    >
+                  </td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">Thursday</td>
+                  <td class="govuk-table__cell">
+                    <span class="dynamic-cell-alt" style="padding-right: 7vw"
+                      >15%</span
+                    >
+                  </td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">Friday</td>
+                  <td class="govuk-table__cell">
+                    <span class="dynamic-cell-alt" style="padding-right: 4vw"
+                      >9%</span
+                    >
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <!-- End of 2 column section -->
+          <style>
+            .bar-table td:last-child {
+              font-weight: bold;
+            }
+          </style>
+          <div class="govuk-grid-row">
+            <table
+              class="govuk-table govuk-table--small-text-until-tablet bar-table"
+            >
+              <caption class="govuk-table__caption">
+                <h2>Work in progress</h2>
+              </caption>
               <thead class="govuk-table__head">
                 <tr class="govuk-table__row">
                   <th scope="col" class="govuk-table__header">Case manager</th>
-                  <th scope="col" class="govuk-table__header govuk-!-text-align-right">New</th>
-                  <th scope="col" class="govuk-table__header govuk-!-text-align-right">In progress</th>
-                  <th scope="col" class="govuk-table__header govuk-!-text-align-right">On hold</th>
-                  <th scope="col" class="govuk-table__header govuk-!-text-align-right">Total</th>
-                  </tr>
-                  </thead>
-                  <style></style>
-                  <tr class="govuk-table__row">
-                    <td class="govuk-table__cell">Jane Grey</td>
-                    <td class="govuk-table__cell govuk-!-text-align-right"><strong class="govuk-tag govuk-tag--blue" style="padding-left: 2em">2</strong></td>
-                    <td class="govuk-table__cell govuk-!-text-align-right"><strong class="govuk-tag govuk-tag--green" style="padding-left: 1em">1</strong></td>
-                    <td class="govuk-table__cell govuk-!-text-align-right"><strong class="govuk-tag govuk-tag--red" style="padding-left: 1em">1</strong></td>
-                    <td class="govuk-table__cell govuk-!-text-align-right">4</td>
-                    </tr>
-                    <tr class="govuk-table__row">
-                      <td class="govuk-table__cell">Avinash Singh</td>
-                      <td class="govuk-table__cell govuk-!-text-align-right"><strong class="govuk-tag govuk-tag--blue" style="padding-left: 3em">3</strong></td>
-                      <td class="govuk-table__cell govuk-!-text-align-right"><strong class="govuk-tag govuk-tag--green" style="padding-left: 1em">1</strong></td>
-                      <td class="govuk-table__cell govuk-!-text-align-right">0</td>
-                      <td class="govuk-table__cell govuk-!-text-align-right">4</td>
-                      </tr>
-                      <tr class="govuk-table__row">
-                        <td class="govuk-table__cell">Kyunghyun Cho</th>
-                        <td class="govuk-table__cell govuk-!-text-align-right"><strong class="govuk-tag govuk-tag--blue" style="padding-left: 3em">3</strong></td>
-                        <td class="govuk-table__cell govuk-!-text-align-right"><strong class="govuk-tag govuk-tag--green" style="padding-left: 1em">1</strong></td>
-                        <td class="govuk-table__cell govuk-!-text-align-right">0</td>
-                        <td class="govuk-table__cell govuk-!-text-align-right">4</td>
-                        </tr>
-                        <tr class="govuk-table__row">
-                          <td class="govuk-table__cell">Darren O'Keefe</th>
-                          <td class="govuk-table__cell govuk-!-text-align-right">0</td>
-                          <td class="govuk-table__cell govuk-!-text-align-right"><strong class="govuk-tag govuk-tag--green" style="padding-left: 3em">3</strong></td>
-                          <td class="govuk-table__cell govuk-!-text-align-right">0</td>
-                          <td class="govuk-table__cell govuk-!-text-align-right">3</td>
-                          </tr>
-                    </table>
-            </div>
+                  <th
+                    scope="col"
+                    class="govuk-table__header govuk-!-text-align-right"
+                  >
+                    New
+                  </th>
+                  <th
+                    scope="col"
+                    class="govuk-table__header govuk-!-text-align-right"
+                  >
+                    In progress
+                  </th>
+                  <th
+                    scope="col"
+                    class="govuk-table__header govuk-!-text-align-right"
+                  >
+                    On hold
+                  </th>
+                  <th
+                    scope="col"
+                    class="govuk-table__header govuk-!-text-align-right"
+                  >
+                    Total
+                  </th>
+                </tr>
+              </thead>
+              <style></style>
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell">Jane Grey</td>
+                <td class="govuk-table__cell govuk-!-text-align-right">
+                  <strong
+                    class="govuk-tag govuk-tag--blue"
+                    style="padding-left: 2em"
+                    >2</strong
+                  >
+                </td>
+                <td class="govuk-table__cell govuk-!-text-align-right">
+                  <strong
+                    class="govuk-tag govuk-tag--green"
+                    style="padding-left: 1em"
+                    >1</strong
+                  >
+                </td>
+                <td class="govuk-table__cell govuk-!-text-align-right">
+                  <strong
+                    class="govuk-tag govuk-tag--red"
+                    style="padding-left: 1em"
+                    >1</strong
+                  >
+                </td>
+                <td class="govuk-table__cell govuk-!-text-align-right">4</td>
+              </tr>
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell">Avinash Singh</td>
+                <td class="govuk-table__cell govuk-!-text-align-right">
+                  <strong
+                    class="govuk-tag govuk-tag--blue"
+                    style="padding-left: 3em"
+                    >3</strong
+                  >
+                </td>
+                <td class="govuk-table__cell govuk-!-text-align-right">
+                  <strong
+                    class="govuk-tag govuk-tag--green"
+                    style="padding-left: 1em"
+                    >1</strong
+                  >
+                </td>
+                <td class="govuk-table__cell govuk-!-text-align-right">0</td>
+                <td class="govuk-table__cell govuk-!-text-align-right">4</td>
+              </tr>
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell">Kyunghyun Cho</td>
+                <td class="govuk-table__cell govuk-!-text-align-right">
+                  <strong
+                    class="govuk-tag govuk-tag--blue"
+                    style="padding-left: 3em"
+                    >3</strong
+                  >
+                </td>
+                <td class="govuk-table__cell govuk-!-text-align-right">
+                  <strong
+                    class="govuk-tag govuk-tag--green"
+                    style="padding-left: 1em"
+                    >1</strong
+                  >
+                </td>
+                <td class="govuk-table__cell govuk-!-text-align-right">0</td>
+                <td class="govuk-table__cell govuk-!-text-align-right">4</td>
+              </tr>
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell">Darren O'Keefe</td>
+                <td class="govuk-table__cell govuk-!-text-align-right">0</td>
+                <td class="govuk-table__cell govuk-!-text-align-right">
+                  <strong
+                    class="govuk-tag govuk-tag--green"
+                    style="padding-left: 3em"
+                    >3</strong
+                  >
+                </td>
+                <td class="govuk-table__cell govuk-!-text-align-right">0</td>
+                <td class="govuk-table__cell govuk-!-text-align-right">3</td>
+              </tr>
+            </table>
+          </div>
+          <style>
+            .grid-container {
+              display: grid;
+              grid-template-columns: 15% 15% 15% 15% 15%;
+            }
+  
+            .chart-bars {
+              border: 1px solid grey;
+              margin: 1em;
+              width: 6vw;
+              list-style: none;
+            }
+  
+            .chart-bars li {
+              margin: 0;
+            }
+  
+            .new {
+              background: #bbd4ea;
+            }
+            .in-progress {
+              background: #cce2d8;
+            }
+            .on-hold {
+              background: #f4cdc6;
+            }
+            @media only screen and (max-width: 767px) {
+              .chart-bars {
+                width:9vw
+              }
+            }
+          </style>
+          <h2>Statuses, during each month</h2>
+          <p>
+            <span class="govuk-tag govuk-tag--blue">New</span> <span class="govuk-tag govuk-tag--green">In progress</span> <span class="govuk-tag govuk-tag--red">On hold</span>
+          </p>
+          
+  <!--         The following bars are actually <ul> lists. 
+          This is a less accessible solution than just offering data in an HTML table. 
+          I've included it just for science.  -->
+          
+          </ul>
+          <div class="grid-container">
+            <ul class="chart-bars">
+              <li>Apr</li>
+              <li class="new" style="height: 130px">60</li>
+              <li class="in-progress" style="height: 80px">40</li>
+              <li class="on-hold" style="height: 30px">1</li>
+            </ul>
+            <ul class="chart-bars">
+              <li>May</li>
+              <li class="new" style="height: 80px">34</li>
+              <li class="in-progress" style="height: 130px">85</li>
+              <li class="on-hold" style="height: 30px">3</li>
+            </ul>
+            <ul class="chart-bars">
+              <li>Jun</li>
+              <li class="new" style="height: 40px">22</li>
+              <li class="in-progress" style="height: 170px">106</li>
+              <li class="on-hold" style="height: 30px">1</li>
+            </ul>
+            <ul class="chart-bars">
+              <li>Jul</li>
+              <li class="new" style="height: 30px">13</li>
+              <li class="in-progress" style="height: 210px">126</li>
+            </ul>
+            <ul class="chart-bars">
+              <li>Aug</li>
+              <li class="new" style="height: 70px">28</li>
+              <li class="in-progress" style="height: 140px">84</li>
+              <li class="on-hold" style="height: 30px">1</li>
+            </ul>
+          </div>
+  
+          <h2>Applicants: year of birth</h2>
+          <p>A P5.js diagram created with a script on the page.</p>
+        <style>
+          #p5-sketch{width:100%;overflow:scroll}
+        </style>
+          <div id="p5-sketch">
+          </div>
+          <!--         Embedded diagram made with P5 -->
+          <script>
+            years = [];
+            let leftMargin;
+            function setup() {
+              let canvas = createCanvas(650, 280);
+              canvas.parent("p5-sketch");
+              textSize(16);
+              leftMargin = 20;
+              setYears();
+              describe(
+                "a bar graph showing the years applicants were born in, from 1970 up to 2010. Most applicants were born in the late 1990s."
+              );
+            }
+  
+            function draw() {
+              background(255);
+              fill(0);
+              line(leftMargin, 20, leftMargin, 200);
+              text("100", leftMargin + 10, 30);
+              fill(50, 200, 90);
+              for (i = 0; i < years.length; i++) {
+                rect(leftMargin + i * 10, 200 - years[i] * 2, 10, years[i] * 2);
+              }
+              fill(0);
+              text("1950", 20, 220);
+              text("1960", 120, 220);
+              text("1970", 220, 220);
+              text("1980", 320, 220);
+              text("1990", 420, 220);
+              text("2000", 520, 220);
+              rollover();
+            }
+  
+            function setYears() {
+              // Set years from 1950 onwards
+              years = [
+                1,
+                0,
+                0,
+                2,
+                3,
+                3,
+                4,
+                0,
+                6,
+                7, //1950
+                12,
+                13,
+                15,
+                9,
+                12,
+                16,
+                17,
+                18,
+                15, //1960
+                20,
+                21,
+                25,
+                27,
+                13,
+                30,
+                31,
+                25,
+                28, //1970
+                32,
+                35,
+                38,
+                41,
+                42,
+                43,
+                47,
+                42,
+                35,
+                51, //1980
+                54,
+                57,
+                51,
+                61,
+                56,
+                62,
+                64,
+                63,
+                75, //1990
+                71,
+                65,
+                61,
+                26,
+                23,
+                8,
+                6,
+                0,
+                0,
+                0, //2000
+              ];
+            }
+  
+            function rollover() {
+              for (i = 0; i < years.length; i++) {
+                if (
+                  mouseX > leftMargin + i * 10 &&
+                  mouseX <= leftMargin + (i + 1) * 10 &&
+                  mouseY < 200
+                ) {
+                  fill(255, 255, 89);
+                  rect(leftMargin + i * 10, 200 - years[i] * 2, 10, years[i] * 2);
+                  rect(mouseX + 15, mouseY, 70, 60);
+                  fill(0);
+                  text(1950 + i, mouseX + 25, mouseY + 25);
+                  text(years[i], mouseX + 25, mouseY + 45);
+                }
+              }
+            }
+          </script>
+  
+          <!--         Alternative: embed an iframe from the OpenProcessing website -->
+          <!--         <iframe
+            src="https://openprocessing.org/sketch/2427622/embed/?plusEmbedHash=576df0a9&userID=95938&plusEmbedTitle=true&show=sketch"
+            width="100%"
+            height="350"
+          ></iframe> -->
+  <hr>
+          <h2>
+    About this dashboard
+          </h2>
+          <p>
+            This is a government mock-up of a data dashboard. Dashboards are a common feature of B2B software. 
+          </p>
+          <p>
+            An online service leaves a trail of data. Developers can extract useful information like 'How many 
+            applications have been submitted this week?' by querying a database or using 3rd party tools. 
+          </p>
+          <p>
+            For this mock-up I've used:
+          </p>
+          <ul>
+            <li>
+            H3 headings, for statuses</li>
+            <li>
+            Tables, for Total applications, Most popular days, and Work in progress
+            </li>
+            <li>
+            A list, for Statuses during each month
+            </li>
+            <li>
+            An interactive diagram, using P5.js
+            </li>
+          </ul>
+        <h3>
+          Display your data in HTML tables
+        </h3>
+          <p>
+            Ordinary HTML tables are the most accessible format for offering numerical data online. 
+            If your visitor resizes their text or uses a screen reader, they'll still be able to read
+            the data held in a table. </p>
+        <p>
+            For this demo I added some coloured bars to show quantities. If you disable styles or javascript in your
+            browser, most of this page will still display, but the coloured bars will disappear. 
+          </p>
+        <p>
+          I picked colours from the gov.uk design system to make sure all the text is readable. 
+        </p>
+        <h3>
+          Embedding data with javascript
+        </h3>
+          <p>
+            I've imagined a fairly simple use case for this page of data. If a government team wanted tools
+            which are more powerful and interactive, they're likely to import data visualisation tools
+            using 3rd party software like Tableau, D3 or High Charts. 
+          </p>
+        <p>
+          I use P5.js because it's an easy way for designers to start making data visualisations (and cool stuff).
+          Visit my account at 
+          <a href="https://openprocessing.org/sketch/2427622" target="_blank">Open processing (link opens in a new tab)</a>.
+        </p>
+          <h3>
+            Any comments / suggestions? 
+          </h3>
+          <p>
+            Contact me on <a href="https://www.linkedin.com/in/bobbykingweb/" target="_blank">LinkedIn (link opens in a new tab)</a>.
+          </p>
               {% endblock %}
