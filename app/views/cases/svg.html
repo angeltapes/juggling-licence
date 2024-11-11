@@ -1,0 +1,159 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName="Data dashboard" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full-width">
+    <style>
+      .govuk-checkboxes__label{min-width:6em}
+    </style>
+    <h1 class="govuk-heading-xl">
+      SVG data library
+    </h1>
+    <p class="govuk-body">
+     Playing with Nunjucks and drawing svg charts
+      </p>
+    </div>
+          </div>
+          <style>
+            .govuk-heading-xl{margin-top:0.2em}
+          </style>
+          <div class="govuk-grid-row">
+            <h2>Statuses</h2>
+            {% set items = [{ title: "foo", id: 1 }, { title: "bar", id: 2}] %}
+            
+<ul>
+  {% for item in items %}
+    <li>{{ item.title }}</li>
+  {% else %}
+    <li>This would display if the 'item' collection were empty</li>
+  {% endfor %}
+  </ul>
+          </div>
+
+          <!-- Two column layout - column 1 -->
+          <div class="govuk-grid-row">
+            <div class="govuk-grid-column-one-half">
+          <h2>Total applications</h2>
+          <a href="#">Edit date range</a></p>
+          <style>
+            .dynamic-cell{
+              border-bottom: 5px #12436d solid;
+              padding: 0.5em 0.5em 0.5em 0
+            }
+            .govuk-table__cell{
+              border-bottom: none;
+            }
+          </style>
+            <table class="govuk-table govuk-table--small-text-until-tablet">
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">April</td>
+              <td class="govuk-table__cell"><span class="dynamic-cell" style="padding-right: 2em">423</span></td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">May</td>
+              <td class="govuk-table__cell"><span class="dynamic-cell" style="padding-right: 5em">1,019</span></td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">June</td>
+              <td class="govuk-table__cell"><span class="dynamic-cell" style="padding-right: 8em">1,682</span></td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">July</td>
+              <td class="govuk-table__cell"><span class="dynamic-cell" style="padding-right: 10em">2,143</span></td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">August</td>
+              <td class="govuk-table__cell"><span class="dynamic-cell" style="padding-right: 16em">3,287</span></td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell"><strong>Total</strong></td>
+              <td class="govuk-table__cell"><strong>8,554</strong></td>
+            </tr>
+            </table>
+          </div>
+          <!-- Second column -->
+          <div class="govuk-grid-column-one-half">
+            <h2>Most popular days</h2>
+            <style>
+              .dynamic-cell-alt{
+                background-color: #0F6143;
+                color:white;
+                padding: 0.5em
+              }
+            </style>
+              <table class="govuk-table govuk-table--small-text-until-tablet">
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell">Monday</td>
+                <td class="govuk-table__cell"><span class="dynamic-cell-alt" style="padding-right: 8em">16%</span></td>
+              </tr>
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell">Tuesday</td>
+                <td class="govuk-table__cell"><span class="dynamic-cell-alt" style="padding-right: 16em">33%</span></td>
+              </tr>
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell">Wednesday</td>
+                <td class="govuk-table__cell"><span class="dynamic-cell-alt" style="padding-right: 13em">27%</span></td>
+              </tr>
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell">Thursday</td>
+                <td class="govuk-table__cell"><span class="dynamic-cell-alt" style="padding-right: 7em">15%</span></td>
+              </tr>
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell">Friday</td>
+                <td class="govuk-table__cell"><span class="dynamic-cell-alt" style="padding-right: 4em">9%</span></td>
+              </tr>
+              </table>
+            </div>
+        </div>
+            <!-- End of 2 column section -->
+            <style>
+              .bar-table td:last-child{
+                font-weight: bold
+              }
+            </style>
+            <div class="govuk-grid-row">
+            <table class="govuk-table govuk-table--small-text-until-tablet bar-table">
+              <caption class="govuk-table__caption"><h2>Work in progress</h2></caption>
+              <thead class="govuk-table__head">
+                <tr class="govuk-table__row">
+                  <th scope="col" class="govuk-table__header">Case manager</th>
+                  <th scope="col" class="govuk-table__header govuk-!-text-align-right">New</th>
+                  <th scope="col" class="govuk-table__header govuk-!-text-align-right">In progress</th>
+                  <th scope="col" class="govuk-table__header govuk-!-text-align-right">On hold</th>
+                  <th scope="col" class="govuk-table__header govuk-!-text-align-right">Total</th>
+                  </tr>
+                  </thead>
+                  <style></style>
+                  <tr class="govuk-table__row">
+                    <td class="govuk-table__cell">Jane Grey</td>
+                    <td class="govuk-table__cell govuk-!-text-align-right"><strong class="govuk-tag govuk-tag--blue" style="padding-left: 2em">2</strong></td>
+                    <td class="govuk-table__cell govuk-!-text-align-right"><strong class="govuk-tag govuk-tag--green" style="padding-left: 1em">1</strong></td>
+                    <td class="govuk-table__cell govuk-!-text-align-right"><strong class="govuk-tag govuk-tag--red" style="padding-left: 1em">1</strong></td>
+                    <td class="govuk-table__cell govuk-!-text-align-right">4</td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                      <td class="govuk-table__cell">Avinash Singh</td>
+                      <td class="govuk-table__cell govuk-!-text-align-right"><strong class="govuk-tag govuk-tag--blue" style="padding-left: 3em">3</strong></td>
+                      <td class="govuk-table__cell govuk-!-text-align-right"><strong class="govuk-tag govuk-tag--green" style="padding-left: 1em">1</strong></td>
+                      <td class="govuk-table__cell govuk-!-text-align-right">0</td>
+                      <td class="govuk-table__cell govuk-!-text-align-right">4</td>
+                      </tr>
+                      <tr class="govuk-table__row">
+                        <td class="govuk-table__cell">Kyunghyun Cho</th>
+                        <td class="govuk-table__cell govuk-!-text-align-right"><strong class="govuk-tag govuk-tag--blue" style="padding-left: 3em">3</strong></td>
+                        <td class="govuk-table__cell govuk-!-text-align-right"><strong class="govuk-tag govuk-tag--green" style="padding-left: 1em">1</strong></td>
+                        <td class="govuk-table__cell govuk-!-text-align-right">0</td>
+                        <td class="govuk-table__cell govuk-!-text-align-right">4</td>
+                        </tr>
+                        <tr class="govuk-table__row">
+                          <td class="govuk-table__cell">Darren O'Keefe</th>
+                          <td class="govuk-table__cell govuk-!-text-align-right">0</td>
+                          <td class="govuk-table__cell govuk-!-text-align-right"><strong class="govuk-tag govuk-tag--green" style="padding-left: 3em">3</strong></td>
+                          <td class="govuk-table__cell govuk-!-text-align-right">0</td>
+                          <td class="govuk-table__cell govuk-!-text-align-right">3</td>
+                          </tr>
+                    </table>
+            </div>
+              {% endblock %}

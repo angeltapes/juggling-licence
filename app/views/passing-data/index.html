@@ -2,6 +2,7 @@
 
 {% set mySetData="cabbage" %}
 {% set myCalculation= 69 * 666 %}
+{% set items = [{ title: "foo", id: 1 }, { title: "bar", id: 2}] %}
 
 {% block content %}
     
@@ -62,6 +63,16 @@
                 <td class="govuk-table__cell govuk-table__cell--numeric">Secretly created when you submit the form below</td>
                   <td class="govuk-table__cell govuk-table__cell--numeric">Yes</td>
                 </tr>
+                <tr class="govuk-table__row">
+                  <th scope="row" class="govuk-table__header">a list of items</th>
+                  <td class="govuk-table__cell govuk-table__cell--numeric">                  {% for item in items %}
+                    <li>{{ item.title }}</li>
+                  {% else %}
+                    <li>This would display if the 'item' collection were empty</li>
+                  {% endfor %}</td>
+                  <td class="govuk-table__cell govuk-table__cell--numeric">Set on this page using an array</td>
+                    <td class="govuk-table__cell govuk-table__cell--numeric">No</td>
+                  </tr>
       </tbody>
     </table>
     <h2>Create session data using a form</h2>
