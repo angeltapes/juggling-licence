@@ -5,47 +5,102 @@
 {% block content %}
 
 <!-- You can amend the style of any page using CSS -->
-<style>
+<!-- <style>
 .govuk-header{
   /* color:#000;background-color:#2a8e02 */
   background-image: linear-gradient(red, yellow);}
-</style>
+</style> -->
+
+    <!-- Load P5.js using a CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.10.0/p5.min.js"></script>
+    <script src="https://openprocessing.org/openprocessing_sketch.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.10.0/lib/p5.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.10.0/lib/addons/p5.sound.min.js"></script>
+
 <div class="govuk-grid-row">
     
     <!-- {% include "govuk-prototype-kit/includes/homepage-top.njk" %} -->
     
     <h1 class="govuk-heading-l">
-      Welcome to my demo website
+      Prototype snippets, examples and hacks
     </h1>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
     <p class="govuk-body">
-      I've worked as a government interaction designer since 2020. I made this prototype to store useful code and techniques. <strong>This isn't a real government service.</strong> 
+      I made this prototype to store useful code and techniques. <strong>This isn't a real government service.</strong> 
        This prototype brings together
       different techniques I've learned from the projects I've done.
     </p>
     <p class="govuk-body">
-      Contact me on LinkedIn if you have any feedback - I'm <a href="https://www.linkedin.com/in/bobbykingweb/" target="_blank">Bobby King</a> (link opens in a new tab).
+      I've worked as a government interaction designer since 2020. Contact me on LinkedIn if you have any feedback - I'm <a href="https://www.linkedin.com/in/bobbykingweb/" target="_blank">Bobby King</a> (link opens in a new tab).
     </p>
-    <h2 class="govuk-heading-m">
-      Example journeys
-    </h2>
-    <p class="govuk-body">
-      <a href="./passing-data/index.html?myURLdata=carrot" class="govuk-link">Passing data</a>
-    </p>
-    <p class="govuk-body">
-      <a href="./cases/data.html" class="govuk-link">Data dashboard</a>
-    </p>
-    <p class="govuk-body">
-      <a href="./cases/index?status-filter=New&status-filter=In progress&status-filter=On hold&status-filter=Complete" class="govuk-link">Case management example</a>
-    </p>
-    <p class="govuk-body">
-      <a href="./editable-pages/editor-radios" class="govuk-link">Form question code generator</a>
-    </p>
-    <p class="govuk-body">
-      <a href="./templates/index" class="govuk-link">Templates</a>
-    </p>
-    <p class="govuk-body">
-      <a href="./juggling-service/start" class="govuk-link">Advanced Juggling licence application</a>
-    </p>
+    </div>
+    <div class="govuk-grid-column-one-third">
+      <script>
+        let curves; 
+        
+        function setup() {
+          let canvas = createCanvas(200,200);
+          background(255);
+          canvas.parent("p5-sketch");
+          imageMode(CENTER);
+          angleMode(DEGREES);
+          fill('#eae6e5');
+          stroke('#273f34');
+        }
+        
+        function draw() {
+background(255);
+          circle(60, 100 - sin(frameCount) * 50, 25);
+          circle(120, 100 - sin(frameCount - 50) * 50, 25);
+          circle(180, 100 - sin(frameCount - 100) * 50, 25);
+        }
+      </script>
+      <div id="p5-sketch"></div>
+    </div>
+  </div>
+
+    <table class="govuk-table">
+      <caption class="govuk-table__caption govuk-table__caption--m">    
+        <h2 class="govuk-heading-m">
+        Example journeys
+      </h2></caption>
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header">Journey</th>
+          <th scope="col" class="govuk-table__header">What it's for</th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        <tr class="govuk-table__row">
+          <th scope="row" class="govuk-table__header"> <a href="./passing-data/index.html?myURLdata=carrot" class="govuk-link">Passing data</a>
+          </th>
+          <td class="govuk-table__cell">A summary of ways to capture data and pass it from page to page</td>
+        </tr>
+        <tr class="govuk-table__row">
+          <th scope="row" class="govuk-table__header"> <a href="./cases/index?status-filter=New&status-filter=In progress&status-filter=On hold&status-filter=Complete" class="govuk-link">Case management example</a>
+          </th>
+          <td class="govuk-table__cell">A list of cases populated by JSON</td>
+        </tr>
+        <tr class="govuk-table__row">
+          <th scope="row" class="govuk-table__header"><a href="./editable-pages/editor-radios" class="govuk-link">Form question code generator</a></th>
+          <td class="govuk-table__cell">A tool for content designers and interaction designers to quickly generate page content</td>
+        </tr> 
+        <tr class="govuk-table__row">
+          <th scope="row" class="govuk-table__header">
+            <a href="./templates/index" class="govuk-link">Templates</a>
+          </th>
+          <td class="govuk-table__cell">A selection of pages we use on a regular basis, set up for replaying answers when you revisit a page</td>
+        </tr>   
+        <tr class="govuk-table__row">
+          <th scope="row" class="govuk-table__header">
+            <a href="./juggling-service/start" class="govuk-link">Advanced Juggling licence application</a>
+          </th>
+          <td class="govuk-table__cell">The prototype kit juggling licence example, with extra pages and useful code snippets</td>
+        </tr>   
+      </tbody>
+    </table>
+    <h3>Other experiments</h3>
     <p class="govuk-body">
       <a href="balsalmiq-style" class="govuk-link">Switch on Balsalmiq (rough) styles</a>
     </p>
