@@ -9,110 +9,139 @@
       .govuk-checkboxes__label{min-width:6em}
     </style>
     <h1 class="govuk-heading-xl">
-      SVG data library
+      SVG charts
     </h1>
     <p class="govuk-body">
-     Playing with Nunjucks and drawing svg charts
+     Creating arrays with Nunjucks and using the data to draw svg charts.
       </p>
     </div>
           </div>
           <style>
             .govuk-heading-xl{margin-top:0.2em}
+            .bar:hover{background:yellow}
           </style>
           <div class="govuk-grid-row">
-            <h2>Statuses</h2>
-            {% set items = [{ title: "foo", id: 1 }, { title: "bar", id: 2}] %}
+            <h2>Applications per month</h2>
+            <p>Here's a table of applications, for an imaginary service. I created it using the <code>set</code> function in Nunjucks</p>
+            {% set items = [{ id: 1, month: "January", apps: 238, onHold: 12  }, 
+                            { id: 2, month: "February", apps: 343, onHold: 15  },
+                            { id: 3, month: "March", apps: 548, onHold: 23   }, 
+                            { id: 4, month: "April", apps: 1236, onHold: 56   }, 
+                            { id: 5, month: "May", apps: 1038, onHold: 45   }, 
+                            { id: 6, month: "June", apps: 931, onHold: 38   }, 
+                            { id: 7, month: "July", apps: 722, onHold: 27  }, 
+                            { id: 8, month: "August", apps: 658, onHold: 21  }, 
+                            { id: 9, month: "September", apps: 897, onHold: 14   }, 
+                            { id: 10, month: "October", apps: 462, onHold: 12   }, 
+                            { id: 11, month: "November", apps: 355, onHold: 18   }, 
+                            { id: 12, month: "December", apps: 239, onHold: 15   }
+                            ]
+            %}
             
-<ul>
+<table class="govuk-table">
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th scope="col" class="govuk-table__header">Month</th>
+      <th scope="col" class="govuk-table__header govuk-!-text-align-right">Applications</th>
+      <th scope="col" class="govuk-table__header"><span class="govuk-visually-hidden">Application bars</span></th>
+      <th scope="col" class="govuk-table__header govuk-!-text-align-right">On hold</th>
+      <th scope="col" class="govuk-table__header"><span class="govuk-visually-hidden">On hold bars</span></th>
+    </tr>
+  </thead>
   {% for item in items %}
-    <li>{{ item.title }}</li>
+    <tr>
+      <td>{{ item.month }} </td>
+      
+      <td class="govuk-!-text-align-right">{{ item.apps }} </td>
+      <td>
+        <svg width="200" height="20" xmlns="http://www.w3.org/2000/svg">
+          <!-- Add a title, for accessibility -->
+          <title>{{item.month}} - {{item.apps}}</title>
+          <rect width={{ item.apps / 10 }} height="10" x="10" y="10" rx="2" ry="2" fill="#12436d" />
+        </svg> 
+     </td>
+     <td class="govuk-!-text-align-right">{{ item.onHold }}</td>
+     <td>
+      <svg width="200" height="20" xmlns="http://www.w3.org/2000/svg">
+        <!-- Add a title, for accessibility -->
+        <title>{{item.month}} - {{item.onHold}}</title>
+        <rect width={{ item.onHold }} height="10" x="10" y="10" rx="2" ry="2" fill="#0f6143" class="bar"/>
+      </svg> 
+   </td>
+    </tr>
   {% else %}
-    <li>This would display if the 'item' collection were empty</li>
+    <p>This would display if the 'item' collection were empty</p>
   {% endfor %}
-  </ul>
+</table>
+<h3>Applications by country and region</h3>
+<p>You might want to see where your applications came from, within the UK. </p>
+<p>This example uses SVG to draw an abstract map of the UK and populate it with some more Nunjucks data.</p>
+<p>You can give each hexagon a hover: state and attach a link to it.</p>
+<!-- 
+
+Hexagonal map of the UK countries and regions
+ 
+-->
+
+            {% set areas = [{ id: 1, area: "Scotland", areaApps: 438, onHold: 12, xPos: 225, yPos: 100  }, 
+                            { id: 2, area: "North West", areaApps: 343, onHold: 15, xPos: 225, yPos: 200   },
+                            { id: 3, area: "North East", areaApps: 291, onHold: 23, xPos: 350, yPos: 150    }, 
+                            { id: 4, area: "N Ireland", areaApps: 355, onHold: 56, xPos: 50, yPos: 200    }, 
+                            { id: 5, area: "Yorks-Humber", areaApps: 462, onHold: 45, xPos: 350, yPos: 250    }, 
+                            { id: 6, area: "East Midlands", areaApps: 931, onHold: 38, xPos: 350, yPos: 350    }, 
+                            { id: 7, area: "West Midlands", areaApps: 722, onHold: 27, xPos: 225, yPos: 400   }, 
+                            { id: 8, area: "Wales", areaApps: 658, onHold: 21, xPos: 100, yPos: 350   }, 
+                            { id: 9, area: "East-England", areaApps: 897, onHold: 14, xPos: 350, yPos: 450    }, 
+                            { id: 10, area: "South East", areaApps: 1038, onHold: 12, xPos: 350, yPos: 550    }, 
+                            { id: 11, area: "London", areaApps: 1236, onHold: 18, xPos: 225, yPos: 500    }, 
+                            { id: 12, area: "South West", areaApps: 548, onHold: 15, xPos: 100, yPos: 550    }
+                            ]
+            %}
+<style>
+  .diagram-text{
+    font-size:16px;
+  }
+  .map-diagram a{text-decoration: none;}
+  .map-diagram a:hover{text-decoration: underline}
+  text.a{text-decoration: none;}
+  /* .diagram-text a{color:pink} */
+  path:hover{fill:yellow; stroke-width:5; transition: 1s;filter: drop-shadow(4px 4px 8px gray);}
+</style>
+<svg width="600" height="700" xmlns="http://www.w3.org/2000/svg" class="map-diagram">
+  <title>A map of the UK countries and English regions, with data. </title>
+  {% for i in areas %}
+  <!-- Add a title, for accessibility -->
+  
+  <a href="#test">
+    <title>{{i.area}} | {{i.areaApps}}  applications this year</title>
+<path d="M {{i.xPos}} {{i.yPos}} 
+         L {{i.xPos}} {{i.yPos}} 
+         L {{i.xPos + 25 }} {{i.yPos - 50}}  
+         L {{i.xPos + 125 }} {{i.yPos - 50}}  
+         L {{i.xPos + 150 }} {{i.yPos}}
+         L {{i.xPos + 125 }} {{i.yPos + 50}}    
+         L {{i.xPos + 25 }} {{i.yPos + 50}}  
+         L {{i.xPos}} {{i.yPos}}" stroke="black" stroke-width="3" fill="rgb(255,{{ 255 - i.areaApps / 10 }},{{ 255 - i.areaApps / 5}})"  class="test"/>
+         <text x={{i.xPos + 25}} y={{i.yPos - 25}} fill="black" class="diagram-text">{{i.area}} </text>
+         <text x={{i.xPos + 25}} y={{i.yPos}} fill="black">{{i.areaApps}}</text>
+        </a>
+{% endfor %}
+</svg>
+  <p>
+    You can also show the list as a set of coloured lozenges.
+  </p>
+  {% for item in items %}
+  <svg width="200" height="100" xmlns="http://www.w3.org/2000/svg">
+    <!-- Add a title, for accessibility -->
+    <title>{{item.month}} - {{item.onHold}}</title>
+    <rect width="150" height="50" x="0" y="0" rx="2" ry="2" fill="rgb(255,{{ 255 - item.onHold }},{{ 255 - item.onHold * 3}})" />
+    <text x="10" y="20" fill="black">{{item.month}}</text>
+    <text x="10" y="40" fill="black">{{item.onHold}}</text>
+    </svg> 
+  {% endfor %}
           </div>
 
-          <!-- Two column layout - column 1 -->
-          <div class="govuk-grid-row">
-            <div class="govuk-grid-column-one-half">
-          <h2>Total applications</h2>
-          <a href="#">Edit date range</a></p>
-          <style>
-            .dynamic-cell{
-              border-bottom: 5px #12436d solid;
-              padding: 0.5em 0.5em 0.5em 0
-            }
-            .govuk-table__cell{
-              border-bottom: none;
-            }
-          </style>
-            <table class="govuk-table govuk-table--small-text-until-tablet">
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">April</td>
-              <td class="govuk-table__cell"><span class="dynamic-cell" style="padding-right: 2em">423</span></td>
-            </tr>
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">May</td>
-              <td class="govuk-table__cell"><span class="dynamic-cell" style="padding-right: 5em">1,019</span></td>
-            </tr>
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">June</td>
-              <td class="govuk-table__cell"><span class="dynamic-cell" style="padding-right: 8em">1,682</span></td>
-            </tr>
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">July</td>
-              <td class="govuk-table__cell"><span class="dynamic-cell" style="padding-right: 10em">2,143</span></td>
-            </tr>
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">August</td>
-              <td class="govuk-table__cell"><span class="dynamic-cell" style="padding-right: 16em">3,287</span></td>
-            </tr>
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell"><strong>Total</strong></td>
-              <td class="govuk-table__cell"><strong>8,554</strong></td>
-            </tr>
-            </table>
-          </div>
-          <!-- Second column -->
-          <div class="govuk-grid-column-one-half">
-            <h2>Most popular days</h2>
-            <style>
-              .dynamic-cell-alt{
-                background-color: #0F6143;
-                color:white;
-                padding: 0.5em
-              }
-            </style>
-              <table class="govuk-table govuk-table--small-text-until-tablet">
-              <tr class="govuk-table__row">
-                <td class="govuk-table__cell">Monday</td>
-                <td class="govuk-table__cell"><span class="dynamic-cell-alt" style="padding-right: 8em">16%</span></td>
-              </tr>
-              <tr class="govuk-table__row">
-                <td class="govuk-table__cell">Tuesday</td>
-                <td class="govuk-table__cell"><span class="dynamic-cell-alt" style="padding-right: 16em">33%</span></td>
-              </tr>
-              <tr class="govuk-table__row">
-                <td class="govuk-table__cell">Wednesday</td>
-                <td class="govuk-table__cell"><span class="dynamic-cell-alt" style="padding-right: 13em">27%</span></td>
-              </tr>
-              <tr class="govuk-table__row">
-                <td class="govuk-table__cell">Thursday</td>
-                <td class="govuk-table__cell"><span class="dynamic-cell-alt" style="padding-right: 7em">15%</span></td>
-              </tr>
-              <tr class="govuk-table__row">
-                <td class="govuk-table__cell">Friday</td>
-                <td class="govuk-table__cell"><span class="dynamic-cell-alt" style="padding-right: 4em">9%</span></td>
-              </tr>
-              </table>
-            </div>
-        </div>
-            <!-- End of 2 column section -->
-            <style>
-              .bar-table td:last-child{
-                font-weight: bold
-              }
-            </style>
+      
             <div class="govuk-grid-row">
             <table class="govuk-table govuk-table--small-text-until-tablet bar-table">
               <caption class="govuk-table__caption"><h2>Work in progress</h2></caption>
