@@ -65,7 +65,8 @@
                 </tr>
                 <tr class="govuk-table__row">
                   <th scope="row" class="govuk-table__header">items</th>
-                  <td class="govuk-table__cell govuk-table__cell--numeric">                  {% for item in items %}
+                  <td class="govuk-table__cell govuk-table__cell--numeric">                  
+                    {% for item in items %}
                     <li>{{ item.title }}</li>
                   {% else %}
                     <li>This would display if the 'item' collection were empty</li>
