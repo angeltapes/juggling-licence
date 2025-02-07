@@ -25,8 +25,7 @@
       </svg>
       Grind bands
   </p>
-
-
+    <!-- Set the graph values -->
     {% set thisData=[
      ["Suffolk",239,16,64,0],
     ["Peterborough",200,16,45,1],
@@ -40,17 +39,13 @@
     ["Essex",172,20,84,9],
     ["Norfolk",172,20,84,10]
     ]  %}
-    <!-- <p>{{thisData[1][1]}} works</p> -->
 <ul class="govuk-list" style="margin-top:2em">
  <style>
      .svg-bar{display:block}
  </style>
-
  <li>
-
 <p>
      <svg height="1200" width="550" xmlns="http://www.w3.org/2000/svg" class="svg-bar">
-
          <text x="200" y="20">0</text>
          <text x="450" y="20">2,400</text>
          <!-- Horizontal axis -->
@@ -64,6 +59,7 @@
          <g fill="none">
              <title>Pop groups in {{x}} - {{y}}</title>
              <line x1="200" y1={{ 50 + q * 100}} x2={{ y + 200}} y2={{ 50 + q * 100}} stroke="purple" stroke-width="20" />
+             <text x={{ y + 220 }} y = {{ 55 + q * 100}} fill="grey">{{y}}</text>
          </g>
 
              <g fill="none">
