@@ -1,33 +1,34 @@
 <h3>
     Bands in the East of England
 </h3>
-    <p>
+<!-- Show chart keys -->
+<p>
     <svg height="20" width="20" xmlns="http://www.w3.org/2000/svg">
-     <g fill="none">
-         <line x1="0" y1="0" x2="20" y2="0" stroke="purple" stroke-width="40" />
-     </g>
-     </svg>
-     Pop groups
- </p>
- <p>
-     <svg height="20" width="20" xmlns="http://www.w3.org/2000/svg">
-      <g fill="none">
-          <line x1="0" y1="0" x2="20" y2="0" stroke="gold" stroke-width="40" />
-      </g>
-      </svg>
-      A capella choirs
-  </p>
-  <p>
-     <svg height="20" width="20" xmlns="http://www.w3.org/2000/svg">
-      <g fill="none">
-          <line x1="0" y1="0" x2="20" y2="0" stroke="orange" stroke-width="40" />
-      </g>
-      </svg>
-      Grind bands
-  </p>
-    <!-- Set the graph values -->
-    {% set thisData=[
-     ["Suffolk",239,16,64,0],
+        <g fill="none">
+            <line x1="0" y1="0" x2="20" y2="0" stroke="purple" stroke-width="40" />
+        </g>
+    </svg>
+    Pop groups
+</p>
+<p>
+    <svg height="20" width="20" xmlns="http://www.w3.org/2000/svg">
+        <g fill="none">
+            <line x1="0" y1="0" x2="20" y2="0" stroke="gold" stroke-width="40" />
+        </g>
+    </svg>
+    A capella choirs
+</p>
+<p>
+    <svg height="20" width="20" xmlns="http://www.w3.org/2000/svg">
+        <g fill="none">
+            <line x1="0" y1="0" x2="20" y2="0" stroke="orange" stroke-width="40" />
+        </g>
+    </svg>
+    Grind bands
+</p>
+<!-- Set the graph values -->
+{% set thisData=[
+    ["Suffolk",239,16,64,0],
     ["Peterborough",200,16,45,1],
     ["Luton",239,16,64,2],
     ["Southend on sea",200,16,45,3],
@@ -39,44 +40,45 @@
     ["Essex",172,20,84,9],
     ["Norfolk",172,20,84,10]
     ]  %}
-<ul class="govuk-list" style="margin-top:2em">
- <style>
-     .svg-bar{display:block}
- </style>
- <li>
-<p>
-     <svg height="1200" width="550" xmlns="http://www.w3.org/2000/svg" class="svg-bar">
-         <text x="200" y="20">0</text>
-         <text x="450" y="20">2,400</text>
-         <!-- Horizontal axis -->
-         <line x1="200" y1="25" x2="500" y2="25" stroke="grey" stroke-width="2" />
-         <!-- Vertical axis -->
-         <line x1="200" y1="25" x2="200" y2="1150" stroke="grey" stroke-width="2" />
-     
-         {% for x, y, z, p, q in thisData %}
-         <text x="10" y={{55 + q * 100}}>{{x}}</text>
-
-         <g fill="none">
-             <title>Pop groups in {{x}} - {{y}}</title>
-             <line x1="200" y1={{ 50 + q * 100}} x2={{ y + 200}} y2={{ 50 + q * 100}} stroke="purple" stroke-width="20" />
-             <text x={{ y + 220 }} y = {{ 55 + q * 100}} fill="grey">{{y}}</text>
-         </g>
-
-             <g fill="none">
-                 <title>A capella choirs in {{x}} - {{z}}</title>
-                 <line x1="200" y1={{ 75 + q * 100}} x2={{z + 200}} y2={{ 75 + q * 100}} stroke="gold" stroke-width="20" />
-             </g>
-
-                 <g fill="none">
-                     <title>Grind bands in {{x}} - {{p}}</title>
-                     <line x1="200" y1={{100 + q * 100}} x2={{p + 200}} y2={{ 100 + q * 100}} stroke="orange" stroke-width="20" />
-                 </g>
-                 {% endfor %}
-               </svg> 
-
-  </li>
-
-
-
-</ul>
-
+    <ul class="govuk-list" style="margin-top:2em">
+        <style>
+            .svg-bar{display:block}
+        </style>
+        <li>
+            <p>
+                <!-- Create an SVG shape -->
+                <svg height="1200" width="550" xmlns="http://www.w3.org/2000/svg" class="svg-bar">
+                    
+                    <!-- Create axes and labels -->
+                    <text x="200" y="20">0</text>
+                    <text x="450" y="20">2,400</text>
+                    <!-- Horizontal axis -->
+                    <line x1="200" y1="25" x2="500" y2="25" stroke="grey" stroke-width="2" />
+                    <!-- Vertical axis -->
+                    <line x1="200" y1="25" x2="200" y2="1150" stroke="grey" stroke-width="2" />
+                    
+                    This nunjucks loop creates the bars and labels:
+                    {% for x, y, z, p, q in thisData %}
+                    <text x="10" y={{55 + q * 100}}>{{x}}</text>
+                    
+                    <g fill="none">
+                        <title>Pop groups in {{x}} - {{y}}</title>
+                        <line x1="200" y1={{ 50 + q * 100}} x2={{ y + 200}} y2={{ 50 + q * 100}} stroke="purple" stroke-width="20" />
+                        <text x={{ y + 220 }} y = {{ 55 + q * 100}} fill="grey">{{y}}</text>
+                    </g>
+                    
+                    <g fill="none">
+                        <title>A capella choirs in {{x}} - {{z}}</title>
+                        <line x1="200" y1={{ 75 + q * 100}} x2={{z + 200}} y2={{ 75 + q * 100}} stroke="gold" stroke-width="20" />
+                    </g>
+                    
+                    <g fill="none">
+                        <title>Grind bands in {{x}} - {{p}}</title>
+                        <line x1="200" y1={{100 + q * 100}} x2={{p + 200}} y2={{ 100 + q * 100}} stroke="orange" stroke-width="20" />
+                    </g>
+                    {% endfor %}
+                </svg> 
+            </li>
+        </ul>
+        
+        
