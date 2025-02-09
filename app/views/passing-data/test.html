@@ -1,41 +1,17 @@
 {% extends "layouts/main.html" %}
 <!-- 
   
-  Set up data for this page  
+  This test page shows what data 'persists' from the previous page. 
   
 -->
-
-<!-- Single item -->
-{% set mySetData="cabbage" %}
-
-<!-- A number, with a calculation - note you don't use quotation marks -->
-{% set myCalculation= 69 * 666 %}
-
-<!-- An array of objects -->
-{% set items = [{ title: "foo", id: 1 }, { title: "bar", id: 2}] %}
-
-<!-- An array -->
-{% set myArray = [
-  ["Cambridgeshire", 239, 9],
-  ["Peterborough", 200, 12],
-  ["Luton", 144, 21]
-  ]
-  %}
   
   {% block content %}
   
   <h1 class="govuk-heading-l">
-    Passing data
+    Test page
   </h1>
-  <p class="govuk-body">
-    All the ways to pass data from one page to another in the gov.uk prototype kit. 
-  </p>
   <p>
-    If a variable 'persists' it means you can still access it even after leaving
-    the page. 
-  </p>
-  <p>
-    You can also visit the <a href="test">test page</a> to check what data persists. 
+    Go back to the main <a href="index">passing data page</a>. 
   </p>
   <table class="govuk-table">
     <caption class="govuk-table__caption govuk-table__caption--m">Variables used on this page</caption>
@@ -49,7 +25,7 @@
     </thead>
     <tbody class="govuk-table__body">
       <tr class="govuk-table__row">
-        <th scope="row" class="govuk-table__header">mySetData</th>
+        <th scope="row" class="govuk-table__header"><strike style="color:red">mySetData</strike></th>
         <td class="govuk-table__cell govuk-table__cell--numeric">{{mySetData}}</td>
         <td class="govuk-table__cell govuk-table__cell--numeric">With Nunjucks, on this page</td>
         <td class="govuk-table__cell govuk-table__cell--numeric">No</td>
@@ -67,7 +43,7 @@
           <td class="govuk-table__cell govuk-table__cell--numeric">Yes</td>
         </tr>
         <tr class="govuk-table__row">
-          <th scope="row" class="govuk-table__header">myCalculaton</th>
+          <th scope="row" class="govuk-table__header"><strike style="color:red">myCalculaton</strike></th>
           <td class="govuk-table__cell govuk-table__cell--numeric">{{myCalculation}}</td>
           <td class="govuk-table__cell govuk-table__cell--numeric">By performing a sum, on this page</td>
           <td class="govuk-table__cell govuk-table__cell--numeric">No</td>
@@ -85,7 +61,7 @@
           <td class="govuk-table__cell govuk-table__cell--numeric">Yes</td>
         </tr>
         <tr class="govuk-table__row">
-          <th scope="row" class="govuk-table__header">items</th>
+          <th scope="row" class="govuk-table__header"><strike style="color:red">items</strike></th>
           <td class="govuk-table__cell govuk-table__cell--numeric">
             <ol>                  
               {% for item in items %}
@@ -99,7 +75,7 @@
           <td class="govuk-table__cell govuk-table__cell--numeric">No</td>
         </tr>
         <tr class="govuk-table__row">
-          <th scope="row" class="govuk-table__header">myArray</th>
+          <th scope="row" class="govuk-table__header"><strike style="color:red">myArray</strike></th>
           <td class="govuk-table__cell govuk-table__cell--numeric"><ol>
             {% for x,y,z in myArray %}
             <li>{{x}} - <br>{{y}}, {{z}}</li>
