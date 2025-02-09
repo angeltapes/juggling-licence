@@ -1,4 +1,5 @@
 let people = require('./people.json')
+let myData = require('./my-data.csv')
 module.exports = {
   people,
 

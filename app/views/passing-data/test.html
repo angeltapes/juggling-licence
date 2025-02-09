@@ -8,7 +8,7 @@
   {% block content %}
   
   <h1 class="govuk-heading-l">
-    Test page
+    Test page    <div id="js-div"></div>
   </h1>
   <p>
     Go back to the main <a href="index">passing data page</a>. 
@@ -112,6 +112,8 @@
       {% endfor %}
     </p>
   </div>
-  
+  <script>
+        document.getElementById("js-div").innerHTML = jsArray[0]; 
+  </script>
   {% endblock %}
   
