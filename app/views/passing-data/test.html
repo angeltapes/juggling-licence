@@ -19,50 +19,64 @@
       <tr class="govuk-table__row">
         <th scope="col" class="govuk-table__header">Variable</th>
         <th scope="col" class="govuk-table__header govuk-table__header--numeric">Value</th>
-        <th scope="col" class="govuk-table__header govuk-table__header--numeric">How was it created?</th>
-        <th scope="col" class="govuk-table__header govuk-table__header--numeric">Persists?</th>
+        <th scope="col" class="govuk-table__header">How was it created?</th>
+        <th scope="col" class="govuk-table__header">Persists?</th>
       </tr>
     </thead>
     <tbody class="govuk-table__body">
       <tr class="govuk-table__row">
-        <th scope="row" class="govuk-table__header"><strike style="color:red">mySetData</strike></th>
-        <td class="govuk-table__cell govuk-table__cell--numeric">{{mySetData}}</td>
-        <td class="govuk-table__cell govuk-table__cell--numeric">With Nunjucks, on this page</td>
-        <td class="govuk-table__cell govuk-table__cell--numeric">No</td>
-      </tr>
-      <tr class="govuk-table__row">
         <th scope="row" class="govuk-table__header">myURLdata</th>
-        <td class="govuk-table__cell govuk-table__cell--numeric">{{data['myURLdata']}}</td>
-        <td class="govuk-table__cell govuk-table__cell--numeric">With the URL, on the previous page</td>
-        <td class="govuk-table__cell govuk-table__cell--numeric">Yes</td>
+        <td class="govuk-table__cell">{{data['myURLdata']}}</td>
+        <td class="govuk-table__cell">With the URL, on the previous page</td>
+        <td class="govuk-table__cell">Yes</td>
       </tr>
       <tr class="govuk-table__row">
         <th scope="row" class="govuk-table__header">first-name</th>
-        <td class="govuk-table__cell govuk-table__cell--numeric">{{data['first-name']}}</td>
-        <td class="govuk-table__cell govuk-table__cell--numeric">In the file <strong>app\data\session-data-defaults.js</strong</td>
-          <td class="govuk-table__cell govuk-table__cell--numeric">Yes</td>
-        </tr>
-        <tr class="govuk-table__row">
-          <th scope="row" class="govuk-table__header"><strike style="color:red">myCalculaton</strike></th>
-          <td class="govuk-table__cell govuk-table__cell--numeric">{{myCalculation}}</td>
-          <td class="govuk-table__cell govuk-table__cell--numeric">By performing a sum, on this page</td>
-          <td class="govuk-table__cell govuk-table__cell--numeric">No</td>
+        <td class="govuk-table__cell">{{data['first-name']}}</td>
+        <td class="govuk-table__cell">In the file <strong>app\data\session-data-defaults.js</strong</td>
+          <td class="govuk-table__cell">Yes</td>
         </tr>
         <tr class="govuk-table__row">
           <th scope="row" class="govuk-table__header">fruit-name</th>
-          <td class="govuk-table__cell govuk-table__cell--numeric">{{data['fruit-name']}}</td>
-          <td class="govuk-table__cell govuk-table__cell--numeric">By entering a value in the form below</td>
-          <td class="govuk-table__cell govuk-table__cell--numeric">Yes</td>
+          <td class="govuk-table__cell">{{data['fruit-name']|default("Not entered yet")}}</td>
+          <td class="govuk-table__cell">By entering a value in the form below</td>
+          <td class="govuk-table__cell">Yes</td>
         </tr>
         <tr class="govuk-table__row">
           <th scope="row" class="govuk-table__header">hidden-fruit</th>
-          <td class="govuk-table__cell govuk-table__cell--numeric">{{data['hidden-fruit']}}</td>
-          <td class="govuk-table__cell govuk-table__cell--numeric">Secretly created when you submit the form below</td>
-          <td class="govuk-table__cell govuk-table__cell--numeric">Yes</td>
+          <td class="govuk-table__cell">{{data['hidden-fruit']|default("Not entered yet")}}</td>
+          <td class="govuk-table__cell">Secretly created when you submit the form below</td>
+          <td class="govuk-table__cell">Yes</td>
         </tr>
         <tr class="govuk-table__row">
-          <th scope="row" class="govuk-table__header"><strike style="color:red">items</strike></th>
-          <td class="govuk-table__cell govuk-table__cell--numeric">
+          <th scope="row" class="govuk-table__header">mySetData</th>
+          <td class="govuk-table__cell">{{mySetData}}</td>
+          <td class="govuk-table__cell">With Nunjucks, on this page</td>
+          <td class="govuk-table__cell">No</td>
+        </tr>
+        <tr class="govuk-table__row">
+          <th scope="row" class="govuk-table__header">fugitives</th>
+          <td class="govuk-table__cell">
+            <ol>
+              {% for item in fugitives %}
+              <li>{{ item.name }}</li>
+              {% else %}
+              <li>This would display if the 'item' collection were empty</li>
+              {% endfor %}
+            </ol>
+          </td>
+          <td class="govuk-table__cell">On this page, using the nunjucks <code>set</code> function</td>
+          <td class="govuk-table__cell">No</td>
+        </tr>
+        <tr class="govuk-table__row">
+          <th scope="row" class="govuk-table__header">myCalculaton</th>
+          <td class="govuk-table__cell">{{myCalculation}}</td>
+          <td class="govuk-table__cell">By performing a sum, on this page</td>
+          <td class="govuk-table__cell">No</td>
+        </tr>
+        <tr class="govuk-table__row">
+          <th scope="row" class="govuk-table__header">items</th>
+          <td class="govuk-table__cell">
             <ol>                  
               {% for item in items %}
               <li>{{ item.title }}</li>
@@ -71,18 +85,28 @@
               {% endfor %}
             </ol>
           </td>
-          <td class="govuk-table__cell govuk-table__cell--numeric">Set on this page using an array of objects (eg title: "foo", id: 1)</td>  
-          <td class="govuk-table__cell govuk-table__cell--numeric">No</td>
+          <td class="govuk-table__cell">Set on this page using an array of objects (eg title: "foo", id: 1)</td>  
+          <td class="govuk-table__cell">No</td>
         </tr>
         <tr class="govuk-table__row">
-          <th scope="row" class="govuk-table__header"><strike style="color:red">myArray</strike></th>
-          <td class="govuk-table__cell govuk-table__cell--numeric"><ol>
+          <th scope="row" class="govuk-table__header">myArray</th>
+          <td class="govuk-table__cell">
+            <ol>
             {% for x,y,z in myArray %}
-            <li>{{x}} - <br>{{y}}, {{z}}</li>
+            <li>{{x}} has {{y}} hotels and {{z}} hospitals</li>
             {% endfor %}
-          </ol></td>
-          <td class="govuk-table__cell govuk-table__cell--numeric">Set on this page using an array</td>
-          <td class="govuk-table__cell govuk-table__cell--numeric">No</td>
+          </ol>
+        </td>
+          <td class="govuk-table__cell">Set on this page using an array</td>
+          <td class="govuk-table__cell">No</td>
+        </tr>
+        <tr class="govuk-table__row">
+          <th scope="row" class="govuk-table__header">js-div</th>
+          <td class="govuk-table__cell">
+            <div id="js-div"></div>
+          </td>
+          <td class="govuk-table__cell">Set on this page using vanilla javascript</td>
+          <td class="govuk-table__cell">No</td>
         </tr>
       </tbody>
     </table>

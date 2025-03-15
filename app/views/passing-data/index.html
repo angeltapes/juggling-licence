@@ -1,8 +1,8 @@
 {% extends "layouts/main.html" %}
 <!-- 
-  
-  Set up data for this page  
-  
+
+Set up data for this page  
+
 -->
 
 <!-- Single item -->
@@ -14,14 +14,36 @@
 <!-- An array of objects -->
 {% set items = [{ title: "foo", id: 1 }, { title: "bar", id: 2}] %}
 
+<!-- A set of objects called 'people' -->
+{% set fugitives = [{ 
+  "date" : "1 April",
+  "name" : "Thelma Dickinson",
+  "address" : "9 Pine Drive DD5 8YY",
+  "dob" : "13-06-1965",
+  "owner" : "Darren O'Keefe",
+  "status" : "New"
+  
+}, { 
+  "date" : "1 April",
+  "name" : "Louise Sawyer",
+  "address" : "5 Larch Road K4 9QQ",
+  "dob" : "19-03-2006",
+  "owner" : "Jane Grey",
+  "status" : "On hold"
+  
+}] %} 
+
 <!-- An array -->
 {% set myArray = [
-    ["Cambridgeshire", 239, 9],
-    ["Peterborough", 200, 12],
-    ["Luton", 144, 21]
+  ["Cambridgeshire", 239, 9],
+  ["Peterborough", 200, 12],
+  ["Luton", 144, 21]
   ] 
-%}
-
+  %}
+  
+  <!-- Set a variable from a JS array  -->
+  
+  
   {% block content %}
   
   <h1 class="govuk-heading-l">
@@ -37,6 +59,11 @@
   <p>
     You can also visit the <a href="test">test page</a> to check what data persists. 
   </p>
+  <!-- 
+  
+  Main table 
+  
+  -->
   <table class="govuk-table">
     <caption class="govuk-table__caption govuk-table__caption--m">Variables used on this page</caption>
     <thead class="govuk-table__head">
@@ -49,40 +76,54 @@
     </thead>
     <tbody class="govuk-table__body">
       <tr class="govuk-table__row">
-        <th scope="row" class="govuk-table__header">mySetData</th>
-        <td class="govuk-table__cell govuk-table__cell--numeric">{{mySetData}}</td>
-        <td class="govuk-table__cell">With Nunjucks, on this page</td>
-        <td class="govuk-table__cell">No</td>
-      </tr>
-      <tr class="govuk-table__row">
         <th scope="row" class="govuk-table__header">myURLdata</th>
-        <td class="govuk-table__cell govuk-table__cell--numeric">{{data['myURLdata']}}</td>
+        <td class="govuk-table__cell">{{data['myURLdata']}}</td>
         <td class="govuk-table__cell">With the URL, on the previous page</td>
         <td class="govuk-table__cell">Yes</td>
       </tr>
       <tr class="govuk-table__row">
         <th scope="row" class="govuk-table__header">first-name</th>
-        <td class="govuk-table__cell govuk-table__cell--numeric">{{data['first-name']}}</td>
+        <td class="govuk-table__cell">{{data['first-name']}}</td>
         <td class="govuk-table__cell">In the file <strong>app\data\session-data-defaults.js</strong</td>
           <td class="govuk-table__cell">Yes</td>
         </tr>
         <tr class="govuk-table__row">
-          <th scope="row" class="govuk-table__header">myCalculaton</th>
-          <td class="govuk-table__cell govuk-table__cell--numeric">{{myCalculation}}</td>
-          <td class="govuk-table__cell">By performing a sum, on this page</td>
-          <td class="govuk-table__cell">No</td>
-        </tr>
-        <tr class="govuk-table__row">
           <th scope="row" class="govuk-table__header">fruit-name</th>
-          <td class="govuk-table__cell govuk-table__cell--numeric">{{data['fruit-name']}}</td>
+          <td class="govuk-table__cell">{{data['fruit-name']|default("Not entered yet")}}</td>
           <td class="govuk-table__cell">By entering a value in the form below</td>
           <td class="govuk-table__cell">Yes</td>
         </tr>
         <tr class="govuk-table__row">
           <th scope="row" class="govuk-table__header">hidden-fruit</th>
-          <td class="govuk-table__cell govuk-table__cell--numeric">{{data['hidden-fruit']}}</td>
+          <td class="govuk-table__cell">{{data['hidden-fruit']|default("Not entered yet")}}</td>
           <td class="govuk-table__cell">Secretly created when you submit the form below</td>
           <td class="govuk-table__cell">Yes</td>
+        </tr>
+        <tr class="govuk-table__row">
+          <th scope="row" class="govuk-table__header">mySetData</th>
+          <td class="govuk-table__cell">{{mySetData}}</td>
+          <td class="govuk-table__cell">With Nunjucks, on this page</td>
+          <td class="govuk-table__cell">No</td>
+        </tr>
+        <tr class="govuk-table__row">
+          <th scope="row" class="govuk-table__header">fugitives</th>
+          <td class="govuk-table__cell">
+            <ol>
+              {% for item in fugitives %}
+              <li>{{ item.name }}</li>
+              {% else %}
+              <li>This would display if the 'item' collection were empty</li>
+              {% endfor %}
+            </ol>
+          </td>
+          <td class="govuk-table__cell">On this page, using the nunjucks <code>set</code> function</td>
+          <td class="govuk-table__cell">No</td>
+        </tr>
+        <tr class="govuk-table__row">
+          <th scope="row" class="govuk-table__header">myCalculaton</th>
+          <td class="govuk-table__cell">{{myCalculation}}</td>
+          <td class="govuk-table__cell">By performing a sum, on this page</td>
+          <td class="govuk-table__cell">No</td>
         </tr>
         <tr class="govuk-table__row">
           <th scope="row" class="govuk-table__header">items</th>
@@ -100,17 +141,19 @@
         </tr>
         <tr class="govuk-table__row">
           <th scope="row" class="govuk-table__header">myArray</th>
-          <td class="govuk-table__cell"><ol>
+          <td class="govuk-table__cell">
+            <ol>
             {% for x,y,z in myArray %}
             <li>{{x}} has {{y}} hotels and {{z}} hospitals</li>
             {% endfor %}
-          </ol></td>
+          </ol>
+        </td>
           <td class="govuk-table__cell">Set on this page using an array</td>
           <td class="govuk-table__cell">No</td>
         </tr>
         <tr class="govuk-table__row">
           <th scope="row" class="govuk-table__header">js-div</th>
-          <td class="govuk-table__cell govuk-table__cell--numeric">
+          <td class="govuk-table__cell">
             <div id="js-div"></div>
           </td>
           <td class="govuk-table__cell">Set on this page using vanilla javascript</td>
@@ -118,6 +161,12 @@
         </tr>
       </tbody>
     </table>
+
+    <!-- 
+    
+    Form example 
+    
+    -->
     <h2>Create session data using a form</h2>
     <form method="post">
       <div class="govuk-form-group">
@@ -135,17 +184,34 @@
         Reload page
       </button>
     </form>
-    <h2>JSON data</h2>
+    <!-- 
+    
+    JSON example 
+    
+    -->
+    <h2>JSON data (broken)</h2>
+    <p><strong>From early 2025 this no longer works.</strong> I've created the data using set, on this page.</p>
     <p>Here's an example of JSON data, pulled from the file app\data\people.json.</p>
     <p>To use the JSON, add new lines to the file app\data\session-data-defaults.js</p>
     <p>
+      {{myarray}}
+      <!-- {% for item in data['myarray'] %}
+      <li>{{ myarray}}</li>
+      {% else %}
+      <li>This would display if the 'item' collection were empty</li>
+      {% endfor %} -->
+      
       {% for person in data['people'] %}
       {{person.name}}<br>
       {% endfor %}
     </p>
   </div>
+  
+  <!-- Change the page content using vanilla javascript -->
   <script>
+    // Create an array
     let jsArray = [1,2,3];
+    // Update a div with the first item in the array
     document.getElementById("js-div").innerHTML = jsArray[0]; 
   </script>
   {% endblock %}
