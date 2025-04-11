@@ -1,0 +1,138 @@
+{% extends "layouts/main.html" %}
+
+
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1>Interactive maps</h1>
+    <p>Made using <a href="https://leafletjs.com/" target="_blank">Leaflet JS</a>. Based on <a href="https://www.openstreetmap.org/#map=5/54.91/-3.43" target="_blank">Open Street Map</a>.</p>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+crossorigin=""/>
+
+<!-- Make sure you put this AFTER Leaflet's CSS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+crossorigin=""></script>
+
+<style>
+  #map { height: 420px; width:100%}
+</style>
+
+<h1>{{pageName}}</h1>
+<table class="govuk-table">
+  <tbody class="govuk-table__body">
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header">Map labels</th>
+      <td class="govuk-table__cell">
+        <ul class="govuk-list" style="text-align: left;">
+          <li>Local authority</li>
+          <li>Registered jugglers</li>
+          <li>Juggler salary per annum</li>
+        </ul>
+      </td>
+      <td class="govuk-table__cell">
+        <a href="present-demand-locations">Change</a>
+      </td>
+    </tr>
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header">Juggler - labels</th>
+      <td class="govuk-table__cell">
+        <ul class="govuk-list" style="text-align: left;">
+          <li>Rating</li>
+          <li>Types of juggling</li>
+        </ul>
+      </td>
+      <td class="govuk-table__cell">
+        <a href="present-demand-locations">Change</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+crossorigin=""/>
+
+<!-- Make sure you put this AFTER Leaflet's CSS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+crossorigin=""></script>
+
+<style>
+  #map { height: 420px; width:100%}
+</style>
+
+<p><img src="/public/images/your-juggling-business.svg" style="width:1.2em; margin-right: 0.5em;">Your location <img src="/public/images/five.svg" style="width:1.2em; margin-left:1em; margin-right: 0.5em;">Other licenced jugglers</p>
+<div id="map"></div>
+<script>
+  var map = L.map('map').setView([52.05, 0.72], 11);
+  
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  }).addTo(map);
+  
+  var marker = L.marker([52.05, 0.72], 11).addTo(map);
+  marker.bindPopup("<b>Suffolk</b><br>Registered jugglers: 23<br>Juggler salary per annum: £19,435 ");
+
+  // var marker2 = L.marker([52.07, 0.72], 11).addTo(map);
+  // marker2.bindPopup("<b>Greenfields Care</b><br>Dementia beds: 6<br>All beds: 18").openPopup();
+
+  var greenIcon = L.icon({
+    iconUrl: '/public/images/your-juggling-business.svg',
+
+    iconSize:     [40, 50], // size of the icon
+    shadowSize:   [50, 64], // size of the shadow
+    iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+    shadowAnchor: [4, 62],  // the same for the shadow
+    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+
+var threeIcon = L.icon({
+    iconUrl: '/public/images/three.svg',
+
+    iconSize:     [38, 95], // size of the icon
+    shadowSize:   [50, 64], // size of the shadow
+    iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+    shadowAnchor: [4, 62],  // the same for the shadow
+    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+
+var fourIcon = L.icon({
+    iconUrl: '/public/images/four.svg',
+
+    iconSize:     [38, 95], // size of the icon
+    shadowSize:   [50, 64], // size of the shadow
+    iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+    shadowAnchor: [4, 62],  // the same for the shadow
+    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+
+var fiveIcon = L.icon({
+    iconUrl: '/public/images/five.svg',
+
+    iconSize:     [38, 95], // size of the icon
+    shadowSize:   [50, 64], // size of the shadow
+    iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+    shadowAnchor: [4, 62],  // the same for the shadow
+    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+
+L.marker([52.01, 0.71], {icon: greenIcon}).addTo(map).bindPopup("<b>Khashif Aslam</b><br>Your location");
+L.marker([52.1, 0.74], {icon: fiveIcon}).addTo(map).bindPopup("<b>Vera Lynn</b><br>Rating: 5 (high)<br>Types: balls, clubs");
+L.marker([52.12, 0.738], {icon: fourIcon}).addTo(map).bindPopup("<b>Kobi Wang</b><br>Rating: 4 (medium high)<br>Types: balls, clubs");
+L.marker([52.01, 0.738], {icon: threeIcon}).addTo(map).bindPopup("<b>Jo McCrae</b><br>Rating: 3 (medium)<br>Types: balls, clubs, fire");
+L.marker([52.04, 0.695], {icon: threeIcon}).addTo(map).bindPopup("<b>Sally Smith</b><br>Rating: 3 (medium)<br>Types: balls, clubs, knives, fire");
+L.marker([52.15, 0.95], {icon: fiveIcon}).addTo(map).bindPopup("<b>Francesca Sullivan</b><br>Rating: 5 (high)<br>Types: residential living");;
+// marker.bindPopup("<b>Your pin</b><br>Click the map to change your location");
+
+</script>
+
+<!--
+
+End of Main section
+
+-->
+</main>
+{% endblock %}

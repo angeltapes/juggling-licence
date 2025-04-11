@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="256" height="256" viewBox="0 0 256 256" xml:space="preserve">
+<g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)">
+	<linearGradient id="SVGID_1" gradientUnits="userSpaceOnUse" x1="45" y1="84.7883" x2="45" y2="4.2607">
+<stop offset="0%" style="stop-color:rgb(33,97,172);stop-opacity: 1"/>
+<stop offset="100%" style="stop-color:rgb(43,127,226);stop-opacity: 1"/>
+</linearGradient>
+<circle cx="45" cy="45" r="45" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: url(#SVGID_1); fill-rule: nonzero; opacity: 1;" transform="  matrix(1 0 0 1 0 0) "/>
+	<path d="M 62.705 70 H 28.311 v -7.448 l 15.843 -16.656 c 3.905 -4.445 5.857 -7.977 5.857 -10.595 c 0 -2.121 -0.463 -3.735 -1.388 -4.841 c -0.926 -1.106 -2.268 -1.659 -4.028 -1.659 c -1.738 0 -3.148 0.74 -4.231 2.217 c -1.084 1.478 -1.625 3.323 -1.625 5.535 H 27.295 c 0 -3.024 0.756 -5.817 2.269 -8.378 c 1.512 -2.562 3.61 -4.565 6.297 -6.009 C 38.546 20.723 41.547 20 44.865 20 c 5.326 0 9.427 1.23 12.305 3.69 s 4.316 5.992 4.316 10.595 c 0 1.941 -0.362 3.831 -1.084 5.67 c -0.722 1.84 -1.844 3.77 -3.367 5.788 c -1.524 2.021 -3.978 4.723 -7.364 8.108 l -6.364 7.347 h 19.398 V 70 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/>
+</g>
+</svg>
