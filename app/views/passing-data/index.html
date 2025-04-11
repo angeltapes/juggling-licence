@@ -189,18 +189,10 @@ Set up data for this page
     JSON example 
     
     -->
-    <h2>JSON data (broken)</h2>
-    <p><strong>From early 2025 this no longer works.</strong> I've created the data using set, on this page.</p>
+    <h2>JSON data</h2>
     <p>Here's an example of JSON data, pulled from the file app\data\people.json.</p>
     <p>To use the JSON, add new lines to the file app\data\session-data-defaults.js</p>
     <p>
-      {{myarray}}
-      <!-- {% for item in data['myarray'] %}
-      <li>{{ myarray}}</li>
-      {% else %}
-      <li>This would display if the 'item' collection were empty</li>
-      {% endfor %} -->
-      
       {% for person in data['people'] %}
       {{person.name}}<br>
       {% endfor %}
