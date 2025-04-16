@@ -1,0 +1,135 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName="D3 bar chart" %}
+
+{% block content %}
+<!-- Test out loading data within the D3 file, not a separate CSV file -->
+
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v4.js"></script>
+<a href="d3" class="govuk-back-link">Back</a>
+<h1>{{pageName}}</h1>
+<p>A simple bar chart based on the <a href="https://d3-graph-gallery.com/intro_d3js.html" target="_blank">D3 Graph gallery</a> (opens in a new tab).</p>
+<style>
+  text{font-family:"GDS Transport", arial, sans-serif;font-size:1em}
+</style>
+<p>Also see the <a href="d3-line-chart">D3 line chart</a>.</p>
+<p>Here's an SVG bar chart created with D3.js, from the .csv file <strong>/public/csv/las.csv</strong>:</p>
+
+<style>
+  @media only screen and (max-width: 500px) {
+    #my_dataviz,  #my_dataviz2{
+      width:400px; 
+      overflow-x: scroll;
+    }
+  }
+  .legendTitle, .chartText{font-size:1.2em}
+  .chartAxis{font-size:1.5em}
+
+</style>
+<!-- Add a svg area, empty -->
+<div id="my_dataviz"></div>
+
+<!-- Based on the example https://d3-graph-gallery.com/intro_d3js.html -->
+<script>
+
+// set the dimensions and margins of the graph
+var margin = {top: 50, right: 300, bottom: 100, left: 100},
+    width = 800 - margin.left - margin.right,
+    height = 300 - margin.top - margin.bottom;
+
+// append the svg object to the body of the page
+var svg = d3.select("#my_dataviz")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+
+// Create data - wrap all the graph commands in this function:
+d3.csv("/public/csv/las.csv", function(data) {
+// this is the equivalent of eg var loaded = [ {x:10, y:20}, {x:40, y:90}, {x:80, y:50} ]
+
+// Add X axis
+var x = d3.scaleLinear()
+    .domain([0, 3000])
+    .range([ 0, width]);
+  svg.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x))
+    .selectAll("text")
+      .attr("transform", "translate(-10,0)rotate(-45)")
+      .style("text-anchor", "end")
+      .attr("class","chartAxis");
+
+  // Y axis
+  var y = d3.scaleBand()
+    .range([ 0, height ])
+    .domain(data.map(function(d) { return d.LA; }))
+    .padding(.6);
+  svg.append("g")
+    .call(d3.axisLeft(y))
+    .attr("class","chartText");
+
+  //Bars
+  svg.selectAll("myRect")
+    .data(data)
+    .enter()
+    .append("rect")
+    .attr("x", x(0) )
+    .attr("y", function(d) { return y(d.LA); })
+    .attr("width", function(d) { return x (d.Value); })
+    .attr("height", y.bandwidth() )
+    .attr("fill", "#69b3a2");
+
+    svg.attr("transform",  "translate(150 50)")
+
+    // Add a legend
+const legend = svg.append("g");
+legend.append("text")
+	.text("Licensed jugglers in each local authority")
+	.attr("x", 0)
+	.attr("y", -20)
+	.attr("class", "legendTitle");
+   //  Log the data
+    console.log(data);
+   });
+</script>
+<p>Here's the same data shown in a table with conditional formatting:</p>
+<div class="govuk-grid-row">
+<div class="govuk-grid-column-one-half">
+  <h3>Licensed jugglers in each local authority</h3>
+    <table class="govuk-table">
+    <!-- <caption><h3 class="govuk-heading-s" style="text-align:left">Suffolk County Council</h3></caption>
+    <tr class="govuk-table__row"> -->
+      <th scope="row" class="govuk-table__header">Suffolk</th>
+      <td class="govuk-table__cell">1500
+        <svg viewBox="0 0 60 10" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" width="60" height="5" rx="1"stroke="#e1e1e1" fill="white"/>
+          <rect x="0" width="30" height="5" rx="1"fill="gold" stroke="grey"/>
+        </svg>
+      </td>
+    </tr>
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header">Cambridgeshire</th>
+      <td class="govuk-table__cell">1,200
+        <svg viewBox="0 0 60 10" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" width="60" height="5" rx="1"stroke="#e1e1e1" fill="white"/>
+            <rect x="0" width="24" height="5" rx="1"fill="gold" stroke="grey"/>
+        </svg>
+      </td>
+    </tr>
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header">Norfolk</th>
+      <td class="govuk-table__cell">2,800
+        <svg viewBox="0 0 60 10" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" width="60" height="5" rx="1"stroke="#e1e1e1" fill="white"/>
+              <rect x="0" width="53" height="5" rx="1"fill="gold" stroke="grey"/>
+        </svg>
+      </td>
+    </tr>
+    </table>
+    </div>
+    </div
+{% endblock %}

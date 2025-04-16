@@ -1,0 +1,76 @@
+<h3>
+    Adult social care beds per 100,000 adult population by local authority, East of England region</h3>
+    <p>
+        <svg height="20" width="20" xmlns="http://www.w3.org/2000/svg">
+            <g fill="none">
+                <line x1="0" y1="0" x2="20" y2="0" stroke="purple" stroke-width="40" />
+            </g>
+        </svg>
+        Total beds
+    </p>
+    <p>
+        <svg height="20" width="20" xmlns="http://www.w3.org/2000/svg">
+            <g fill="none">
+                <line x1="0" y1="0" x2="20" y2="0" stroke="gold" stroke-width="40" />
+            </g>
+        </svg>
+        Dementia residential
+    </p>
+    <p>
+        <svg height="20" width="20" xmlns="http://www.w3.org/2000/svg">
+            <g fill="none">
+                <line x1="0" y1="0" x2="20" y2="0" stroke="orange" stroke-width="40" />
+            </g>
+        </svg>
+        Dementia nursing
+    </p>
+    
+    
+    {% set thisData=[
+        ["Suffolk",239,16,64,0],
+        ["Peterborough",200,21,45,1],
+        ["Luton",239,18,59,2],
+        ["Southend on sea",200,16,45,3],
+        ["Thurrock",239,12,74,4],
+        ["Bedford",200,16,45,5],
+        ["Central Bedfordshire",200,16,45,6],
+        ["Cambridgeshire",239,16,64,7],
+        ["Hertfordshire",200,16,45,8],
+        ["Essex",172,20,84,9],
+        ["Norfolk",172,20,84,10]
+        ]  %}
+            <style>
+                .svg-bar{width:100%; overflow-x: auto;}
+            </style>
+                    <svg height="1200" width="500" xmlns="http://www.w3.org/2000/svg" class="svg-bar">
+                        
+                        <text x="200" y="20">0</text>
+                        <text x="450" y="20">2,400</text>
+                        <!-- Horizontal axis -->
+                        <line x1="200" y1="25" x2="500" y2="25" stroke="grey" stroke-width="2" />
+                        <!-- Vertical axis -->
+                        <line x1="200" y1="25" x2="200" y2="1160" stroke="grey" stroke-width="2" />
+                        
+                        {% for x, y, z, p, q in thisData %}
+                        <text x="10" y={{55 + q * 100}}>{{x}}</text>
+                        
+                        <g fill="none">
+                            <title>Total beds per 100,000 in {{x}} - {{y}}</title>
+                            <line x1="200" y1={{ 50 + q * 100}} x2={{ y + 200}} y2={{ 50 + q * 100}} stroke="purple" stroke-width="20" />
+                            <!-- Uncomment the following lines to add text values to each bar: -->
+                            <!-- <text x={{ y + 210}} y={{ 55 + q * 100}} fill="black">{{y}}</text> -->
+                        </g>
+                        
+                        <g fill="none">
+                            <title>Dementia residential in {{x}} - {{z}}</title>
+                            <line x1="200" y1={{ 75 + q * 100}} x2={{z + 200}} y2={{ 75 + q * 100}} stroke="gold" stroke-width="20" />
+                            <!-- <text x={{ z + 210}} y={{ 80 + q * 100}} fill="black">{{z}}</text> -->
+                        </g>
+                        
+                        <g fill="none">
+                            <title>Dementia nursing in {{x}} - {{p}}</title>
+                            <line x1="200" y1={{100 + q * 100}} x2={{p + 200}} y2={{ 100 + q * 100}} stroke="orange" stroke-width="20" />
+                            <!-- <text x={{ p + 210}} y={{ 105 + q * 100}} fill="black">{{p}}</text> -->
+                        </g>
+                        {% endfor %}
+                    </svg> 

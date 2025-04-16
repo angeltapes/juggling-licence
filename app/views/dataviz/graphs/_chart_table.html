@@ -1,0 +1,77 @@
+<h3>
+    Adult social care beds per 100,000 adult population by local authority
+</h3>
+<p>
+    <svg height="20" width="20" xmlns="http://www.w3.org/2000/svg">
+        <g fill="none">
+            <line x1="0" y1="0" x2="20" y2="0" stroke="purple" stroke-width="40" />
+        </g>
+    </svg>
+    All types
+</p>
+<!-- <p>
+    <svg height="20" width="20" xmlns="http://www.w3.org/2000/svg">
+        <g fill="none">
+            <line x1="0" y1="0" x2="20" y2="0" stroke="gold" stroke-width="40" />
+        </g>
+    </svg>
+    Dementia residential
+</p>
+<p>
+    <svg height="20" width="20" xmlns="http://www.w3.org/2000/svg">
+        <g fill="none">
+            <line x1="0" y1="0" x2="20" y2="0" stroke="orange" stroke-width="40" />
+        </g>
+    </svg>
+    Dementia nursing
+</p> -->
+{% set thisData=[
+    ["Cambridgeshire",239,16,64,0],
+    ["Peterborough",200,16,45,1],
+    ["Luton",199,16,64,2],
+    ["Southend on sea",200,16,45,3],
+    ["Suffolk",189,16,64,4],
+    ["Bedford",170,16,45,5],
+    ["Central Bedfordshire",148,16,45,6],
+    ["Thurrock",132,16,64,7],
+    ["Hertfordshire",104,16,45,8],
+    ["Essex",98,20,84,9],
+    ["Norfolk",91,20,84,10]
+    ]  %}
+    <!-- <p>{{thisData[1][1]}} works</p> -->
+    <!-- <ul class="govuk-list" style="margin-top:2em"> -->
+        <style>
+            .svg-bar{display:block; overflow-x: auto;}
+        </style>
+        <!-- <li>
+            <p> -->
+                <div class="svg-bar">
+                <svg height="600" width="500" xmlns="http://www.w3.org/2000/svg" class="svg-bar">
+                    <title>Beds per 100,000 by local authorities in the East of England</title>
+                    <!-- Axis labels -->
+                    <text x="200" y="20">0</text>
+                    <text x="450" y="20">2,400</text>
+                    <!-- Horizontal axis -->
+                    <line x1="200" y1="25" x2="500" y2="25" stroke="grey" stroke-width="2" />
+                    <!-- Vertical axis -->
+                    <line x1="200" y1="25" x2="200" y2="600" stroke="grey" stroke-width="2" />
+                    
+                    {% for x,y,z,p,q in thisData %}
+                    <text x="10" y={{55 + q * 50}}>{{x}}</text>
+                    
+                    <g fill="none">
+                        <title stroke-width="5">Total beds per 100,000 in {{x}} - {{y}}</title>
+                        {% if x == "Suffolk" %}
+                        <rect x="0" y={{ 35 + q * 50}} width="500" height="30"stroke="black" stroke-width="2" stroke-dasharray="2,2"/>
+                        <line x1="200" y1={{ 50 + q * 50}} x2={{ y + 200}} y2={{ 50 + q * 50}} stroke="red" stroke-width="20" />
+                        {% else %}
+                        <line x1="200" y1={{ 50 + q * 50}} x2={{ y + 200}} y2={{ 50 + q * 50}} stroke="purple" stroke-width="20" />
+                        {% endif %}
+                    </g>
+                    {% endfor %}
+                </svg> 
+            </div>
+            <!-- </li>
+        </ul> -->
+        
+        

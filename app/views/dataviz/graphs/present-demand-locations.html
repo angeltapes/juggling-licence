@@ -1,0 +1,52 @@
+{% extends "layouts/data.html" %}
+
+{% set pageName="Edit locations" %}
+
+{% block content %} 
+<a href="../data-pages/present-demand" class="govuk-back-link">Back</a>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <!-- <span class="govuk-caption-l">Demand and capacity</span> -->
+    <h1 class="govuk-heading-l">
+      <!--<span class="govuk-caption-m">Demand</span>-->
+      {{pageName}}</h1>
+      <!-- 
+      
+      Main content
+      
+      -->
+      {% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+      {{ govukRadios({
+        name: "care-provider-location",
+        fieldset: {
+          legend: {
+            text: "Your locations",
+            isPageHeading: true,
+            classes: "govuk-fieldset__legend--s"
+          }
+        },
+        items: [
+          {
+            value: "Care provider location A",
+            text: "Care provider location A, Suffolk"
+          },
+          {
+            value: "Care provider location B",
+            text: "Care provider location B, Suffolk"
+          },
+          {
+            value: "Care provider location C",
+            text: "Care provider location C, Cambridgeshire"
+          }
+
+        ]
+      }) }}
+        <form action="present-demand">
+          <button type="submit" class="govuk-button" data-module="govuk-button">
+            Apply changes
+          </button>
+        </form>
+
+        <p class="govuk-body"><a href="javascript:history.back()" class="govuk-link">Cancel and go back</a></p>
+        {% endblock%}

@@ -1,0 +1,91 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName="D3 line chart" %}
+
+{% block content %}
+<!-- Test out loading data within the D3 file, not a separate CSV file -->
+
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v4.js"></script>
+<h1>{{pageName}}</h1>
+<p>Also see the <a href="d3-bar-chart">D3 bar chart</a>.</p>
+<p>This line chart is made from data contained within this page.</p>
+<h3>Licenced jugglers - changes year by year (%)</h3>
+<!-- Create a div where the graph will take place -->
+<div id="my_dataviz"></div>
+
+<script>
+  
+  // set the dimensions and margins of the graph
+  var margin = {top: 10, right: 30, bottom: 30, left: 60},
+  width = 460 - margin.left - margin.right,
+  height = 400 - margin.top - margin.bottom;
+  
+  // append the svg object to the body of the page
+  var svg = d3.select("#my_dataviz")
+  .append("svg")
+  .attr("width", width + margin.left + margin.right)
+  .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+  .attr("transform",
+  "translate(" + margin.left + "," + margin.top + ")");
+  
+  // Create data
+  const data = [ {x:2024,y:0},
+  {x:2025,y:0.37},
+  {x:2026,y:0.72},
+  {x:2027,y:1.05},
+  {x:2028,y:1.38},
+  {x:2029,y:1.7},
+  {x:2030,y:2.01},
+  {x:2031,y:2.32},
+  {x:2032,y:2.64},
+  {x:2033,y:2.95},
+  {x:2034,y:3.27},
+  {x:2035,y:1.57},
+  {x:2036,y:3.88},
+  {x:2037,y:4.19},
+  {x:2038,y:4.5},
+  {x:2039,y:4.82},
+  {x:2040,y:5.13},
+  {x:2041,y:5.45},
+  {x:2042,y:5.76},
+  {x:2043,y:6.07} ];
+  
+  // Add X axis --> it is a date format
+  var x = d3.scaleTime()
+  .domain(d3.extent(data, function(d) { return d.x; }))
+  .range([ 0, width ]);
+  svg.append("g")
+  .attr("transform", "translate(0," + height + ")")
+  .call(d3.axisBottom(x));
+  
+  // Add Y axis
+  var y = d3.scaleLinear()
+  .domain([0, d3.max(data, function(d) { return +d.y; })])
+  .range([ height, 0 ]);
+  svg.append("g")
+  .call(d3.axisLeft(y));
+  
+  // Add the line
+  svg.append("path")
+  .datum(data)
+  .attr("fill", "none")
+  .attr("stroke", "steelblue")
+  .attr("stroke-width", 1.5)
+  .attr("d", d3.line()
+  .x(function(d) { return x(d.x) })
+  .y(function(d) { return y(d.y) })
+  )
+  
+  
+</script>
+
+
+<!--
+
+End of Main section
+
+-->
+</main>
+{% endblock %}

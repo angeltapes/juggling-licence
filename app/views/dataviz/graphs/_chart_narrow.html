@@ -1,0 +1,78 @@
+<h3>
+    Licensed jugglers per 100,000 adult population by local authority
+</h3>
+<p>
+    <svg height="20" width="20" xmlns="http://www.w3.org/2000/svg">
+        <g fill="none">
+            <line x1="0" y1="0" x2="20" y2="0" stroke="#69b3a2" stroke-width="40" />
+        </g>
+    </svg>
+    Local authorities
+</p>
+<p>
+    <svg height="20" width="20" xmlns="http://www.w3.org/2000/svg">
+        <g fill="none">
+            <line x1="0" y1="0" x2="0" y2="20" stroke="gold" stroke-width="40" stroke-dasharray="15,3" />
+        </g>
+    </svg>
+    Suffolk
+</p>
+
+{% set thisData=[
+    ["Cambridgeshire",2390,16,64,0],
+    ["Peterborough",2000,16,45,1],
+    ["Luton",1990,16,64,2],
+    ["Southend on sea",2000,16,45,3],
+    ["Suffolk",1890,16,64,4],
+    ["Bedford",1700,16,45,5],
+    ["Central Bedfordshire",1480,16,45,6],
+    ["Thurrock",1320,16,64,7],
+    ["Hertfordshire",1040,16,45,8],
+    ["Essex",980,20,84,9],
+    ["Norfolk",910,20,84,10]
+    ]  %}
+    
+    <!-- Set dimensions for the graph -->
+    {% set leftMargin = 25 %}
+    {% set barWidth = (100 / thisData.length) - 4 %}
+        <style>
+            .svg-bar{display:block; overflow-x: auto;}
+        </style>
+                <div class="svg-bar">
+                <svg height="340" width="100%" xmlns="http://www.w3.org/2000/svg" class="svg-bar">
+                    <title>Beds per 100,000 by local authorities in the East of England</title>
+
+                    <!-- Axis labels -->
+                    <text x="0" y="10%">2,400</text>
+                    <text x="0" y="50%">1,200</text>
+                    <text x="0" y="85%">0</text>
+                    <text x = "{{leftMargin}}%" y="95%">Local authorities</text>
+
+                    <!-- Ticks -->
+                    <line x1="{{leftMargin - barWidth / 2}}%" y1="30" x2 ="{{leftMargin + barWidth * thisData.length }}%" y2="30" stroke="grey" stroke-width="1" />
+                    <line x1="{{leftMargin - barWidth / 2}}%" y1="160" x2 ="{{leftMargin + barWidth * thisData.length }}%" y2="160" stroke="grey" stroke-width="1" />
+                    <line x1="{{leftMargin - barWidth / 2}}%" y1="280" x2 ="{{leftMargin + barWidth * thisData.length }}%" y2="280" stroke="grey" stroke-width="1" />                  
+
+                    <!-- Horizontal axis -->
+                    <line x1="{{leftMargin - barWidth / 2}}%" y1="280" x2="{{leftMargin + barWidth * thisData.length }}%" y2="280" stroke="grey" stroke-width="2" />
+                    
+                    <!-- Vertical axis -->
+                    <line x1="{{leftMargin - barWidth / 2}}%" y1="0" x2="{{leftMargin - barWidth / 2}}%" y2="280" stroke="grey" stroke-width="2" />
+                    
+                    {% for x, y, z, p, q in thisData %}
+                    
+                    <g fill="none">
+
+                        <title stroke-width="5">Total beds per 100,000 in {{x}} - {{y}}</title>
+                        {% if x == "Suffolk" %}
+                        <line x1="{{ leftMargin + barWidth * q}}%" x2="{{ leftMargin + barWidth * q}}%" y1="280" y2={{280 - y / 10}} stroke="gold" stroke-width={{barWidth + "%"}} stroke-dasharray="15,3" />
+                        {% else %}
+                        <line x1="{{ leftMargin + barWidth * q}}%" x2="{{ leftMargin + barWidth * q}}%" y1="280" y2={{280 - y / 10}} stroke="#69b3a2" stroke-width={{barWidth + "%"}} />
+                        {% endif %}
+
+                    </g>
+                    {% endfor %}
+                </svg> 
+            </div>
+        
+        
