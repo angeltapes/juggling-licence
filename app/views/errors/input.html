@@ -1,0 +1,50 @@
+{% extends "layouts/main.html" %}
+<!-- 
+  
+  This test page shows what data 'persists' from the previous page. 
+  
+-->
+
+{% block content %}
+
+<h1 class="govuk-heading-l">
+  Example error page    
+</h1>
+<p>The current error state is: {{data['error']}}</p>
+<p>
+  Go back to the <a href="result">result page</a>. {{x}}
+</p>
+<!-- I used the following code to debug the page with Nunjucks: -->
+<!-- <p>
+  {% set regExp = r/\D+/g %}
+  {% if regExp.test(data['check-this-number']) %}
+  characters other than numbers
+  {% else %}
+  only numbers
+  {% endif %}
+</p> -->
+<form action="error-check" method="post" novalidate>
+  <div class="govuk-form-group {% if data['error'] == 'not-a-number'%}govuk-form-group--error{% endif %}">
+    <label class="govuk-label govuk-label--m" for="check-this-number">
+      Enter an amount, in pounds and pence
+    </label>
+    <div id="check-this-number-hint" class="govuk-hint">
+      The input box will only accept numbers. Letters and special characters trigger an error message. 
+    </div>
+    <!-- Trigger an error message if the routes file has added a value for 'error' -->
+    {% if data['error'] == 'not-a-number'%}
+    <p id="check-this-number-error" class="govuk-error-message">
+      <span class="govuk-visually-hidden">Error:</span> Enter a number up to two decimal places.
+    </p>
+    {% endif %}
+    <div class="govuk-input__wrapper">
+      <div class="govuk-input__prefix" aria-hidden="true">£</div>
+      <!-- Use Nunjucks to modify the class if there is an active error -->
+      <input  class="govuk-input govuk-!-width-one-quarter {% if data['error'] == 'not-a-number'%} govuk-input--error{% endif %}" id="check-this-number" name="check-this-number" type="text" value ="{{data['check-this-number']}}" aria-describedby="check-this-number-hint check-this-number-error">
+    </div>
+  </div>
+  <button type="submit" class="govuk-button" data-module="govuk-button">
+    Continue
+  </button>
+</form>
+{% endblock %}

@@ -18,6 +18,18 @@ router.post('/juggling-service/juggling-balls-router', function(request, respons
     }
 })
 
+//Example route for the juggling balls journey
+router.post('/errors/error-check', function(request, response) {
+  let regExp = /^\d+(\.\d{1,2})?$/;
+  let hasNumbers = regExp.test(request.session.data['check-this-number']);
+  let result = hasNumbers ? "Yes" : "No";
+  if (result == "Yes"){
+      response.redirect("/errors/result?error=false")
+  } else {
+      response.redirect("/errors/input?error=not-a-number")
+  }
+})
+
 // Logging session data  
   
 router.use((req, res, next) => {    

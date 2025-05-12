@@ -1,0 +1,53 @@
+{% extends "layouts/main.html" %}
+<!-- 
+  
+  This test page shows what data 'persists' from the previous page. 
+  
+-->
+  
+  {% block content %}
+  
+  <h1 class="govuk-heading-l">
+    Example error page    
+  </h1>
+  <p>{{data['errorState']}}</p>
+  <p>
+    Go back to the <a href="result">result page</a>. {{x}}
+  </p>
+  <p>
+    {% set regExp = r/\D+/g %}
+    {% if regExp.test(data['check-this-number']) %}
+    characters other than numbers
+    {% else %}
+    only numbers
+    {% endif %}
+  </p>
+  <form name="myForm" onsubmit="return errorCheck()" method="post">
+  <div class="govuk-form-group govuk-form-group--error">
+    <label class="govuk-label" for="check-this-number">
+      Enter a number
+    </label>
+    <div id="check-this-number-hint" class="govuk-hint">
+      The box will only accept numbers. Letters and special characters trigger an error message. 
+        </div>
+    <p id="check-this-number-error" class="govuk-error-message">
+      <span class="govuk-visually-hidden">Error:</span> You can only enter a number.
+    </p>
+    <input class="govuk-input govuk-input--error" id="check-this-number" name="check-this-number" type="text" value ="{{data['check-this-number']}}" aria-describedby="check-this-number-hint check-this-number-error">
+  </div>
+  <button type="submit" class="govuk-button" data-module="govuk-button">
+    Continue
+  </button>
+</form>
+<script>
+  function errorCheck(){
+    let x = document.forms["myForm"]["check-this-number"].value;
+  if (x == "") {
+    alert("Name must be filled out");
+    sessionStorage.setItem("errorState", "Not entered");
+    return false;
+  }
+  else{alert("working")}
+}
+</script>
+  {% endblock %}

@@ -1,0 +1,21 @@
+{% extends "layouts/main.html" %}
+<!-- 
+  
+  This test page shows what data 'persists' from the previous page. 
+  
+-->
+  
+  {% block content %}
+  
+  <h1 class="govuk-heading-l">
+    Result page    <div id="js-div"></div>
+  </h1>
+  <p>
+    Go back to the <a href="input">input page</a>. 
+  </p>
+  <p>
+    {{data['check-this-number']}} is a number
+  </p>
+  
+  {% endblock %}
+  

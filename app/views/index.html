@@ -36,6 +36,7 @@
     </p>
     </div>
     <div class="govuk-grid-column-one-third">
+      <!-- Draw some moving balls with P5.js -->
       <script>
         let curves; 
         
@@ -50,12 +51,13 @@
         }
         
         function draw() {
-background(255);
+          background(255);
           circle(60, 100 - sin(frameCount) * 50, 25);
           circle(120, 100 - sin(frameCount - 50) * 50, 25);
           circle(180, 100 - sin(frameCount - 100) * 50, 25);
         }
       </script>
+      <!-- P5 uses the following div to animate the three balls -->
       <div id="p5-sketch"></div>
     </div>
   </div>
@@ -72,6 +74,11 @@ background(255);
         </tr>
       </thead>
       <tbody class="govuk-table__body">
+        <tr class="govuk-table__row">
+          <th scope="row" class="govuk-table__header"> <a href="./errors/input" class="govuk-link">Error page</a>
+          </th>
+          <td class="govuk-table__cell">Enter values in a text box to trigger errors.</td>
+        </tr>
         <tr class="govuk-table__row">
           <th scope="row" class="govuk-table__header"> <a href="./map/map" class="govuk-link">Interactive maps</a>
           </th>
