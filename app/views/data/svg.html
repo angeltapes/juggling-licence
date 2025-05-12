@@ -19,6 +19,18 @@
 <style>
   .govuk-heading-xl{margin-top:0.2em}
   .bar:hover{background:yellow}
+  td {padding-right:1em}
+  @media only screen and (min-width: 700px) {
+  td:nth-child(2), td:nth-child(4){text-align: right}
+  }
+  @media only screen and (max-width: 699px) {
+      th, td{
+        display:block;
+        text-align: left;
+      }
+      tr {border-top:2em solid white}
+      
+    }
 </style>
 <div class="govuk-grid-row">
   <h2>Table with bars: applications per month</h2>
@@ -38,34 +50,35 @@
   ]
   %}
   
-  <table class="govuk-table">
+  <table class="overflow-table">
     <thead class="govuk-table__head">
       <tr class="govuk-table__row">
         <th scope="col" class="govuk-table__header">Month</th>
-        <th scope="col" class="govuk-table__header govuk-!-text-align-right">Applications</th>
-        <th scope="col" class="govuk-table__header"><span class="govuk-visually-hidden">Application bars</span></th>
-        <th scope="col" class="govuk-table__header govuk-!-text-align-right">On hold</th>
-        <th scope="col" class="govuk-table__header"><span class="govuk-visually-hidden">On hold bars</span></th>
+        <th scope="col" class="govuk-table__header"><span class="govuk-visually-hidden">Application numbers</span></th>
+        <th scope="col" class="govuk-table__header">Applications</th>
+        <th scope="col" class="govuk-table__header"><span class="govuk-visually-hidden">On hold numbers</span></th>
+        <th scope="col" class="govuk-table__header">On hold</th>
       </tr>
     </thead>
+    <!-- Use a loop to populate the table -->
     {% for item in items %}
     <tr>
       <td>{{ item.month }} </td>
-      
-      <td class="govuk-!-text-align-right">{{ item.apps }} </td>
+      <td>{{ item.apps | addcommas }} </td>
       <td>
+        <!-- Create the bars in the table using SVG, with the data from the Nunjucks array: -->
         <svg width="200" height="20" xmlns="http://www.w3.org/2000/svg">
           <!-- Add a title, for accessibility -->
           <title>{{item.month}} - {{item.apps}}</title>
-          <rect width={{ item.apps / 10 }} height="10" x="10" y="10" rx="2" ry="2" fill="#12436d" />
+          <rect width={{ item.apps / 10 }} height="10" x="0" y="10" rx="2" ry="2" fill="#12436d" />
         </svg> 
       </td>
-      <td class="govuk-!-text-align-right">{{ item.onHold }}</td>
+      <td>{{ item.onHold }}</td>
       <td>
         <svg width="200" height="20" xmlns="http://www.w3.org/2000/svg">
           <!-- Add a title, for accessibility -->
           <title>{{item.month}} - {{item.onHold}}</title>
-          <rect width={{ item.onHold }} height="10" x="10" y="10" rx="2" ry="2" fill="#0f6143" class="bar"/>
+          <rect width={{ item.onHold }} height="10" x="0" y="10" rx="2" ry="2" fill="#0f6143" class="bar"/>
         </svg> 
       </td>
     </tr>
@@ -101,6 +114,7 @@
   %}
   <style>
     .diagram-text{font-size:16px}
+    .map-diagram{width:600px; overflow-x: scroll;}
     .map-diagram a{text-decoration: none; border:none}
     .map-diagram a:hover{text-decoration: underline}
     text.a{text-decoration: none; fill:yellow}
@@ -127,7 +141,7 @@
     {% endfor %}
   </svg>
   <p>
-    You can also show the list as a set of coloured lozenges.
+    You can also show a list as a set of coloured lozenges.
   </p>
   {% for item in items %}
   <svg width="200" height="100" xmlns="http://www.w3.org/2000/svg">

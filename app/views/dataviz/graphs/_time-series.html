@@ -1,0 +1,132 @@
+    <!-- 
+    
+    Time series 
+    
+    -->
+    <table class="govuk-table">
+        <tbody class="govuk-table__body">
+            <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">Filters</th>
+                <td class="govuk-table__cell">
+                    <ul class="govuk-list" style="text-align: left;">
+                        <li>Total performers</li>
+                        <li>Acrobats</li>
+                        <li>Jugglers</li>
+                    </ul>
+                </td>
+                <td class="govuk-table__cell">
+                    <a href="total_jugglers-edit-filters">Change</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <h3>Time period</h3>
+    <style>
+        .date-pickers{display:inline-grid;
+            grid-template-columns: auto auto;
+            gap:1em
+        }
+    </style>
+    <div class="date-pickers">
+        <div class="moj-datepicker" data-module="moj-date-picker">
+            <div class="govuk-form-group">
+                <label class="govuk-label" for="from-date">
+                    Start date 
+                </label>
+                <input class="govuk-input moj-js-datepicker-input" id="from-date" name="from-date" type="text" autocomplete="off" value="1/04/2021">
+            </div>
+        </div>
+        
+        <div class="moj-datepicker" data-module="moj-date-picker">
+            <div class="govuk-form-group">
+                <label class="govuk-label" for="to-date">
+                    End to-date
+                </label>
+                <input class="govuk-input moj-js-datepicker-input" id="to-date" name="to-date" type="text" autocomplete="off" value="1/11/2023">
+            </div>
+        </div>
+    </div>
+        <h3>
+            Licensed jugglers per 100,000 adult population in Suffolk: 1 April 2021 to 1 November 2023
+        </h3>
+        <ul class="govuk-list">
+            <li>
+                <svg height="5" width="50" xmlns="http://www.w3.org/2000/svg">
+                    <g fill="none">
+                        <line x1="0" y1="0" x2="50" y2="0" stroke="purple" stroke-width="10" />
+                    </g>
+                </svg> 
+                All types</li>
+           <li>
+                <svg height="5" width="50" xmlns="http://www.w3.org/2000/svg">
+                    <g fill="none">
+                        <line x1="0" y1="0" x2="50" y2="0" stroke="gold" stroke-width="10" />
+                    </g>
+                </svg> 
+                Acrobats</li>
+                <li>
+                    <svg height="5" width="50" xmlns="http://www.w3.org/2000/svg">
+                        <g fill="none">
+                            <line x1="0" y1="0" x2="50" y2="0" stroke="orange" stroke-width="10" />
+                        </g>
+                    </svg> 
+                    Fire jugglers</li>
+                    
+                </ul>
+                <!-- 
+                
+                Chart  
+                
+                -->
+                <style>
+                    .data-chart{width:100%; overflow-x: scroll;}
+                </style>
+                <svg height="250" width="600" xmlns="http://www.w3.org/2000/svg" class="data-chart">
+                    <defs>
+                        <style>
+                            text{font-family: 'Helvetica Neue', sans-serif; }
+                        </style>
+                    </defs>
+
+                    <title>Total jugglers per 100,000 population in Suffolk: 1 April 2021 to 1 November 2023</title>
+                    
+                    <!-- 	Y Scale -->
+                    <text class="axis-text"x="0" y="50" fill="#666">2,400</text>
+                    <text class="axis-text"x="0" y="125" fill="#666">1,200</text>
+                    <text class="axis-text"x="42" y="200" fill="#666">0</text>
+                    
+                    <g transform="translate(20,0)">
+                        <!-- 		Axes -->
+                        <line x1="50" y1="0" x2="50" y2="200" style="stroke:#666;stroke-width:2" />
+                        <line x1="50" y1="200" x2="600" y2="200" style="stroke:#666;stroke-width:2" />
+                        <rect width="600" height="2" x="50" y="50" fill="#e1e1e1" />
+                        <rect width="600" height="2" x="50" y="120" fill="#e1e1e1" />
+                        
+                        <!-- 		X Scale -->
+                        <text class="axis-text"x="50" y="220" fill="#666">2021</text>
+                        <text class="axis-text"x="250" y="220" fill="#666">2022</text>
+                        <text class="axis-text"x="450" y="220" fill="#666">2023</text>
+                        
+                        <!-- 		Lines -->
+                        <g transform="translate(-250,0) scale (2 1)">
+                            <!-- Total beds -->
+                            <polyline points="150,110 200,90 250,80 300,90 350,82 400,65, 450,80"
+                            style="fill:none;stroke:purple;stroke-width:3" />
+                            
+                            <!-- Dementia residential -->
+                            <polyline points="150,169 200,173 250,152 300,158 350,143 400,154, 450,158"
+                            style="fill:none;stroke:gold;stroke-width:3" />
+                            
+                            <!-- Dementia nursing -->
+                            <polyline points="150,194 200,193 250,179 300,191 350,193 400,189, 450,195"
+                            style="fill:none;stroke:orange;stroke-width:3" />
+                            
+                        </g>
+                    </svg>                            
+                    <p class="govuk-body"><a href="#" class="govuk-link">Download chart image (PNG)</a><br>
+                        <a href="#" class="govuk-link">Download table data (CSV)</a>
+                    </p>
+                    <p class="govuk-body">Source: JuggleGov<br>
+                        Data correct as of 24 December 2024<br>
+                        <!--<a href="../0-3/help/beds-per-100000-people.html" class="govuk-link">View supporting information for this data</a>-->
+                    </p>

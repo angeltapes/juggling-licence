@@ -1,0 +1,61 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName="Edit time series filters" %}
+
+{% block content %} 
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <span class="govuk-caption-m">Licensed jugglers per 100,000 population</span> 
+    <h1 class="govuk-heading-l">{{pageName}}</h1>
+    <p class="govuk-body">Select filters to refine the data displayed.</p>
+
+    <!-- 
+    
+    General  
+    
+    -->
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset" aria-describedby="jugglers-hint">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+          <h1 class="govuk-fieldset__heading">
+            General
+          </h1>
+        </legend>
+        <div class="govuk-checkboxes__item">
+          <input class="govuk-checkboxes__input" id="jugglers-2" name="jugglers" type="checkbox" value="All types" checked>
+          <label class="govuk-label govuk-checkboxes__label" for="jugglers-2">
+            All types
+          </label>
+        </div>
+        <div class="govuk-checkboxes__item">
+          <input class="govuk-checkboxes__input" id="jugglers-2" name="jugglers" type="checkbox" value="Fire jugglers" checked>
+          <label class="govuk-label govuk-checkboxes__label" for="jugglers-2">
+            Fire jugglers
+          </label>
+        </div>
+        <div class="govuk-checkboxes__item">
+          <input class="govuk-checkboxes__input" id="jugglers-2" name="jugglers" type="checkbox" value="Acrobats" checked>
+          <label class="govuk-label govuk-checkboxes__label" for="jugglers-2">
+            Acrobats
+          </label>
+      </div>
+      <div class="govuk-checkboxes__item">
+        <input class="govuk-checkboxes__input" id="jugglers-2" name="jugglers" type="checkbox" value="Unicyclists">
+        <label class="govuk-label govuk-checkboxes__label" for="jugglers-2">
+          Unicyclists
+        </label>
+    </div>
+    </fieldset>
+  </div>
+  
+<form action="index">
+  <button type="submit" class="govuk-button" data-module="govuk-button">
+    Apply changes
+  </button>
+</form>
+<p class="govuk-body"><a href="javascript:history.back()" class="govuk-link">Cancel and go back</a></p>
+
+</div>
+
+{% endblock%}

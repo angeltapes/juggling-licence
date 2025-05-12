@@ -1,0 +1,77 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName="Graphs library" %}
+
+{% block content %} 
+<p class="govuk-body"><a href="javascript:history.back()" class="govuk-link">Back</a></p>
+
+<div class="govuk-grid-row">
+  <!-- 
+  
+  Main column 
+  
+-->
+  <div class="govuk-grid-column-two-thirds">
+    <!-- <span class="govuk-caption-l">Demand and capacity</span> -->
+    <h1 class="govuk-heading-l">
+      <!-- <span class="govuk-caption-m">Demand</span> -->
+      {{pageName}}</h1>
+      <!-- 
+      
+      Main content
+      
+      -->
+      <!-- 
+      
+      Bar chart - narrow 
+      
+      -->
+      <h2 id="data">Bar chart: show LAs in a region (narrow version)</h2>
+      <p>The following Chart is an SVG image. I made it using Nunjucks. It resizes if you change the browser width or text size. </p>
+      {% include "./_chart_narrow.html" %}
+      <!-- 
+      
+      Bar chart
+      
+      -->
+      <h2 id="data">Bar chart: show LAs in a region (longer version)</h2>
+      <p>The following Chart is an SVG image. I made it using Nunjucks. A horizontal scroll bar appears
+        if you change the browser to a narrow width. Unfortunately, if you change your browser text 
+        size the layout breaks. 
+      </p>
+          {% include "./_chart.html" %}
+          <p class="govuk-body"><a href="" class="govuk-link">Download chart image (PNG)</a><br>
+            <a href="#" class="govuk-link">Download table data (CSV)</a>
+            <p class="govuk-body">Source: JuggleGov<br>
+              Data correct as of 24 December 2024<br>
+             <!-- <a href="../0-3/help/beds-per-100000-people.html" class="govuk-link">View supporting information for this data</a></p>-->
+  
+            <!-- 
+            
+            Time series 
+            
+            -->
+            <h2>Time series: show three filters over time</h2>
+            <p>The following Chart is an SVG image. I made it using Nunjucks. A horizontal scroll bar appears
+              if you change the browser to a narrow width. If you change your browser text 
+              size to over 28 point, the text overlaps with the graph axes but it is still legible. 
+            </p>
+            {% include "./_time-series.html" %}
+            <!-- 
+            
+            Map 
+            
+            -->
+            <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="map">
+              <h2>
+                Map
+              </h2>
+              <p class="govuk-body">The map view is not yet available.</p>
+              <p class="govuk-body">We are working to introduce this feature to the service. In the meantime, you can explore the data by chart, time series or table.</p>
+              </p>
+            </div>
+          
+
+            <p class="govuk-body"><a href="javascript:history.back()" class="govuk-link">Back</a></p>
+
+              {% endblock%}
