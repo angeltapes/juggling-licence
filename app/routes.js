@@ -18,13 +18,14 @@ router.post('/juggling-service/juggling-balls-router', function(request, respons
     }
 })
 
-//Example route for the juggling balls journey
+//Test if an input is a number - if not, send the user back to the page and
+//trigger error messages
 router.post('/errors/error-check', function(request, response) {
   let regExp = /^\d+(\.\d{1,2})?$/;
   let hasNumbers = regExp.test(request.session.data['check-this-number']);
   let result = hasNumbers ? "Yes" : "No";
   if (result == "Yes"){
-      response.redirect("/errors/result?error=false")
+      response.redirect("/errors/result?error=no-errors")
   } else {
       response.redirect("/errors/input?error=not-a-number")
   }

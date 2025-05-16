@@ -33,7 +33,7 @@ crossorigin=""></script>
         </ul>
       </td>
       <td class="govuk-table__cell">
-        <a href="present-demand-locations">Change</a>
+        <a href="#">Change</a>
       </td>
     </tr>
     <tr class="govuk-table__row">
@@ -45,7 +45,7 @@ crossorigin=""></script>
         </ul>
       </td>
       <td class="govuk-table__cell">
-        <a href="present-demand-locations">Change</a>
+        <a href="#">Change</a>
       </td>
     </tr>
   </tbody>
@@ -62,7 +62,7 @@ crossorigin=""></script>
 <style>
   #map { height: 420px; width:100%}
 </style>
-
+<h2>Jugglers in your area</h2>
 <p><img src="/public/images/your-juggling-business.svg" style="width:1.2em; margin-right: 0.5em;">Your location <img src="/public/images/five.svg" style="width:1.2em; margin-left:1em; margin-right: 0.5em;">Other licenced jugglers</p>
 <div id="map"></div>
 <script>
@@ -120,15 +120,44 @@ var fiveIcon = L.icon({
 });
 
 L.marker([52.01, 0.71], {icon: greenIcon}).addTo(map).bindPopup("<b>Khashif Aslam</b><br>Your location");
-L.marker([52.1, 0.74], {icon: fiveIcon}).addTo(map).bindPopup("<b>Vera Lynn</b><br>Rating: 5 (high)<br>Types: balls, clubs");
+L.marker([52.1, 0.74], {icon: fiveIcon}).addTo(map).bindPopup("<b>Vera Lynn</b><br>Rating: 5 (high)<br>Types: balls, clubs, knives, fire");
 L.marker([52.12, 0.738], {icon: fourIcon}).addTo(map).bindPopup("<b>Kobi Wang</b><br>Rating: 4 (medium high)<br>Types: balls, clubs");
 L.marker([52.01, 0.738], {icon: threeIcon}).addTo(map).bindPopup("<b>Jo McCrae</b><br>Rating: 3 (medium)<br>Types: balls, clubs, fire");
-L.marker([52.04, 0.695], {icon: threeIcon}).addTo(map).bindPopup("<b>Sally Smith</b><br>Rating: 3 (medium)<br>Types: balls, clubs, knives, fire");
+L.marker([52.04, 0.695], {icon: threeIcon}).addTo(map).bindPopup("<b>Sally Smith</b><br>Rating: 3 (medium)<br>Types: balls, clubs");
 L.marker([52.15, 0.95], {icon: fiveIcon}).addTo(map).bindPopup("<b>Francesca Sullivan</b><br>Rating: 5 (high)<br>Types: residential living");;
 // marker.bindPopup("<b>Your pin</b><br>Click the map to change your location");
 
 </script>
-
+<h2>Table version</h2>
+<p>For accessibility, you might include a table version of the data.</p>
+<p>Offer this below the map or on a separate tab.</p>
+<table class="govuk-table">
+  <caption class="govuk-table__caption govuk-table__caption--m">Jugglers in your area</caption>
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th scope="col" class="govuk-table__header">Name</th>
+      <th scope="col" class="govuk-table__header">Rating</th>
+      <th scope="col" class="govuk-table__header">Types of juggling</th>
+    </tr>
+  </thead>
+  <tbody class="govuk-table__body">
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header">Sally Smith</th>
+      <td class="govuk-table__cell">3 (Medium)</td>
+      <td class="govuk-table__cell">Balls, clubs</td>
+    </tr>
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header">Jo McCrae</th>
+      <td class="govuk-table__cell">3 (Medium)</td>
+      <td class="govuk-table__cell">Balls, clubs, fire</td>
+    </tr>
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header">Vera Lynn</th>
+      <td class="govuk-table__cell">5 (High)</td>
+      <td class="govuk-table__cell">Balls, clubs, knives, fire</td>
+    </tr>
+  </tbody>
+</table>
 <!--
 
 End of Main section
