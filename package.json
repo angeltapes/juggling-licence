@@ -6,9 +6,13 @@
   },
   "dependencies": {
     "@govuk-prototype-kit/common-templates": "2.0.1",
+    "@govuk-prototype-kit/task-list": "2.0.0",
     "@scottish-government-design-system/prototype-templates": "^0.2.0",
-    "@scottish-government/design-system": "^2.2.0",
-    "govuk-frontend": "^5.7.0",
-    "govuk-prototype-kit": "13.16.2"
+    "@scottish-government/design-system": "3.4.1",
+    "govuk-frontend": "6.1.0",
+    "govuk-prototype-kit": "13.16.2",
+    "jquery": "4.0.0",
+    "node": "^22.22.1",
+    "notifications-node-client": "8.3.0"
   }
 }

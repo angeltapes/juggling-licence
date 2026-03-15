@@ -6,34 +6,34 @@
 
 <!-- You can amend the style of any page using CSS -->
 <!-- <style>
-.govuk-header{
+  .govuk-header{
   /* color:#000;background-color:#2a8e02 */
   background-image: linear-gradient(red, yellow);}
 </style> -->
 
-    <!-- Load P5.js using a CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.10.0/p5.min.js"></script>
-    <script src="https://openprocessing.org/openprocessing_sketch.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/p5@1.10.0/lib/p5.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/p5@1.10.0/lib/addons/p5.sound.min.js"></script>
+<!-- Load P5.js using a CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.10.0/p5.min.js"></script>
+<script src="https://openprocessing.org/openprocessing_sketch.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/p5@1.10.0/lib/p5.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/p5@1.10.0/lib/addons/p5.sound.min.js"></script>
 
 <div class="govuk-grid-row">
-    
-    <!-- {% include "govuk-prototype-kit/includes/homepage-top.njk" %} -->
-    
-    <h1 class="govuk-heading-l">
-      Prototype snippets, examples and hacks
-    </h1>
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-two-thirds">
-    <p class="govuk-body">
-      I made this prototype to store useful code and techniques. <strong>This isn't a real government service.</strong> 
-       This prototype brings together
-      different techniques I've learned from the projects I've done.
-    </p>
-    <p class="govuk-body">
-      I've worked as a government interaction designer since 2020. Contact me on LinkedIn if you have any feedback - I'm <a href="https://www.linkedin.com/in/bobbykingweb/" target="_blank">Bobby King</a> (link opens in a new tab).
-    </p>
+  
+  <!-- {% include "govuk-prototype-kit/includes/homepage-top.njk" %} -->
+  
+  <h1 class="govuk-heading-l">
+    Prototype snippets, examples and hacks
+  </h1>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <p class="govuk-body">
+        I made this prototype to store useful code and techniques. <strong>This isn't a real government service.</strong> 
+        This prototype brings together
+        different techniques I've learned from the projects I've done.
+      </p>
+      <p class="govuk-body">
+        I've worked as a government interaction designer since 2020. Contact me on LinkedIn if you have any feedback - I'm <a href="https://www.linkedin.com/in/bobbykingweb/" target="_blank">Bobby King</a> (link opens in a new tab).
+      </p>
     </div>
     <div class="govuk-grid-column-one-third">
       <!-- Draw some moving balls with P5.js -->
@@ -61,10 +61,10 @@
       <div id="p5-sketch"></div>
     </div>
   </div>
-
-    <table class="govuk-table">
-      <caption class="govuk-table__caption govuk-table__caption--m">    
-        <h2 class="govuk-heading-m">
+  
+  <table class="govuk-table">
+    <caption class="govuk-table__caption govuk-table__caption--m">    
+      <h2 class="govuk-heading-m">
         Example journeys
       </h2></caption>
       <thead class="govuk-table__head">
@@ -78,8 +78,8 @@
           <th scope="row" class="govuk-table__header"> <a href="./errors/input" class="govuk-link">Error page</a>
           </th>
           <td class="govuk-table__cell">Enter values in a text box to trigger errors.</td>
-          </tr>
-          <tr class="govuk-table__row">
+        </tr>
+        <tr class="govuk-table__row">
           <th scope="row" class="govuk-table__header"> <a href="./dataviz/d3-bar-chart" class="govuk-link">D3 bar chart</a>
             / <a href="./dataviz/d3-line-chart" class="govuk-link">D3 line chart</a>
           </th>
@@ -116,6 +116,12 @@
           </th>
           <td class="govuk-table__cell">The prototype kit juggling licence example, with extra pages and useful code snippets</td>
         </tr>   
+        <tr class="govuk-table__row">
+          <th scope="row" class="govuk-table__header"> <a href="./passing-data/js-sandpit" class="govuk-link">Javascript sandpit</a>
+            
+          </th>
+          <td class="govuk-table__cell">Useful JS snippets</td>
+        </tr>
       </tbody>
     </table>
     <h3>Other experiments</h3>
@@ -143,5 +149,6 @@
       {% endfor %}
     </p>
   </div>
-
-{% endblock %}
+  
+  {% endblock %}
+  

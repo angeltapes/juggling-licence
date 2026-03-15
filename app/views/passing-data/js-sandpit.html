@@ -1,0 +1,43 @@
+{% extends "layouts/main.html" %}
+<!-- 
+  
+  This test page shows what data 'persists' from the previous page. 
+  
+-->
+  
+  {% block content %}
+  
+  <h1 class="govuk-heading-l">
+    JS sandpit   
+  </h1>
+  <script>
+    let myDate = 99
+  </script>
+  {% set testContent =  "Vanilla JavaScript isn't that useful for making GOVUK prototypes."  %}
+  <p>{{testContent}} </p>
+  <p>You can do most of the things you need using express.js and nunjucks, so I'd recommend using those.</p>
+<div class="govuk-form-group">
+  <h1 class="govuk-label-wrapper">
+    <label class="govuk-label govuk-label--m" for="event-name">
+      Type something
+    </label>
+  </h1>
+  <input class="govuk-input" id="event-name" name="eventName" type="text">
+</div>
+  <script>
+        document.getElementById("js-div").innerHTML = jsArray[0]; 
+  </script>
+  <!-- //Trigger an alert box with a button -->
+  <button type="submit" class="govuk-button" data-module="govuk-button" id="generate">
+  Go
+</button>
+<script>
+  // Event listener
+   document.getElementById('generate').addEventListener('click', async () => {
+    alert("working /// " + Date())
+   })
+  
+
+</script>
+  {% endblock %}
+  

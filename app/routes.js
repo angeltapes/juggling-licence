@@ -5,9 +5,15 @@
 
 const govukPrototypeKit = require('govuk-prototype-kit');
 const router = govukPrototypeKit.requests.setupRouter();
-const myRoutesValue = 'eggplant';
 
 // Add your routes here
+
+//An example of setting a session variable in this routes.js file
+router.get('/passing-data/xtest', function(request, response) {
+ request.session.data.myvar = "I set myvar using the routes file"; // access this using {{data.myvar}}
+ request.session.data['my-variable']="Yes"; // alternative format, access this using {{data['my-variable']}}
+ response.redirect('/passing-data/test') // this line needs to contain a redirect, otherwise you need to set request.local.data.myvar too
+})
 
 //Example route for the juggling balls journey
 router.post('/juggling-service/juggling-balls-router', function(request, response) {
@@ -31,8 +37,7 @@ router.post('/errors/error-check', function(request, response) {
   }
 })
 
-// Logging session data  
-  
+// Logging session data
 router.use((req, res, next) => {    
     const log = {  
       method: req.method,  

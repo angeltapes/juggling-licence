@@ -1,0 +1,858 @@
+<!doctype html>
+<html lang="en" data-theme="govuk-offline">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Offline GOV.UK Page Generator (Nunjucks templates)</title>
+  <style>
+    @font-face { font-family: 'GDS Transport'; src: local('GDS Transport'), local('Transport'); font-display: swap; }
+    :root {
+      --govuk-black:#0b0c0c; --govuk-white:#fff; --govuk-text:#0b0c0c; --govuk-link:#1d70b8; --govuk-link-hover:#003078; --govuk-border:#b1b4b6; --govuk-highlight:#f3f2f1; --govuk-button:#1d70b8; --govuk-button-hover:#003078; --govuk-muted:#505a5f;
+      --s-2:8px; --s-3:12px; --s-4:16px; --s-5:20px; --s-6:24px; --s-7:32px; --s-8:40px; --s-9:48px;
+    }
+    body{margin:0;background:var(--govuk-white);color:var(--govuk-text);font-family:'GDS Transport',Arial,Helvetica,sans-serif;line-height:1.5}
+    .govuk-width-container{max-width:none;width:66.666%;margin:0 auto;padding:0 var(--s-6)}
+    .govuk-header{background:var(--govuk-black);color:#fff;padding:var(--s-6) 0}
+    .govuk-header__logotype{font-weight:700;font-size:24px}
+    .tag{display:inline-block;background:#ffbf47;color:#000;font-weight:700;padding:2px 6px}
+    .govuk-heading-m{font-size:24px;margin:var(--s-6) 0 var(--s-4)}
+    .govuk-body{font-size:19px}
+    .app-grid{display:grid;grid-template-columns:1fr;gap:var(--s-7);padding:var(--s-7) 0 var(--s-9)}
+    .card{border:1px solid var(--govuk-border);border-radius:6px;padding:var(--s-6);background:#fff}
+    label{font-weight:700;margin-bottom:var(--s-2);display:block}
+    textarea,input[type=text]{width:100%;padding:var(--s-4);border:2px solid var(--govuk-border);font-size:16px}
+    textarea{min-height:140px}
+    .row{display:flex;gap:var(--s-4);flex-wrap:wrap;align-items:left}
+    .hint{color:var(--govuk-muted)}
+    .govuk-button{display:inline-block;background:var(--govuk-button);color:#fff;border:none;padding:10px 16px;font-size:19px;cursor:pointer;text-decoration:none}
+    .govuk-button:hover{background:var(--govuk-button-hover)}
+    .code{background:#0b0c0c;color:#f8f8f2;padding:var(--s-6);overflow:auto;max-height:60vh;white-space:pre;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px}
+    iframe{width:100%;height:45vh;border:1px solid var(--govuk-border)}
+    .phase{border-bottom:1px solid var(--govuk-border);padding:var(--s-4) 0;background:var(--govuk-highlight)}
+    .footer{margin:var(--s-8) 0;color:var(--govuk-muted);font-size:16px}
+    /* Headings with actions on the right */
+.heading-row{
+  display:flex;
+  align-items:left;
+  justify-content:space-between;
+  gap:1px;
+}
+.heading-row .govuk-button{ margin:0; } /* remove extra top/bottom space in the header */
+/* Make service navigation match govukHeader width */
+.govuk-service-navigation--full-width .govuk-width-container {
+    max-width: none;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px; /* match header padding */
+  }
+  
+  </style>
+</head>
+<body>
+  <header class="govuk-header">
+    <div class="govuk-width-container">
+      <div class="govuk-header__logotype">GOV.UK offline generator <span class="tag">BETA</span></div>
+    </div>
+  </header>
+
+  <div class="govuk-width-container">
+    <div class="phase govuk-body">Locally generate web pages with GDS components for the GOV.UK Prototype Kit.</div>
+
+    <div class="app-grid">
+      <section class="card" aria-label="Generator controls">
+        <h2 class="govuk-heading-m">Describe the page</h2>
+        <p class="hint">Examples: Start page, Question page, Check your answers, Confirmation page, Mainstream guidance, Step by step.</p>
+        <p class="hint">You can ask for specific components to be added, for example; radio buttons, cookie banner, file upload etc. All components found <a href="https://design-system.service.gov.uk/components/">here in the GOVUK Design System</a>.</p>
+        <label for="prompt">Prompt</label>
+        <textarea id="prompt" placeholder="Describe your page…"></textarea>
+        <div class="row" style="margin-top:12px">
+          <button class="govuk-button" id="generate">Generate</button>
+         
+        </div>
+      </section>
+
+      <section class="card" aria-label="Outputs">
+        <h2 class="govuk-heading-m">Live preview (approximate)</h2>
+        <iframe id="preview" title="Live preview"></iframe>
+        <div class="heading-row" style="margin-top:24px">
+          <h2 class="govuk-heading-m" style="margin:0">Generated Nunjucks code</h2>
+          <button class="govuk-button" id="copyCode" type="button">Copy code</button>
+          <span id="copyStatus" class="hint" role="status" aria-live="polite"></span>
+        </div>
+        
+        <pre class="code" id="codeOutput" aria-label="Generated code" tabindex="0"></pre>
+        
+      </section>
+    </div>
+
+    <p class="footer">Copy the generated Nunjucks into your Prototype Kit <code>.njk</code>.</p>
+  </div>
+  {% raw %}
+  <script>
+    // ===========================
+    // Fetchers
+    // ===========================
+
+// *** The async function declaration creates a binding of a new async function to a given name. 
+// *** The await keyword is permitted within the function body
+    async function loadComponentMacro(name, params = {}) {
+      const qs = new URLSearchParams(params).toString();
+      const url = qs ? `/components-macro/${name}?${qs}` : `/components-macro/${name}`;
+      const res = await fetch(url, { cache: 'no-store' });
+      if (!res.ok) throw new Error(`Failed to load component: ${name}`);
+      return res.text(); // returns NJK like {{ govukRadios({ ... }) }}
+    }
+  
+    // Exact server-side render for live preview
+    async function renderExactPreview(njk) {
+      const res = await fetch('/preview-render', {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain' },
+        body: njk
+      });
+      if (!res.ok) {
+        const errText = await res.text().catch(() => '');
+        throw new Error(errText || `Preview render failed (HTTP ${res.status})`);
+      }
+      return res.text();
+    }
+  
+    // ===========================
+    // Template choice
+    // ===========================
+    function decideTemplateName(prompt) {
+      const t = (prompt || '').toLowerCase();
+      if (/confirmation|complete/.test(t)) return 'confirmation';
+      if (/check your answers|cya/.test(t)) return 'cya';
+      if (/guidance|guide|mainstream/.test(t)) return 'guidance';
+      if (/step[\s-]?by[\s-]?step/.test(t)) return 'step-by-step';
+      if (/blank/.test(t)) return 'blank';
+      if (/\b(question|form|ask|capture)\b/.test(t)) return 'question';
+      return 'start';
+    }
+  
+    // ===========================
+    // Component detection with ordering and negation
+    // ===========================
+    function parseOrderedComponents(prompt) {
+      const text = prompt || '';
+  
+      // 1) find mentions (for ordering by occurrence)
+      const mentions = [];
+      pushMention(mentions, text, 'radios', /\bradio|single choice|multiple choice|yes\/?no|yes and no|yes or no/ig);
+      pushMention(mentions, text, 'checkboxes', /\bcheckbox|tick|select all that apply|multiple selection/ig);
+      pushMention(mentions, text, 'input-text', /\btext input|input field|free text|full name|email address|postcode/ig);
+      pushMention(mentions, text, 'date-input', /\bdate of birth|dob|date input|when were you born/ig);
+      pushMention(mentions, text, 'error-summary', /\berror summary|validation|show errors|there is a problem\b/ig);
+      pushMention(mentions, text, 'notification-banner', /\bnotification banner|warning message|important\b/ig);
+      pushMention(mentions, text, 'panel', /\bpanel|application complete|reference number\b/ig);
+      pushMention(mentions, text, 'summary-list', /\bsummary list\b/ig);
+      pushMention(mentions, text, 'button-basic', /\bbutton|continue|start now|submit\b/ig);
+  
+      // previously added components
+      pushMention(mentions, text, 'details', /\bdetails?\b|\bexpand(?:er|able)?\b|help( section)?\b/ig);
+      pushMention(mentions, text, 'cookie-banner', /\bcookie(?:s)?\s*(banner|consent|message)\b/ig);
+      pushMention(mentions, text, 'breadcrumbs', /\bbreadcrumbs?\b/ig);
+      pushMention(mentions, text, 'accordion', /\baccordion\b|\bexpand(ed|able) sections?\b/ig);
+  
+      // new components you requested
+      pushMention(mentions, text, 'warning-text', /\bwarning text|warning\b/ig);
+      pushMention(mentions, text, 'textarea', /\btextarea|long text|multi\s*line\b/ig);
+      pushMention(mentions, text, 'tag', /\btag\b/ig);
+      pushMention(mentions, text, 'tabs', /\btabs?\b/ig);
+      pushMention(mentions, text, 'table', /\btable\b/ig);
+      pushMention(mentions, text, 'service-navigation', /\bservice navigation|service nav\b/ig);
+      pushMention(mentions, text, 'password-input', /\bpassword\b/ig);
+      pushMention(mentions, text, 'pagination', /\bpagination|pager\b/ig);
+      pushMention(mentions, text, 'inset-text', /\binset text\b/ig);
+      pushMention(mentions, text, 'file-upload', /\bfile upload|upload\b/ig);
+      pushMention(mentions, text, 'fieldset', /\bfieldset|address fieldset\b/ig);
+      pushMention(mentions, text, 'exit-this-page', /\bexit this page\b/ig);
+      pushMention(mentions, text, 'date-input-error', /\bdate input error|date with error|passport issued error\b/ig);
+  
+      mentions.sort((a,b)=> a.index - b.index);
+  
+      // 2) infer sensible params
+      const choiceList = extractChoiceList(prompt); // radios from "options: a, b, c"
+      const inferred = mentions.map(m => {
+        if (m.name === 'radios') {
+          const yesNo = /\byes\/?no|yes and no|yes or no\b/i.test(text);
+          const legend = extractLegend(prompt) || guessLegend(prompt) || 'Choose one option';
+          const params = { legend };
+          if (choiceList && choiceList.type === 'radios') {
+            params.items = JSON.stringify(choiceList.items);
+          } else if (yesNo) {
+            params.yn = 'true';
+          }
+          return { name: 'radios', params };
+        }
+        if (m.name === 'checkboxes') {
+          const legend = extractLegend(prompt) || 'Select all that apply';
+          return { name: 'checkboxes', params: { legend } };
+        }
+        if (m.name === 'input-text') {
+          const label = extractLabel(prompt) || guessLabel(prompt) || 'Full name';
+          const id = toId(label);
+          const autocomplete = guessAutocomplete(label);
+          return { name: 'input-text', params: { id, name: id, label, autocomplete } };
+        }
+        if (m.name === 'date-input') {
+          return { name: 'date-input', params: { legend: 'What is your date of birth?', id: 'date-of-birth', namePrefix: 'dob' } };
+        }
+        if (m.name === 'button-basic') {
+          const isStart = /\bstart now\b/i.test(text);
+          const label = extractButtonText(prompt) || (isStart ? 'Start now' : 'Continue');
+          return { name: 'button-basic', params: { text: label, ...(isStart ? { isStartButton: 'true' } : {}) } };
+        }
+  
+        // previously added
+        if (m.name === 'details') {
+          const summaryText = extractAfter(prompt, /details(?:\s+summary| title)?\s*[:\-]\s*/i) || 'Help with nationality';
+          const dtext = extractAfter(prompt, /details(?:\s+text| content)?\s*[:\-]\s*/i) ||
+            'We need to know your nationality so we can work out which elections you’re entitled to vote in. If you cannot provide your nationality, you’ll have to send copies of identity documents through the post.';
+          return { name: 'details', params: { summaryText, text: dtext } };
+        }
+        if (m.name === 'cookie-banner') {
+          const ariaLabel = extractAfter(prompt, /cookie(?:s)?(?:\s+aria\s*label|\s*heading)?\s*[:\-]\s*/i) || 'Cookies on [name of service]';
+          return { name: 'cookie-banner', params: { ariaLabel } };
+        }
+        if (m.name === 'breadcrumbs') {
+          const crumbsLine = /(?:crumbs|breadcrumbs?)\s*[:\-]\s*([^\n]+)/i.exec(prompt);
+          let items = null;
+          if (crumbsLine && crumbsLine[1]) {
+            items = crumbsLine[1]
+              .split(/\s*>\s*|\s*\/\s*/).map(s => s.trim()).filter(Boolean)
+              .map((t, i, arr) => i < arr.length - 1 ? ({ text: t, href: '#' }) : ({ text: t }));
+          }
+          const params = {};
+          if (items) params.items = JSON.stringify(items);
+          return { name: 'breadcrumbs', params };
+        }
+        if (m.name === 'accordion') {
+          const headingsLine = /accordion\s*[:\-]\s*([^\n]+)/i.exec(prompt);
+          let items = null;
+          if (headingsLine && headingsLine[1]) {
+            const heads = headingsLine[1].split(/\s*\|\s*|,\s*/).map(s => s.trim()).filter(Boolean);
+            if (heads.length) {
+              items = heads.map(h => ({
+                heading: { text: h },
+                content: { html: `<p class="govuk-body">This is the content for ${escapeHtml(h)}.</p>` }
+              }));
+            }
+          }
+          const params = { ...(items ? { items: JSON.stringify(items) } : {}) };
+          return { name: 'accordion', params };
+        }
+  
+        // new
+        if (m.name === 'warning-text') {
+          const w = extractAfter(prompt, /warning(?:\s*text)?\s*[:\-]\s*/i) || undefined;
+          return { name: 'warning-text', params: w ? { text: w } : {} };
+        }
+        if (m.name === 'textarea') {
+          const label = extractAfter(prompt, /textarea label\s*[:\-]\s*/i) || 'Can you provide more detail?';
+          const hint  = extractAfter(prompt, /textarea hint\s*[:\-]\s*/i) ||
+            'Do not include personal or financial information, like your National Insurance number or credit card details';
+          return { name: 'textarea', params: { label, hint } };
+        }
+        if (m.name === 'tag') {
+          const t = extractAfter(prompt, /tag\s*[:\-]\s*/i) || 'Completed';
+          return { name: 'tag', params: { text: t } };
+        }
+        if (m.name === 'tabs') {
+          const labelsLine = extractAfter(prompt, /tabs?\s*[:\-]\s*/i);
+          const labels = labelsLine ? labelsLine.split(/\s*\|\s*|,\s*/).map(s => s.trim()).filter(Boolean).join('|') : undefined;
+          const params = {};
+          if (labels) params.labels = labels;
+          return { name: 'tabs', params };
+        }
+        if (m.name === 'table') {
+          const caption = extractAfter(prompt, /table caption\s*[:\-]\s*/i) || undefined;
+          return { name: 'table', params: caption ? { caption } : {} };
+        }
+        if (m.name === 'service-navigation') {
+          return { name: 'service-navigation', params: {} };
+        }
+        if (m.name === 'password-input') {
+          const label = extractAfter(prompt, /password label\s*[:\-]\s*/i) || 'Password';
+          return { name: 'password-input', params: { label } };
+        }
+        if (m.name === 'pagination') {
+          return { name: 'pagination', params: {} };
+        }
+        if (m.name === 'inset-text') {
+          const it = extractAfter(prompt, /inset\s*text\s*[:\-]\s*/i) || undefined;
+          return { name: 'inset-text', params: it ? { text: it } : {} };
+        }
+        if (m.name === 'file-upload') {
+          const label = extractAfter(prompt, /upload label\s*[:\-]\s*/i) || 'Upload a file';
+          return { name: 'file-upload', params: { label } };
+        }
+        if (m.name === 'fieldset') {
+          const legend = extractAfter(prompt, /fieldset(?:\s+legend)?\s*[:\-]\s*/i) || 'What is your address?';
+          return { name: 'fieldset', params: { legend } };
+        }
+        if (m.name === 'exit-this-page') {
+          return { name: 'exit-this-page', params: {} };
+        }
+        if (m.name === 'date-input-error') {
+          const legend = extractAfter(prompt, /date(?:\s+legend)?\s*[:\-]\s*/i) || undefined;
+          const errorText = extractAfter(prompt, /error\s*text\s*[:\-]\s*/i) || undefined;
+          const params = {};
+          if (legend) params.legend = legend;
+          if (errorText) params.errorText = errorText;
+          return { name: 'date-input-error', params };
+        }
+  
+        // fallback
+        return { name: m.name, params: {} };
+      });
+  
+      // 3) apply basic relative rules
+      const ordered = applyRelativeRules(text, inferred);
+  
+      // 4) de-dupe by name, keep first occurrence
+      const seen = new Set();
+      const finalOrder = [];
+      for (const c of ordered) {
+        if (!seen.has(c.name)) { seen.add(c.name); finalOrder.push(c); }
+      }
+      return finalOrder;
+    }
+  
+    function pushMention(list, text, name, regex) {
+      let m; while ((m = regex.exec(text))){ list.push({ name, index: m.index }); }
+    }
+  
+    // ---- Fixed placement rules & relative ordering ----
+    function applyRelativeRules(text, comps) {
+      const out = [...comps];
+  
+      // Don’t move fixed components
+      const isFixed = name =>
+        name === 'cookie-banner' || name === 'exit-this-page' || name === 'panel';
+
+
+  
+      function moveRelative(cName, refName, place) {
+        if (isFixed(cName) || isFixed(refName)) return;
+        const i = out.findIndex(c => c.name === cName);
+        const j = out.findIndex(c => c.name === refName);
+        if (i === -1 || j === -1) return;
+        const [c] = out.splice(i, 1);
+        out.splice(place === 'after' ? j + 1 : j, 0, c);
+      }
+      function moveFirst(name) {
+        if (isFixed(name)) return;
+        const i = out.findIndex(c => c.name === name);
+        if (i > 0) { const [c] = out.splice(i, 1); out.unshift(c); }
+      }
+      function moveLast(name) {
+        if (isFixed(name)) return;
+        const i = out.findIndex(c => c.name === name);
+        if (i !== -1 && i !== out.length - 1) { const [c] = out.splice(i, 1); out.push(c); }
+      }
+  
+      // button below/after or above/before radios
+      if (/button.*(below|after).*(radio|radios)/i.test(text) || /(below|after).*(radio|radios).*button/i.test(text)) {
+        moveRelative('button-basic', 'radios', 'after');
+      }
+      if (/button.*(above|before).*(radio|radios)/i.test(text) || /(above|before).*(radio|radios).*button/i.test(text)) {
+        moveRelative('button-basic', 'radios', 'before');
+      }
+  
+      // top/bottom for some components
+      if (/cookie(?:s)? (banner|message).*(at the )?top/i.test(text)) moveFirst('cookie-banner');
+      if (/breadcrumbs?.*(at the )?top/i.test(text)) moveFirst('breadcrumbs');
+      if (/button.*at the top/i.test(text)) moveFirst('button-basic');
+      if (/button.*at the bottom/i.test(text)) moveLast('button-basic');
+  
+      return out;
+    }
+  
+    // Negation: “no/without/remove X”
+    function removeNegatedComponents(components, prompt) {
+      const text = (prompt || '').toLowerCase();
+      const aliases = {
+        'button-basic': ['button','continue button','start button','submit'],
+        'radios': ['radio','radios','radio buttons'],
+        'checkboxes': ['checkbox','checkboxes'],
+        'input-text': ['text input','input','text field'],
+        'date-input': ['date input','dob','date of birth'],
+        'error-summary': ['error summary','errors','validation'],
+        'notification-banner': ['notification banner','banner'],
+        'panel': ['panel','confirmation panel'],
+        'summary-list': ['summary list','check your answers','cya'],
+        'breadcrumbs': ['breadcrumbs','breadcrumb'],
+        'details': ['details','expandable help','help section'],
+        'cookie-banner': ['cookie banner','cookies message','cookies consent','cookies banner'],
+        'accordion': ['accordion','expandable sections','expanders'],
+        'warning-text': ['warning text','warning'],
+        'textarea': ['textarea','long text','multiline'],
+        'tag': ['tag','status tag'],
+        'tabs': ['tabs','tabbed content'],
+        'table': ['table'],
+        'service-navigation': ['service navigation','service nav'],
+        'password-input': ['password','password input'],
+        'pagination': ['pagination','pager'],
+        'inset-text': ['inset text'],
+        'file-upload': ['file upload','upload'],
+        'fieldset': ['fieldset','address fieldset'],
+        'exit-this-page': ['exit this page','panic button'],
+        'date-input-error': ['date input with error','date error','date with error']
+      };
+      function isNegated(name) {
+        const terms = aliases[name] || [name];
+        return terms.some(term =>
+          text.includes(`no ${term}`) ||
+          text.includes(`without ${term}`) ||
+          text.includes(`remove ${term}`)
+        );
+      }
+      return components.filter(c => !isNegated(c.name));
+    }
+  
+    // Strip negated built-ins that might still be hard-coded in a template
+    function stripNegatedBuiltIns(njk, prompt) {
+      const text = (prompt || '').toLowerCase();
+      const wantsRemoval = term => text.includes(`no ${term}`) || text.includes(`without ${term}`) || text.includes(`remove ${term}`);
+  
+      if (wantsRemoval('breadcrumbs') || wantsRemoval('breadcrumb')) {
+        njk = njk.replace(/\{\{\s*govukBreadcrumbs\([\s\S]*?\)\s*\}\}\s*/g, '');
+      }
+      if (wantsRemoval('button') || wantsRemoval('continue button') || wantsRemoval('start button')) {
+        njk = njk.replace(/\{\{\s*govukButton\([\s\S]*?\)\s*\}\}\s*/g, '');
+      }
+      if (wantsRemoval('panel')) {
+        njk = njk.replace(/\{\{\s*govukPanel\([\s\S]*?\)\s*\}\}\s*/g, '');
+      }
+      if (wantsRemoval('summary list') || wantsRemoval('check your answers') || wantsRemoval('cya')) {
+        njk = njk.replace(/\{\{\s*govukSummaryList\([\s\S]*?\)\s*\}\}\s*/g, '');
+      }
+      return njk;
+    }
+  
+    // ===========================
+    // Tiny NLP helpers
+    // ===========================
+    function extractLegend(prompt) {
+      const m = /legend\s*[:\-]\s*([^\.\n]{3,120})/i.exec(prompt);
+      return m ? clean(m[1]) : null;
+    }
+    function extractLabel(prompt) {
+      const m = /label\s*[:\-]\s*([^\.\n]{3,120})/i.exec(prompt);
+      return m ? clean(m[1]) : null;
+    }
+    function extractButtonText(prompt) {
+      const m = /button\s*text\s*[:\-]\s*([^\.\n]{1,80})/i.exec(prompt);
+      return m ? clean(m[1]) : null;
+    }
+    function extractAfter(prompt, regex){
+      const m = regex.exec(prompt);
+      if (!m) return null;
+      const rest = prompt.slice(m.index + m[0].length).split('\n')[0];
+      return clean(rest);
+    }
+    function extractChoiceList(prompt) {
+      // supports: options: yes, no, maybe   OR   choices: yes, no, maybe
+      const m = /(?:options|choices)\s*[:\-]\s*([^\n]+)/i.exec(prompt);
+      if (!m) return null;
+      const items = m[1]
+        .split(/[,\|]/)
+        .map(s => clean(s))
+        .filter(Boolean)
+        .map((t,i) => ({ value: toId(t) || `option-${i+1}`, text: capitalise(t) }));
+      return items.length ? { type: 'radios', items } : null;
+    }
+    function guessLegend(prompt) {
+      const m = /([A-Z].+\?)\s*$/m.exec(prompt) || /([A-Z].+?)\s*(?:\n|$)/m.exec(prompt);
+      return m ? clean(m[1]) : null;
+    }
+    function guessLabel(prompt) {
+      if (/full name/i.test(prompt)) return 'Full name';
+      if (/email/i.test(prompt)) return 'Email address';
+      if (/postcode/i.test(prompt)) return 'Postcode';
+      return null;
+    }
+    function guessAutocomplete(label) {
+      const l = label.toLowerCase();
+      if (l.includes('name')) return 'name';
+      if (l.includes('email')) return 'email';
+      if (l.includes('postcode')) return 'postal-code';
+      return '';
+    }
+    function toId(s){ return String(s).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,''); }
+    function clean(s){ return String(s).trim().replace(/\s+/g,' ').replace(/[“”]/g,'"').replace(/[’]/g,"'"); }
+    function capitalise(s){ return s ? s.charAt(0).toUpperCase() + s.slice(1) : s; }
+    function escapeHtml(s){ return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+  
+    // ===========================
+    // Assemble page
+    // ===========================
+
+    // ----- Fixed-position insertion helpers -----
+  
+    // 1) Cookie banner: always at the very top, ideally right after the header macro
+    function insertCookieBanner(njk, fragment) {
+      if (!fragment) return njk;
+      const headerMatch = njk.match(/\{\{\s*govukHeader\([\s\S]*?\)\s*\}\}|\{\{\s*govukHeader\(\)\s*\}\}/);
+      if (headerMatch) {
+        const idx = njk.indexOf(headerMatch[0]) + headerMatch[0].length;
+        return njk.slice(0, idx) + '\n\n' + fragment + '\n\n' + njk.slice(idx);
+      }
+      const beforeContentIdx = njk.indexOf('{% block beforeContent %}');
+      if (beforeContentIdx !== -1) {
+        return njk.slice(0, beforeContentIdx) + fragment + '\n\n' + njk.slice(beforeContentIdx);
+      }
+      return fragment + '\n\n' + njk; // fallback very top
+    }
+  
+    // 2) Exit this page: always immediately under the header, but below any cookie banner if present
+    function insertExitThisPageUnderHeader(njk, fragment) {
+      if (!fragment) return njk;
+      const headerMatch = njk.match(/\{\{\s*govukHeader\([\s\S]*?\)\s*\}\}|\{\{\s*govukHeader\(\)\s*\}\}/);
+      if (headerMatch) {
+        const headerEnd = njk.indexOf(headerMatch[0]) + headerMatch[0].length;
+        const afterHeader = njk.slice(headerEnd);
+        const cookieRE = /\{\{\s*govukCookieBanner\([\s\S]*?\)\s*\}\}/;
+        const cookieMatch = afterHeader.match(cookieRE);
+        if (cookieMatch) {
+          const cookieIdx = afterHeader.indexOf(cookieMatch[0]) + cookieMatch[0].length;
+          const abs = headerEnd + cookieIdx;
+          return njk.slice(0, abs) + '\n\n' + fragment + '\n\n' + njk.slice(abs);
+        }
+        return njk.slice(0, headerEnd) + '\n\n' + fragment + '\n\n' + njk.slice(headerEnd);
+      }
+      const beforeContentIdx = njk.indexOf('{% block beforeContent %}');
+      if (beforeContentIdx !== -1) {
+        return njk.slice(0, beforeContentIdx) + fragment + '\n\n' + njk.slice(beforeContentIdx);
+      }
+      return fragment + '\n\n' + njk;
+    }
+
+  
+    // Panel: act as page H1, but keep it inside the first two-thirds column
+function placePanelAsH1(njk, fragment) {
+  if (!fragment) return njk;
+
+  const open = njk.indexOf('{% block content %}');
+  if (open === -1) return fragment + '\n\n' + njk;
+
+  const rest = njk.slice(open);
+  const endRel = rest.indexOf('{% endblock %}');
+  if (endRel === -1) return fragment + '\n\n' + njk;
+
+  const startContent = open + '{% block content %}'.length;
+  const endContent = open + endRel;
+  const content = njk.slice(startContent, endContent);
+
+  // Narrow to the first two-thirds column if present
+  const colMatch = content.match(/<div\s+class="[^"]*govuk-grid-column-(two-thirds(-from-desktop)?)[^"]*"\s*>/i);
+  if (colMatch) {
+    const colOpenIdx = content.indexOf(colMatch[0]) + colMatch[0].length;
+    const beforeCol = content.slice(0, colOpenIdx);
+    const afterCol = content.slice(colOpenIdx);
+
+    // Replace first <h1> inside the column only, else prepend in column
+    const h1Regex = /<h1\b[^>]*>[\s\S]*?<\/h1>/i;
+    if (h1Regex.test(afterCol)) {
+      const newAfterCol = afterCol.replace(h1Regex, fragment);
+      const newContent = beforeCol + newAfterCol;
+      return njk.slice(0, startContent) + newContent + njk.slice(endContent);
+    } else {
+      const newContent = beforeCol + '\n' + fragment + '\n' + afterCol;
+      return njk.slice(0, startContent) + newContent + njk.slice(endContent);
+    }
+  }
+
+  // Fallback to the whole content block if no column found
+  const h1Regex = /<h1\b[^>]*>[\s\S]*?<\/h1>/i;
+  if (h1Regex.test(content)) {
+    const newContent = content.replace(h1Regex, fragment);
+    return njk.slice(0, startContent) + newContent + njk.slice(endContent);
+  }
+  const newContent = '\n' + fragment + '\n' + content;
+  return njk.slice(0, startContent) + newContent + njk.slice(endContent);
+}
+
+    // 4) Breadcrumbs: always above the main element of the page
+function insertBreadcrumbsBeforeMain(njk, fragment) {
+  if (!fragment) return njk;
+
+  // Remove any existing breadcrumbs to avoid duplicates
+  njk = njk.replace(/\{\{\s*govukBreadcrumbs\([\s\S]*?\)\s*\}\}\s*/g, '');
+
+  // If there's a beforeContent block, insert at its start
+  const beforeOpen = njk.indexOf('{% block beforeContent %}');
+  if (beforeOpen !== -1) {
+    const rest = njk.slice(beforeOpen);
+    const beforeCloseRel = rest.indexOf('{% endblock %}');
+    if (beforeCloseRel !== -1) {
+      const insertPos = beforeOpen + '{% block beforeContent %}'.length;
+      return njk.slice(0, insertPos) + '\n\n' + fragment + '\n\n' + njk.slice(insertPos);
+    }
+  }
+
+  // Otherwise insert just before the main content block
+  const contentOpen = njk.indexOf('{% block content %}');
+  if (contentOpen !== -1) {
+    return njk.slice(0, contentOpen) + '\n\n' + fragment + '\n\n' + njk.slice(contentOpen);
+  }
+
+  // Fallback: after the header
+  const headerMatch = njk.match(/\{\{\s*govukHeader\([\s\S]*?\)\s*\}\}|\{\{\s*govukHeader\(\)\s*\}\}/);
+  if (headerMatch) {
+    const idx = njk.indexOf(headerMatch[0]) + headerMatch[0].length;
+    return njk.slice(0, idx) + '\n\n' + fragment + '\n\n' + njk.slice(idx);
+  }
+
+  // Last fallback: very top of file
+  return fragment + '\n\n' + njk;
+}
+// Service navigation: always above the main content
+function insertServiceNavBeforeMain(njk, fragment) {
+  if (!fragment) return njk;
+
+  // Prefer the beforeContent block if present
+  const beforeOpen = njk.indexOf('{% block beforeContent %}');
+  if (beforeOpen !== -1) {
+    const rest = njk.slice(beforeOpen);
+    const beforeEndRel = rest.indexOf('{% endblock %}');
+    if (beforeEndRel !== -1) {
+      const insertAt = beforeOpen + '{% block beforeContent %}'.length;
+      return njk.slice(0, insertAt) + '\n' + fragment + '\n' + njk.slice(insertAt);
+    }
+  }
+
+  // Else, insert just before the main content block
+  const contentOpen = njk.indexOf('{% block content %}');
+  if (contentOpen !== -1) {
+    return njk.slice(0, contentOpen) + '\n' + fragment + '\n' + njk.slice(contentOpen);
+  }
+
+  // Fallback, prepend at top
+  return fragment + '\n\n' + njk;
+}
+
+  
+function insertComponentsIntoContent(njk, componentsMarkup) {
+  if (!componentsMarkup.trim()) return njk;
+
+  const marker = '<!-- COMPONENTS_HERE -->';
+  if (njk.includes(marker)) {
+    return njk.replace(marker, '\n' + componentsMarkup + '\n');
+  }
+
+  // Prefer inserting inside the first two-thirds column in the content block
+  const open = njk.indexOf('{% block content %}');
+  if (open !== -1) {
+    const rest = njk.slice(open);
+    const endRel = rest.indexOf('{% endblock %}');
+    if (endRel !== -1) {
+      const startContent = open + '{% block content %}'.length;
+      const endContent = open + endRel;
+      const content = njk.slice(startContent, endContent);
+
+      // Find first two-thirds column wrapper
+      const colMatch = content.match(/<div\s+class="[^"]*govuk-grid-column-(two-thirds(-from-desktop)?)[^"]*"\s*>/i);
+      if (colMatch) {
+        const colOpenIdx = content.indexOf(colMatch[0]) + colMatch[0].length;
+        const beforeCol = content.slice(0, colOpenIdx);
+        const afterCol = content.slice(colOpenIdx);
+        const newContent = beforeCol + '\n' + componentsMarkup + '\n' + afterCol;
+        return njk.slice(0, startContent) + newContent + njk.slice(endContent);
+      }
+
+      // Otherwise, append near the end of the content block
+      return njk.slice(0, endContent) + '\n\n' + componentsMarkup + '\n\n' + njk.slice(endContent);
+    }
+  }
+
+  // Last resort, append at end of file
+  return njk + '\n\n' + componentsMarkup + '\n';
+}
+
+    // Prepend macro imports at the top of the NJK if not already present
+function prependMacroImports(njk, componentNames) {
+  const imports = [];
+
+  // map component identifiers to macro imports
+  const mapping = {
+    'button-basic': `{% from "govuk/components/button/macro.njk" import govukButton %}`,
+    'input-text': `{% from "govuk/components/input/macro.njk" import govukInput %}`,
+    'radios': `{% from "govuk/components/radios/macro.njk" import govukRadios %}`,
+    'checkboxes': `{% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}`,
+    'date-input': `{% from "govuk/components/date-input/macro.njk" import govukDateInput %}`,
+    'date-input-error': `{% from "govuk/components/date-input/macro.njk" import govukDateInput %}`,
+    'error-summary': `{% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}`,
+    'notification-banner': `{% from "govuk/components/notification-banner/macro.njk" import govukNotificationBanner %}`,
+    'panel': `{% from "govuk/components/panel/macro.njk" import govukPanel %}`,
+    'summary-list': `{% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}`,
+    'details': `{% from "govuk/components/details/macro.njk" import govukDetails %}`,
+    'cookie-banner': `{% from "govuk/components/cookie-banner/macro.njk" import govukCookieBanner %}`,
+    'breadcrumbs': `{% from "govuk/components/breadcrumbs/macro.njk" import govukBreadcrumbs %}`,
+    'accordion': `{% from "govuk/components/accordion/macro.njk" import govukAccordion %}`,
+    'warning-text': `{% from "govuk/components/warning-text/macro.njk" import govukWarningText %}`,
+    'textarea': `{% from "govuk/components/textarea/macro.njk" import govukTextarea %}`,
+    'tag': `{% from "govuk/components/tag/macro.njk" import govukTag %}`,
+    'tabs': `{% from "govuk/components/tabs/macro.njk" import govukTabs %}`,
+    'table': `{% from "govuk/components/table/macro.njk" import govukTable %}`,
+    'service-navigation': `{% from "govuk/components/service-navigation/macro.njk" import govukServiceNavigation %}`,
+    'password-input': `{% from "govuk/components/password-input/macro.njk" import govukPasswordInput %}`,
+    'pagination': `{% from "govuk/components/pagination/macro.njk" import govukPagination %}`,
+    'inset-text': `{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}`,
+    'file-upload': `{% from "govuk/components/file-upload/macro.njk" import govukFileUpload %}`,
+    'fieldset': `{% from "govuk/components/fieldset/macro.njk" import govukFieldset %}\n{% from "govuk/components/input/macro.njk" import govukInput %}`,
+    'exit-this-page': `{% from "govuk/components/exit-this-page/macro.njk" import govukExitThisPage %}`
+  };
+
+  for (const name of componentNames) {
+    if (mapping[name]) imports.push(mapping[name]);
+  }
+
+  if (!imports.length) return njk;
+
+  const blockStart = njk.indexOf('{% extends');
+  if (blockStart !== -1) {
+    return (
+      njk.slice(0, blockStart) +
+      imports.join('\n') +
+      '\n\n' +
+      njk.slice(blockStart)
+    );
+  }
+  return imports.join('\n') + '\n\n' + njk;
+}
+
+  
+    async function buildPageCode() {
+  // 1) Base template
+  const prompt = document.getElementById('prompt').value || '';
+ const templateName = decideTemplateName(prompt);
+ let njk = await (async () => {
+  const res = await fetch(`/templates/${templateName}`, { cache: 'no-store' });
+  if (!res.ok) throw new Error(`Failed to load template: ${templateName}`);
+  return res.text();
+})();
+
+
+
+  // 2) Strip any built-ins the prompt negates (defensive)
+  njk = stripNegatedBuiltIns(njk, prompt);
+
+  // 3) Detect and order components from the prompt
+  let components = parseOrderedComponents(prompt);
+
+  // 4) Remove any components explicitly negated by the prompt
+  components = removeNegatedComponents(components, prompt);
+  // Ensure service-navigation is always included
+if (!components.some(c => c.name === 'service-navigation')) {
+  components.unshift({ name: 'service-navigation', params: { serviceName: 'Your service name' } });
+}
+
+// Ensure service navigation is present by default unless explicitly negated
+if (!components.some(c => c.name === 'service-navigation')) {
+  components.unshift({
+    name: 'service-navigation',
+    params: {
+      serviceName: 'Service name',
+      serviceUrl: '#'
+      // no navigation passed here, the server builder will supply the default 3 items
+      // classes will also be set by the server builder to full-width
+    }
+  });
+}
+
+  // Helper: split fixed-position vs the rest, and enforce fixed order
+  function partitionFixedComponents(list) {
+    const fixedNames = new Set(['cookie-banner', 'exit-this-page', 'breadcrumbs', 'service-navigation', 'panel']);
+    const fixed = [];
+    const rest = [];
+    for (const c of list) {
+      if (fixedNames.has(c.name)) fixed.push(c);
+      else rest.push(c);
+    }
+    // Enforce the required placement order for fixed items
+    const fixedOrder = ['cookie-banner', 'exit-this-page', 'breadcrumbs', 'panel'];
+    fixed.sort((a, b) => fixedOrder.indexOf(a.name) - fixedOrder.indexOf(b.name));
+    return { fixed, rest };
+  }
+
+  // 5) Fetch macro fragments and insert them with fixed placement rules
+  if (components.length) {
+    const { fixed, rest } = partitionFixedComponents(components);
+
+    // First, fixed-position components in enforced order
+    if (fixed.length) {
+      for (const c of fixed) {
+  const frag = await loadComponentMacro(c.name, c.params || {});
+  if (c.name === 'cookie-banner') {
+    njk = insertCookieBanner(njk, frag);
+  } else if (c.name === 'exit-this-page') {
+    njk = insertExitThisPageUnderHeader(njk, frag);
+  } else if (c.name === 'service-navigation') {
+    njk = insertServiceNavBeforeMain(njk, frag);
+  } else if (c.name === 'breadcrumbs') {
+    njk = insertBreadcrumbsBeforeMain(njk, frag);
+  } else if (c.name === 'panel') {
+    njk = placePanelAsH1(njk, frag);
+  }
+}
+
+    }
+    
+
+    // Then, the rest, in detected order
+    if (rest.length) {
+      const fragments = await Promise.all(rest.map(c => loadComponentMacro(c.name, c.params || {})));
+      njk = insertComponentsIntoContent(njk, fragments.join('\n\n'));
+    }
+  }
+
+  // 6) Ensure preview can render macros even if the layout hasn’t imported them
+  // Requires the prependMacroImports helper to be defined elsewhere in this script.
+  const allNames = (components || []).map(c => c.name);
+  njk = prependMacroImports(njk, allNames);
+
+  return njk;
+}
+  
+    // ===========================
+    // Wire up UI + exact preview
+    // ===========================
+    const preview = document.getElementById('preview');
+    const codeOutput = document.getElementById('codeOutput');
+    const copyBtn = document.getElementById('copyCode');
+    const statusEl = document.getElementById('copyStatus');
+  
+    document.getElementById('generate').addEventListener('click', async () => {
+      try {
+        const njk = await buildPageCode();
+        codeOutput.textContent = njk;
+  
+        const html = await renderExactPreview(njk);
+        preview.srcdoc = html;
+      } catch (err) {
+        codeOutput.textContent = `// Preview render error: ${err.message}`;
+        preview.srcdoc = `<pre style="padding:1rem;color:#b10e1e;background:#f3f2f1;white-space:pre-wrap">${escapeHtml(String(err.message || err))}</pre>`;
+      }
+    });
+  
+    copyBtn?.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(codeOutput.textContent || '');
+        setStatus('Copied.');
+      } catch {
+        setStatus('Copy failed');
+      }
+    });
+  
+    function setStatus(msg){
+      if (!statusEl) return;
+      statusEl.textContent = msg;
+      setTimeout(() => { statusEl.textContent = ''; }, 2000);
+    }
+  </script>
+  {% endraw %}
+</body>
+</html>  
